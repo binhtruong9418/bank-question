@@ -51,7 +51,7 @@ public class Main extends javax.swing.JFrame {
         ;
         content = new javax.swing.JPanel();
         listQuiz = new gui.component.ListQuiz();
-        listQuestion = new gui.component.ListQuestion();
+        listQuestion = new gui.component.Content();
 
         settingMenu.setBackground(new java.awt.Color(7, 116, 163));
         settingMenu.setForeground(new java.awt.Color(7, 116, 163));
@@ -137,7 +137,7 @@ public class Main extends javax.swing.JFrame {
         page.setPreferredSize(new java.awt.Dimension(172, 115));
 
         itLabel.setFont(new java.awt.Font("Segoe UI", 1, 32)); // NOI18N
-        itLabel.setForeground(new java.awt.Color(207, 90, 44));
+        itLabel.setForeground(new java.awt.Color(192, 36, 36));
         org.openide.awt.Mnemonics.setLocalizedText(itLabel, org.openide.util.NbBundle.getMessage(Main.class, "Main.itLabel.text")); // NOI18N
 
         pageLink.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -198,7 +198,7 @@ public class Main extends javax.swing.JFrame {
         bgLayout.setHorizontalGroup(
             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(topbar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(page, javax.swing.GroupLayout.DEFAULT_SIZE, 1393, Short.MAX_VALUE)
+            .addComponent(page, javax.swing.GroupLayout.DEFAULT_SIZE, 1577, Short.MAX_VALUE)
             .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         bgLayout.setVerticalGroup(
@@ -301,7 +301,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel itLabel;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private gui.component.ListQuestion listQuestion;
+    private gui.component.Content listQuestion;
     private gui.component.ListQuiz listQuiz;
     private javax.swing.JPanel page;
     private javax.swing.JLabel pageLink;

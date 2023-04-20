@@ -114,7 +114,7 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Component id="topbar" alignment="0" max="32767" attributes="0"/>
-              <Component id="page" alignment="0" pref="1393" max="32767" attributes="0"/>
+              <Component id="page" alignment="0" pref="1577" max="32767" attributes="0"/>
               <Component id="content" alignment="0" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
@@ -265,7 +265,7 @@
                   <Font name="Segoe UI" size="32" style="1"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="2c" green="5a" red="cf" type="rgb"/>
+                  <Color blue="24" green="24" red="c0" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                   <ResourceString bundle="Bundle.properties" key="Main.itLabel.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
@@ -340,7 +340,7 @@
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="gui.component.ListQuestion" name="listQuestion">
+            <Component class="gui.component.Content" name="listQuestion">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
                   <CardConstraints cardName="listQuestionCard"/>

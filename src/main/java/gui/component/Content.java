@@ -8,12 +8,12 @@ package gui.component;
  *
  * @author Duc Binh
  */
-public class ListQuestion extends javax.swing.JPanel {
+public class Content extends javax.swing.JPanel {
 
     /**
      * Creates new form ListQuestion
      */
-    public ListQuestion() {
+    public Content() {
         initComponents();
     }
 
@@ -36,6 +36,7 @@ public class ListQuestion extends javax.swing.JPanel {
         jCheckBox2 = new javax.swing.JCheckBox();
         jButton1 = new javax.swing.JButton();
         categoryTab = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
         importTab = new javax.swing.JPanel();
         exportTab = new javax.swing.JPanel();
 
@@ -48,27 +49,27 @@ public class ListQuestion extends javax.swing.JPanel {
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(207, 90, 44));
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel1, org.openide.util.NbBundle.getMessage(ListQuestion.class, "ListQuestion.jLabel1.text")); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(192, 36, 36));
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel1, org.openide.util.NbBundle.getMessage(Content.class, "Content.jLabel1.text")); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel2, org.openide.util.NbBundle.getMessage(ListQuestion.class, "ListQuestion.jLabel2.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel2, org.openide.util.NbBundle.getMessage(Content.class, "Content.jLabel2.text")); // NOI18N
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel3, org.openide.util.NbBundle.getMessage(ListQuestion.class, "ListQuestion.jLabel3.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel3, org.openide.util.NbBundle.getMessage(Content.class, "Content.jLabel3.text")); // NOI18N
 
         jCheckBox1.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
-        org.openide.awt.Mnemonics.setLocalizedText(jCheckBox1, org.openide.util.NbBundle.getMessage(ListQuestion.class, "ListQuestion.jCheckBox1.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jCheckBox1, org.openide.util.NbBundle.getMessage(Content.class, "Content.jCheckBox1.text")); // NOI18N
 
         jCheckBox2.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
-        org.openide.awt.Mnemonics.setLocalizedText(jCheckBox2, org.openide.util.NbBundle.getMessage(ListQuestion.class, "ListQuestion.jCheckBox2.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jCheckBox2, org.openide.util.NbBundle.getMessage(Content.class, "Content.jCheckBox2.text")); // NOI18N
 
         jButton1.setBackground(new java.awt.Color(7, 116, 163));
         jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        org.openide.awt.Mnemonics.setLocalizedText(jButton1, org.openide.util.NbBundle.getMessage(ListQuestion.class, "ListQuestion.jButton1.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jButton1, org.openide.util.NbBundle.getMessage(Content.class, "Content.jButton1.text")); // NOI18N
 
         javax.swing.GroupLayout questionTabLayout = new javax.swing.GroupLayout(questionTab);
         questionTab.setLayout(questionTabLayout);
@@ -108,22 +109,32 @@ public class ListQuestion extends javax.swing.JPanel {
                 .addContainerGap(334, Short.MAX_VALUE))
         );
 
-        menuTab.addTab(org.openide.util.NbBundle.getMessage(ListQuestion.class, "ListQuestion.questionTab.TabConstraints.tabTitle"), questionTab); // NOI18N
+        menuTab.addTab(org.openide.util.NbBundle.getMessage(Content.class, "Content.questionTab.TabConstraints.tabTitle"), questionTab); // NOI18N
 
         categoryTab.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel4.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(192, 36, 36));
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel4, org.openide.util.NbBundle.getMessage(Content.class, "Content.jLabel4.text")); // NOI18N
 
         javax.swing.GroupLayout categoryTabLayout = new javax.swing.GroupLayout(categoryTab);
         categoryTab.setLayout(categoryTabLayout);
         categoryTabLayout.setHorizontalGroup(
             categoryTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 981, Short.MAX_VALUE)
+            .addGroup(categoryTabLayout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(jLabel4)
+                .addContainerGap(812, Short.MAX_VALUE))
         );
         categoryTabLayout.setVerticalGroup(
             categoryTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 546, Short.MAX_VALUE)
+            .addGroup(categoryTabLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jLabel4)
+                .addContainerGap(499, Short.MAX_VALUE))
         );
 
-        menuTab.addTab(org.openide.util.NbBundle.getMessage(ListQuestion.class, "ListQuestion.categoryTab.TabConstraints.tabTitle"), categoryTab); // NOI18N
+        menuTab.addTab(org.openide.util.NbBundle.getMessage(Content.class, "Content.categoryTab.TabConstraints.tabTitle"), categoryTab); // NOI18N
 
         importTab.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -138,7 +149,7 @@ public class ListQuestion extends javax.swing.JPanel {
             .addGap(0, 546, Short.MAX_VALUE)
         );
 
-        menuTab.addTab(org.openide.util.NbBundle.getMessage(ListQuestion.class, "ListQuestion.importTab.TabConstraints.tabTitle"), importTab); // NOI18N
+        menuTab.addTab(org.openide.util.NbBundle.getMessage(Content.class, "Content.importTab.TabConstraints.tabTitle"), importTab); // NOI18N
 
         exportTab.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -153,7 +164,7 @@ public class ListQuestion extends javax.swing.JPanel {
             .addGap(0, 546, Short.MAX_VALUE)
         );
 
-        menuTab.addTab(org.openide.util.NbBundle.getMessage(ListQuestion.class, "ListQuestion.exportTab.TabConstraints.tabTitle"), exportTab); // NOI18N
+        menuTab.addTab(org.openide.util.NbBundle.getMessage(Content.class, "Content.exportTab.TabConstraints.tabTitle"), exportTab); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -181,6 +192,7 @@ public class ListQuestion extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JTabbedPane menuTab;
     private javax.swing.JPanel questionTab;
     // End of variables declaration//GEN-END:variables
