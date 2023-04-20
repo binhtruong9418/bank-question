@@ -51,6 +51,7 @@ public class Main extends javax.swing.JFrame {
         ;
         content = new javax.swing.JPanel();
         listQuiz = new gui.component.ListQuiz();
+        listQuestion = new gui.component.ListQuestion();
 
         settingMenu.setBackground(new java.awt.Color(7, 116, 163));
         settingMenu.setForeground(new java.awt.Color(7, 116, 163));
@@ -190,6 +191,7 @@ public class Main extends javax.swing.JFrame {
         content.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         content.setLayout(new java.awt.CardLayout());
         content.add(listQuiz, "listQuizCard");
+        content.add(listQuestion, "listQuestionCard");
 
         javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
         bg.setLayout(bgLayout);
@@ -206,7 +208,7 @@ public class Main extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(page, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, 560, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -299,6 +301,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel itLabel;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private gui.component.ListQuestion listQuestion;
     private gui.component.ListQuiz listQuiz;
     private javax.swing.JPanel page;
     private javax.swing.JLabel pageLink;

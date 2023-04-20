@@ -26,91 +26,162 @@ public class ListQuestion extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        menuTab = new javax.swing.JTabbedPane();
         questionTab = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        jCheckBox1 = new javax.swing.JCheckBox();
+        jCheckBox2 = new javax.swing.JCheckBox();
+        jButton1 = new javax.swing.JButton();
+        categoryTab = new javax.swing.JPanel();
+        importTab = new javax.swing.JPanel();
+        exportTab = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
+        menuTab.setBackground(new java.awt.Color(255, 255, 255));
+
+        questionTab.setBackground(new java.awt.Color(255, 255, 255));
+        questionTab.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(207, 90, 44));
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel1, org.openide.util.NbBundle.getMessage(ListQuestion.class, "ListQuestion.jLabel1.text")); // NOI18N
+
+        jLabel2.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel2, org.openide.util.NbBundle.getMessage(ListQuestion.class, "ListQuestion.jLabel2.text")); // NOI18N
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel3, org.openide.util.NbBundle.getMessage(ListQuestion.class, "ListQuestion.jLabel3.text")); // NOI18N
+
+        jCheckBox1.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jCheckBox1, org.openide.util.NbBundle.getMessage(ListQuestion.class, "ListQuestion.jCheckBox1.text")); // NOI18N
+
+        jCheckBox2.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jCheckBox2, org.openide.util.NbBundle.getMessage(ListQuestion.class, "ListQuestion.jCheckBox2.text")); // NOI18N
+
+        jButton1.setBackground(new java.awt.Color(7, 116, 163));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        org.openide.awt.Mnemonics.setLocalizedText(jButton1, org.openide.util.NbBundle.getMessage(ListQuestion.class, "ListQuestion.jButton1.text")); // NOI18N
 
         javax.swing.GroupLayout questionTabLayout = new javax.swing.GroupLayout(questionTab);
         questionTab.setLayout(questionTabLayout);
         questionTabLayout.setHorizontalGroup(
             questionTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1161, Short.MAX_VALUE)
+            .addGroup(questionTabLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(questionTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addGroup(questionTabLayout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel3)
+                    .addComponent(jCheckBox2)
+                    .addComponent(jCheckBox1)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(512, Short.MAX_VALUE))
         );
         questionTabLayout.setVerticalGroup(
             questionTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 4, Short.MAX_VALUE)
+            .addGroup(questionTabLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(questionTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jCheckBox1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBox2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
+                .addContainerGap(334, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab(org.openide.util.NbBundle.getMessage(ListQuestion.class, "ListQuestion.questionTab.TabConstraints.tabTitle"), questionTab); // NOI18N
+        menuTab.addTab(org.openide.util.NbBundle.getMessage(ListQuestion.class, "ListQuestion.questionTab.TabConstraints.tabTitle"), questionTab); // NOI18N
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1161, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 4, Short.MAX_VALUE)
-        );
+        categoryTab.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTabbedPane1.addTab(org.openide.util.NbBundle.getMessage(ListQuestion.class, "ListQuestion.jPanel2.TabConstraints.tabTitle"), jPanel2); // NOI18N
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1161, Short.MAX_VALUE)
+        javax.swing.GroupLayout categoryTabLayout = new javax.swing.GroupLayout(categoryTab);
+        categoryTab.setLayout(categoryTabLayout);
+        categoryTabLayout.setHorizontalGroup(
+            categoryTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 981, Short.MAX_VALUE)
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 4, Short.MAX_VALUE)
+        categoryTabLayout.setVerticalGroup(
+            categoryTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 546, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab(org.openide.util.NbBundle.getMessage(ListQuestion.class, "ListQuestion.jPanel3.TabConstraints.tabTitle"), jPanel3); // NOI18N
+        menuTab.addTab(org.openide.util.NbBundle.getMessage(ListQuestion.class, "ListQuestion.categoryTab.TabConstraints.tabTitle"), categoryTab); // NOI18N
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1161, Short.MAX_VALUE)
+        importTab.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout importTabLayout = new javax.swing.GroupLayout(importTab);
+        importTab.setLayout(importTabLayout);
+        importTabLayout.setHorizontalGroup(
+            importTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 981, Short.MAX_VALUE)
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 4, Short.MAX_VALUE)
+        importTabLayout.setVerticalGroup(
+            importTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 546, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab(org.openide.util.NbBundle.getMessage(ListQuestion.class, "ListQuestion.jPanel4.TabConstraints.tabTitle"), jPanel4); // NOI18N
+        menuTab.addTab(org.openide.util.NbBundle.getMessage(ListQuestion.class, "ListQuestion.importTab.TabConstraints.tabTitle"), importTab); // NOI18N
+
+        exportTab.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout exportTabLayout = new javax.swing.GroupLayout(exportTab);
+        exportTab.setLayout(exportTabLayout);
+        exportTabLayout.setHorizontalGroup(
+            exportTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 981, Short.MAX_VALUE)
+        );
+        exportTabLayout.setVerticalGroup(
+            exportTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 546, Short.MAX_VALUE)
+        );
+
+        menuTab.addTab(org.openide.util.NbBundle.getMessage(ListQuestion.class, "ListQuestion.exportTab.TabConstraints.tabTitle"), exportTab); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 24, Short.MAX_VALUE)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1161, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(menuTab, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(245, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(menuTab))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JPanel categoryTab;
+    private javax.swing.JPanel exportTab;
+    private javax.swing.JPanel importTab;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox jCheckBox2;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JTabbedPane menuTab;
     private javax.swing.JPanel questionTab;
     // End of variables declaration//GEN-END:variables
 }

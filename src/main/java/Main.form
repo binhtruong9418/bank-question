@@ -125,7 +125,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="page" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="content" max="32767" attributes="0"/>
+                  <Component id="content" pref="560" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -337,6 +337,13 @@
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
                   <CardConstraints cardName="listQuizCard"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+            <Component class="gui.component.ListQuestion" name="listQuestion">
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+                  <CardConstraints cardName="listQuestionCard"/>
                 </Constraint>
               </Constraints>
             </Component>
