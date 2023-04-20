@@ -31,6 +31,7 @@ public class ListQuiz extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/quiz.png"))); // NOI18N
         org.openide.awt.Mnemonics.setLocalizedText(jLabel1, org.openide.util.NbBundle.getMessage(ListQuiz.class, "ListQuiz.jLabel1.text")); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -40,14 +41,14 @@ public class ListQuiz extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(86, 86, 86)
                 .addComponent(jLabel1)
-                .addContainerGap(1383, Short.MAX_VALUE))
+                .addContainerGap(1359, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(74, 74, 74)
                 .addComponent(jLabel1)
-                .addContainerGap(488, Short.MAX_VALUE))
+                .addContainerGap(485, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
