@@ -1,4 +1,5 @@
 
+import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JMenuItem;
@@ -11,7 +12,6 @@ import org.openide.awt.DropDownButtonFactory;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  *
  * @author ducbinh
@@ -49,7 +49,8 @@ public class Main extends javax.swing.JFrame {
         turnEditingButton = new javax.swing.JButton();
         settingButton = DropDownButtonFactory.createDropDownButton(settingMenuButtonIcon, settingMenu);
         ;
-        jPanel1 = new javax.swing.JPanel();
+        content = new javax.swing.JPanel();
+        listQuiz = new gui.component.ListQuiz();
 
         settingMenu.setBackground(new java.awt.Color(7, 116, 163));
         settingMenu.setForeground(new java.awt.Color(7, 116, 163));
@@ -132,6 +133,7 @@ public class Main extends javax.swing.JFrame {
 
         page.setBackground(new java.awt.Color(255, 255, 255));
         page.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        page.setPreferredSize(new java.awt.Dimension(172, 115));
 
         itLabel.setFont(new java.awt.Font("Segoe UI", 1, 32)); // NOI18N
         itLabel.setForeground(new java.awt.Color(207, 90, 44));
@@ -166,7 +168,7 @@ public class Main extends javax.swing.JFrame {
                         .addComponent(settingButton))
                     .addGroup(pageLayout.createSequentialGroup()
                         .addComponent(pageLink)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 893, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(turnEditingButton)))
                 .addGap(26, 26, 26))
         );
@@ -184,31 +186,18 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1361, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 710, Short.MAX_VALUE)
-        );
+        content.setBackground(new java.awt.Color(255, 255, 255));
+        content.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        content.setLayout(new java.awt.CardLayout());
+        content.add(listQuiz, "listQuizCard");
 
         javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
         bg.setLayout(bgLayout);
         bgLayout.setHorizontalGroup(
             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(topbar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(bgLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(page, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(15, Short.MAX_VALUE))
+            .addComponent(page, javax.swing.GroupLayout.DEFAULT_SIZE, 1393, Short.MAX_VALUE)
+            .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         bgLayout.setVerticalGroup(
             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -217,7 +206,7 @@ public class Main extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(page, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -240,24 +229,18 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
         Object source = evt.getSource();
         if (source instanceof JMenuItem) {
-                    JMenuItem clickedMenuItem = (JMenuItem) source;
-                    String menuText = clickedMenuItem.getText();
-                    System.out.println("Create a " + menuText);
-            } else if (source instanceof JButton) {
-                    System.out.println("Create a default project");
+            JMenuItem clickedMenuItem = (JMenuItem) source;
+            String menuText = clickedMenuItem.getText();
+            if ("Question".equals(menuText)) {
+                CardLayout contentLayout = (CardLayout)content.getLayout();
+                contentLayout.show(content, "listQuestionCard");
             }
+
+        }
     }//GEN-LAST:event_questionMenuItemActionPerformed
 
     private void settingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settingButtonActionPerformed
         // TODO add your handling code here:
-        Object source = evt.getSource();
-        if (source instanceof JMenuItem) {
-                    JMenuItem clickedMenuItem = (JMenuItem) source;
-                    String menuText = clickedMenuItem.getText();
-                    System.out.println("Create a " + menuText);
-            } else if (source instanceof JButton) {
-                    System.out.println("Create a default project");
-            }
     }//GEN-LAST:event_settingButtonActionPerformed
 
     private void categoryMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoryMenuItemActionPerformed
@@ -275,7 +258,6 @@ public class Main extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -311,12 +293,13 @@ public class Main extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
     private javax.swing.JMenuItem categoryMenuItem;
+    private javax.swing.JPanel content;
     private javax.swing.JMenuItem exportMenuItem;
     private javax.swing.JMenuItem importMenuItem;
     private javax.swing.JLabel itLabel;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JPanel jPanel1;
+    private gui.component.ListQuiz listQuiz;
     private javax.swing.JPanel page;
     private javax.swing.JLabel pageLink;
     private javax.swing.JMenuItem questionMenuItem;
