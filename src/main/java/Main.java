@@ -50,7 +50,7 @@ public class Main extends javax.swing.JFrame {
         settingButton = DropDownButtonFactory.createDropDownButton(settingMenuButtonIcon, settingMenu);
         ;
         content = new javax.swing.JPanel();
-        listQuiz = new gui.component.ListQuiz();
+        listQuiz1 = new gui.component.ListQuiz();
         listQuestion = new gui.component.Content();
 
         settingMenu.setBackground(new java.awt.Color(7, 116, 163));
@@ -147,7 +147,13 @@ public class Main extends javax.swing.JFrame {
         turnEditingButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         turnEditingButton.setForeground(new java.awt.Color(255, 255, 255));
         org.openide.awt.Mnemonics.setLocalizedText(turnEditingButton, org.openide.util.NbBundle.getMessage(Main.class, "Main.turnEditingButton.text")); // NOI18N
+        turnEditingButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                turnEditingButtonActionPerformed(evt);
+            }
+        });
 
+        settingButton.setActionCommand(org.openide.util.NbBundle.getMessage(Main.class, "Main.settingButton.actionCommand")); // NOI18N
         settingButton.setBorder(null);
         settingButton.setContentAreaFilled(false);
         settingButton.addActionListener(new java.awt.event.ActionListener() {
@@ -187,10 +193,12 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
+        settingButton.getAccessibleContext().setAccessibleName(org.openide.util.NbBundle.getMessage(Main.class, "Main.settingButton.AccessibleContext.accessibleName")); // NOI18N
+
         content.setBackground(new java.awt.Color(255, 255, 255));
         content.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         content.setLayout(new java.awt.CardLayout());
-        content.add(listQuiz, "listQuizCard");
+        content.add(listQuiz1, "card3");
         content.add(listQuestion, "listQuestionCard");
 
         javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
@@ -257,6 +265,10 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_exportMenuItemActionPerformed
 
+    private void turnEditingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_turnEditingButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_turnEditingButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -302,7 +314,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private gui.component.Content listQuestion;
-    private gui.component.ListQuiz listQuiz;
+    private gui.component.ListQuiz listQuiz1;
     private javax.swing.JPanel page;
     private javax.swing.JLabel pageLink;
     private javax.swing.JMenuItem questionMenuItem;
