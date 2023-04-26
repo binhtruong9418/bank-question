@@ -49,8 +49,35 @@ public class Main extends javax.swing.JFrame {
         turnEditingButton = new javax.swing.JButton();
         settingButton = DropDownButtonFactory.createDropDownButton(settingMenuButtonIcon, settingMenu);
         content = new javax.swing.JPanel();
-        listQuiz1 = new gui.component.ListQuiz();
-        content1 = new gui.component.Content();
+        listQuiz = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        mainContent = new javax.swing.JPanel();
+        menuContent = new javax.swing.JTabbedPane();
+        questionTab = new javax.swing.JPanel();
+        listQuestionTitleLabel = new javax.swing.JLabel();
+        selectCategoryLabel = new javax.swing.JLabel();
+        selectCategoryDropdown = new javax.swing.JComboBox<>();
+        categoryDescriptionLabel = new javax.swing.JLabel();
+        showSubcategoryCheckbox = new javax.swing.JCheckBox();
+        showOldQuestionsCheckbox = new javax.swing.JCheckBox();
+        createNewQuestionButton = new javax.swing.JButton();
+        categoryTab = new javax.swing.JPanel();
+        addCategoryTitleLabel = new javax.swing.JLabel();
+        parentCategoryInputLabel = new javax.swing.JLabel();
+        parentCategoryInput = new javax.swing.JComboBox<>();
+        nameCategoryInputLabel = new javax.swing.JLabel();
+        nameCategoryInput = new javax.swing.JTextField();
+        categoryInfoInputLabel = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        categoryInfoInput = new javax.swing.JTextArea();
+        IDNumberInputLabel = new javax.swing.JLabel();
+        IDNumberInput = new javax.swing.JTextField();
+        addCategoryButtonSubmit = new javax.swing.JButton();
+        requiredText = new javax.swing.JLabel();
+        requiredLabel1 = new javax.swing.JLabel();
+        requiredLabel2 = new javax.swing.JLabel();
+        importTab = new javax.swing.JPanel();
+        exportTab = new javax.swing.JPanel();
 
         settingMenu.setBackground(new java.awt.Color(7, 116, 163));
         settingMenu.setForeground(new java.awt.Color(7, 116, 163));
@@ -152,6 +179,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        settingButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/settings.png"))); // NOI18N
         org.openide.awt.Mnemonics.setLocalizedText(settingButton, org.openide.util.NbBundle.getMessage(Main.class, "Main.settingButton.text")); // NOI18N
         settingButton.setBorder(null);
         settingButton.setContentAreaFilled(false);
@@ -190,8 +218,272 @@ public class Main extends javax.swing.JFrame {
         content.setBackground(new java.awt.Color(255, 255, 255));
         content.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         content.setLayout(new java.awt.CardLayout());
-        content.add(listQuiz1, "listQuizCard");
-        content.add(content1, "listQuestionCard");
+
+        listQuiz.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/quiz.png"))); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel1, org.openide.util.NbBundle.getMessage(Main.class, "Main.jLabel1.text")); // NOI18N
+
+        javax.swing.GroupLayout listQuizLayout = new javax.swing.GroupLayout(listQuiz);
+        listQuiz.setLayout(listQuizLayout);
+        listQuizLayout.setHorizontalGroup(
+            listQuizLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(listQuizLayout.createSequentialGroup()
+                .addGap(112, 112, 112)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(977, Short.MAX_VALUE))
+        );
+        listQuizLayout.setVerticalGroup(
+            listQuizLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(listQuizLayout.createSequentialGroup()
+                .addGap(86, 86, 86)
+                .addComponent(jLabel1)
+                .addContainerGap(663, Short.MAX_VALUE))
+        );
+
+        content.add(listQuiz, "card2");
+
+        mainContent.setBackground(new java.awt.Color(255, 255, 255));
+
+        questionTab.setBackground(new java.awt.Color(255, 255, 255));
+
+        listQuestionTitleLabel.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        listQuestionTitleLabel.setForeground(new java.awt.Color(192, 36, 36));
+        org.openide.awt.Mnemonics.setLocalizedText(listQuestionTitleLabel, org.openide.util.NbBundle.getMessage(Main.class, "Main.listQuestionTitleLabel.text")); // NOI18N
+
+        selectCategoryLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(selectCategoryLabel, org.openide.util.NbBundle.getMessage(Main.class, "Main.selectCategoryLabel.text")); // NOI18N
+
+        selectCategoryDropdown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        categoryDescriptionLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(categoryDescriptionLabel, org.openide.util.NbBundle.getMessage(Main.class, "Main.categoryDescriptionLabel.text")); // NOI18N
+        categoryDescriptionLabel.setToolTipText(org.openide.util.NbBundle.getMessage(Main.class, "Main.categoryDescriptionLabel.toolTipText")); // NOI18N
+
+        showSubcategoryCheckbox.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(showSubcategoryCheckbox, org.openide.util.NbBundle.getMessage(Main.class, "Main.showSubcategoryCheckbox.text")); // NOI18N
+
+        showOldQuestionsCheckbox.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(showOldQuestionsCheckbox, org.openide.util.NbBundle.getMessage(Main.class, "Main.showOldQuestionsCheckbox.text")); // NOI18N
+
+        createNewQuestionButton.setBackground(new java.awt.Color(7, 116, 163));
+        createNewQuestionButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        createNewQuestionButton.setForeground(new java.awt.Color(255, 255, 255));
+        org.openide.awt.Mnemonics.setLocalizedText(createNewQuestionButton, org.openide.util.NbBundle.getMessage(Main.class, "Main.createNewQuestionButton.text")); // NOI18N
+
+        javax.swing.GroupLayout questionTabLayout = new javax.swing.GroupLayout(questionTab);
+        questionTab.setLayout(questionTabLayout);
+        questionTabLayout.setHorizontalGroup(
+            questionTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(questionTabLayout.createSequentialGroup()
+                .addGroup(questionTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(questionTabLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(listQuestionTitleLabel))
+                    .addGroup(questionTabLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(questionTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(categoryDescriptionLabel)
+                            .addGroup(questionTabLayout.createSequentialGroup()
+                                .addComponent(selectCategoryLabel)
+                                .addGap(18, 18, 18)
+                                .addComponent(selectCategoryDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(showOldQuestionsCheckbox)
+                            .addComponent(showSubcategoryCheckbox)
+                            .addComponent(createNewQuestionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(878, Short.MAX_VALUE))
+        );
+        questionTabLayout.setVerticalGroup(
+            questionTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(questionTabLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(listQuestionTitleLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(questionTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(selectCategoryLabel)
+                    .addComponent(selectCategoryDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(categoryDescriptionLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(showSubcategoryCheckbox)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(showOldQuestionsCheckbox)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(createNewQuestionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(527, Short.MAX_VALUE))
+        );
+
+        menuContent.addTab(org.openide.util.NbBundle.getMessage(Main.class, "Main.questionTab.TabConstraints.tabTitle"), questionTab); // NOI18N
+
+        categoryTab.setBackground(new java.awt.Color(255, 255, 255));
+
+        addCategoryTitleLabel.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        addCategoryTitleLabel.setForeground(new java.awt.Color(192, 36, 36));
+        org.openide.awt.Mnemonics.setLocalizedText(addCategoryTitleLabel, org.openide.util.NbBundle.getMessage(Main.class, "Main.addCategoryTitleLabel.text")); // NOI18N
+
+        parentCategoryInputLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(parentCategoryInputLabel, org.openide.util.NbBundle.getMessage(Main.class, "Main.parentCategoryInputLabel.text")); // NOI18N
+
+        parentCategoryInput.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        parentCategoryInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                parentCategoryInputActionPerformed(evt);
+            }
+        });
+
+        nameCategoryInputLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(nameCategoryInputLabel, org.openide.util.NbBundle.getMessage(Main.class, "Main.nameCategoryInputLabel.text")); // NOI18N
+
+        nameCategoryInput.setText(org.openide.util.NbBundle.getMessage(Main.class, "Main.nameCategoryInput.text")); // NOI18N
+
+        categoryInfoInputLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(categoryInfoInputLabel, org.openide.util.NbBundle.getMessage(Main.class, "Main.categoryInfoInputLabel.text")); // NOI18N
+
+        categoryInfoInput.setColumns(20);
+        categoryInfoInput.setRows(5);
+        jScrollPane1.setViewportView(categoryInfoInput);
+
+        IDNumberInputLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(IDNumberInputLabel, org.openide.util.NbBundle.getMessage(Main.class, "Main.IDNumberInputLabel.text")); // NOI18N
+
+        IDNumberInput.setText(org.openide.util.NbBundle.getMessage(Main.class, "Main.IDNumberInput.text")); // NOI18N
+
+        addCategoryButtonSubmit.setBackground(new java.awt.Color(192, 36, 36));
+        addCategoryButtonSubmit.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        addCategoryButtonSubmit.setForeground(new java.awt.Color(255, 255, 255));
+        org.openide.awt.Mnemonics.setLocalizedText(addCategoryButtonSubmit, org.openide.util.NbBundle.getMessage(Main.class, "Main.addCategoryButtonSubmit.text")); // NOI18N
+
+        requiredText.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(requiredText, org.openide.util.NbBundle.getMessage(Main.class, "Main.requiredText.text")); // NOI18N
+        requiredText.setToolTipText(org.openide.util.NbBundle.getMessage(Main.class, "Main.requiredText.toolTipText")); // NOI18N
+        requiredText.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+
+        requiredLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        requiredLabel1.setForeground(new java.awt.Color(255, 0, 51));
+        org.openide.awt.Mnemonics.setLocalizedText(requiredLabel1, org.openide.util.NbBundle.getMessage(Main.class, "Main.requiredLabel1.text")); // NOI18N
+
+        requiredLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        requiredLabel2.setForeground(new java.awt.Color(255, 0, 51));
+        org.openide.awt.Mnemonics.setLocalizedText(requiredLabel2, org.openide.util.NbBundle.getMessage(Main.class, "Main.requiredLabel2.text")); // NOI18N
+
+        javax.swing.GroupLayout categoryTabLayout = new javax.swing.GroupLayout(categoryTab);
+        categoryTab.setLayout(categoryTabLayout);
+        categoryTabLayout.setHorizontalGroup(
+            categoryTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(categoryTabLayout.createSequentialGroup()
+                .addGroup(categoryTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(categoryTabLayout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addGroup(categoryTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(addCategoryTitleLabel)
+                            .addGroup(categoryTabLayout.createSequentialGroup()
+                                .addGroup(categoryTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(categoryTabLayout.createSequentialGroup()
+                                        .addGroup(categoryTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(parentCategoryInputLabel)
+                                            .addComponent(categoryInfoInputLabel)
+                                            .addComponent(IDNumberInputLabel))
+                                        .addGap(207, 207, 207))
+                                    .addGroup(categoryTabLayout.createSequentialGroup()
+                                        .addComponent(nameCategoryInputLabel)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(requiredLabel1)
+                                        .addGap(12, 12, 12)))
+                                .addGroup(categoryTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(parentCategoryInput, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(nameCategoryInput)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
+                                    .addComponent(IDNumberInput, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(categoryTabLayout.createSequentialGroup()
+                        .addGap(333, 333, 333)
+                        .addComponent(addCategoryButtonSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(categoryTabLayout.createSequentialGroup()
+                        .addGap(281, 281, 281)
+                        .addComponent(requiredText)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(requiredLabel2)))
+                .addContainerGap(620, Short.MAX_VALUE))
+        );
+        categoryTabLayout.setVerticalGroup(
+            categoryTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(categoryTabLayout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(addCategoryTitleLabel)
+                .addGap(18, 18, 18)
+                .addGroup(categoryTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(parentCategoryInputLabel)
+                    .addComponent(parentCategoryInput, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17)
+                .addGroup(categoryTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nameCategoryInputLabel)
+                    .addComponent(nameCategoryInput, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(categoryTabLayout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addComponent(requiredLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(29, 29, 29)
+                .addGroup(categoryTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(categoryInfoInputLabel)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
+                .addGroup(categoryTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(IDNumberInputLabel)
+                    .addComponent(IDNumberInput, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(addCategoryButtonSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(categoryTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(requiredText)
+                    .addComponent(requiredLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(261, Short.MAX_VALUE))
+        );
+
+        menuContent.addTab(org.openide.util.NbBundle.getMessage(Main.class, "Main.categoryTab.TabConstraints.tabTitle"), categoryTab); // NOI18N
+
+        importTab.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout importTabLayout = new javax.swing.GroupLayout(importTab);
+        importTab.setLayout(importTabLayout);
+        importTabLayout.setHorizontalGroup(
+            importTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1278, Short.MAX_VALUE)
+        );
+        importTabLayout.setVerticalGroup(
+            importTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 744, Short.MAX_VALUE)
+        );
+
+        menuContent.addTab(org.openide.util.NbBundle.getMessage(Main.class, "Main.importTab.TabConstraints.tabTitle"), importTab); // NOI18N
+
+        exportTab.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout exportTabLayout = new javax.swing.GroupLayout(exportTab);
+        exportTab.setLayout(exportTabLayout);
+        exportTabLayout.setHorizontalGroup(
+            exportTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1278, Short.MAX_VALUE)
+        );
+        exportTabLayout.setVerticalGroup(
+            exportTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 744, Short.MAX_VALUE)
+        );
+
+        menuContent.addTab(org.openide.util.NbBundle.getMessage(Main.class, "Main.exportTab.TabConstraints.tabTitle"), exportTab); // NOI18N
+
+        javax.swing.GroupLayout mainContentLayout = new javax.swing.GroupLayout(mainContent);
+        mainContent.setLayout(mainContentLayout);
+        mainContentLayout.setHorizontalGroup(
+            mainContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(menuContent, javax.swing.GroupLayout.Alignment.TRAILING)
+        );
+        mainContentLayout.setVerticalGroup(
+            mainContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainContentLayout.createSequentialGroup()
+                .addGap(0, 19, Short.MAX_VALUE)
+                .addComponent(menuContent, javax.swing.GroupLayout.PREFERRED_SIZE, 755, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        content.add(mainContent, "mainContentCard");
 
         javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
         bg.setLayout(bgLayout);
@@ -199,7 +491,7 @@ public class Main extends javax.swing.JFrame {
             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(topbar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(page, javax.swing.GroupLayout.DEFAULT_SIZE, 1280, Short.MAX_VALUE)
-            .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, 1280, Short.MAX_VALUE)
+            .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         bgLayout.setVerticalGroup(
             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -208,7 +500,7 @@ public class Main extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(page, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, 776, Short.MAX_VALUE))
+                .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -236,27 +528,61 @@ public class Main extends javax.swing.JFrame {
             String menuText = clickedMenuItem.getText();
             if ("Question".equals(menuText)) {
                 CardLayout contentLayout = (CardLayout)content.getLayout();
-                contentLayout.show(content, "listQuestionCard");
+                contentLayout.show(content, "mainContentCard");
+                menuContent.setSelectedIndex(0);
             }
-
         }
     }//GEN-LAST:event_questionMenuItemActionPerformed
 
     private void categoryMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoryMenuItemActionPerformed
         // TODO add your handling code here:
+        Object source = evt.getSource();
+        if (source instanceof JMenuItem) {
+            JMenuItem clickedMenuItem = (JMenuItem) source;
+            String menuText = clickedMenuItem.getText();
+            if ("Categories".equals(menuText)) {
+                CardLayout contentLayout = (CardLayout)content.getLayout();
+                contentLayout.show(content, "mainContentCard");
+                menuContent.setSelectedIndex(1);
+            }
+        }
     }//GEN-LAST:event_categoryMenuItemActionPerformed
 
     private void importMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importMenuItemActionPerformed
         // TODO add your handling code here:
+        Object source = evt.getSource();
+        if (source instanceof JMenuItem) {
+            JMenuItem clickedMenuItem = (JMenuItem) source;
+            String menuText = clickedMenuItem.getText();
+            if ("Import".equals(menuText)) {
+                CardLayout contentLayout = (CardLayout)content.getLayout();
+                contentLayout.show(content, "mainContentCard");
+                menuContent.setSelectedIndex(2);
+            }
+        }
     }//GEN-LAST:event_importMenuItemActionPerformed
 
     private void exportMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportMenuItemActionPerformed
         // TODO add your handling code here:
+        Object source = evt.getSource();
+        if (source instanceof JMenuItem) {
+            JMenuItem clickedMenuItem = (JMenuItem) source;
+            String menuText = clickedMenuItem.getText();
+            if ("Export".equals(menuText)) {
+                CardLayout contentLayout = (CardLayout)content.getLayout();
+                contentLayout.show(content, "mainContentCard");
+                menuContent.setSelectedIndex(3);
+            }
+        }
     }//GEN-LAST:event_exportMenuItemActionPerformed
 
     private void turnEditingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_turnEditingButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_turnEditingButtonActionPerformed
+
+    private void parentCategoryInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_parentCategoryInputActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_parentCategoryInputActionPerformed
 
     /**
      * @param args the command line arguments
@@ -291,24 +617,51 @@ public class Main extends javax.swing.JFrame {
         });
     }
 
-    private ImageIcon settingMenuButtonIcon = new ImageIcon(getClass().getResource("/images/settings.png"));
+    private final ImageIcon settingMenuButtonIcon = new ImageIcon(getClass().getResource("/images/settings.png"));
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField IDNumberInput;
+    private javax.swing.JLabel IDNumberInputLabel;
+    private javax.swing.JButton addCategoryButtonSubmit;
+    private javax.swing.JLabel addCategoryTitleLabel;
     private javax.swing.JPanel bg;
+    private javax.swing.JLabel categoryDescriptionLabel;
+    private javax.swing.JTextArea categoryInfoInput;
+    private javax.swing.JLabel categoryInfoInputLabel;
     private javax.swing.JMenuItem categoryMenuItem;
+    private javax.swing.JPanel categoryTab;
     private javax.swing.JPanel content;
-    private gui.component.Content content1;
+    private javax.swing.JButton createNewQuestionButton;
     private javax.swing.JMenuItem exportMenuItem;
+    private javax.swing.JPanel exportTab;
     private javax.swing.JMenuItem importMenuItem;
+    private javax.swing.JPanel importTab;
     private javax.swing.JLabel itLabel;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private gui.component.ListQuiz listQuiz1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel listQuestionTitleLabel;
+    private javax.swing.JPanel listQuiz;
+    private javax.swing.JPanel mainContent;
+    private javax.swing.JTabbedPane menuContent;
+    private javax.swing.JTextField nameCategoryInput;
+    private javax.swing.JLabel nameCategoryInputLabel;
     private javax.swing.JPanel page;
     private javax.swing.JLabel pageLink;
+    private javax.swing.JComboBox<String> parentCategoryInput;
+    private javax.swing.JLabel parentCategoryInputLabel;
     private javax.swing.JMenuItem questionMenuItem;
+    private javax.swing.JPanel questionTab;
+    private javax.swing.JLabel requiredLabel1;
+    private javax.swing.JLabel requiredLabel2;
+    private javax.swing.JLabel requiredText;
+    private javax.swing.JComboBox<String> selectCategoryDropdown;
+    private javax.swing.JLabel selectCategoryLabel;
     private javax.swing.JButton settingButton;
     private javax.swing.JPopupMenu settingMenu;
+    private javax.swing.JCheckBox showOldQuestionsCheckbox;
+    private javax.swing.JCheckBox showSubcategoryCheckbox;
     private javax.swing.JPanel topbar;
     private javax.swing.JButton turnEditingButton;
     // End of variables declaration//GEN-END:variables
