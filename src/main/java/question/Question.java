@@ -6,6 +6,7 @@ import java.awt.*;
 import java.util.List;
 
 public class Question {
+
     private String name;
 
     private Category category;
@@ -74,5 +75,14 @@ public class Question {
 
     public void addAnswer(Answer answer) {
         this.answers.add(answer);
+    }
+
+
+    public String toString() {
+        String result =  this.questionText + " ";
+        for (Answer answer : answers) {
+            result += answer.getText() + " ";
+        }
+        return result;
     }
 }

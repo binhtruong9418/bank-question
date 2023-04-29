@@ -6,16 +6,13 @@ import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DropTarget;
 import java.awt.dnd.DropTargetDropEvent;
-import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
-import javax.swing.ImageIcon;
-import javax.swing.JMenuItem;
-import javax.swing.JPopupMenu;
-import javax.swing.JButton;
-import javax.swing.JFileChooser;
-import org.openide.awt.DropDownButtonFactory;
 import java.util.List;
+import javax.swing.*;
+
+import org.openide.awt.DropDownButtonFactory;
+
 
 
 
@@ -34,6 +31,7 @@ public class Main extends javax.swing.JFrame {
      */
     public Main() {
         initComponents();
+        setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH); 
         addDropAndDragFile();
     }
 
@@ -71,8 +69,9 @@ public class Main extends javax.swing.JFrame {
         selectCategoryDropdown = new javax.swing.JComboBox<>();
         categoryDescriptionLabel = new javax.swing.JLabel();
         showSubcategoryCheckbox = new javax.swing.JCheckBox();
-        showOldQuestionsCheckbox = new javax.swing.JCheckBox();
         createNewQuestionButton = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        listQuestionTable = new javax.swing.JTable();
         categoryTab = new javax.swing.JPanel();
         addCategoryTitleLabel = new javax.swing.JLabel();
         parentCategoryInputLabel = new javax.swing.JLabel();
@@ -264,7 +263,7 @@ public class Main extends javax.swing.JFrame {
             .addGroup(listQuizLayout.createSequentialGroup()
                 .addGap(86, 86, 86)
                 .addComponent(jLabel1)
-                .addContainerGap(663, Short.MAX_VALUE))
+                .addContainerGap(740, Short.MAX_VALUE))
         );
 
         content.add(listQuiz, "card2");
@@ -289,13 +288,60 @@ public class Main extends javax.swing.JFrame {
         showSubcategoryCheckbox.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         org.openide.awt.Mnemonics.setLocalizedText(showSubcategoryCheckbox, org.openide.util.NbBundle.getMessage(Main.class, "Main.showSubcategoryCheckbox.text")); // NOI18N
 
-        showOldQuestionsCheckbox.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
-        org.openide.awt.Mnemonics.setLocalizedText(showOldQuestionsCheckbox, org.openide.util.NbBundle.getMessage(Main.class, "Main.showOldQuestionsCheckbox.text")); // NOI18N
-
         createNewQuestionButton.setBackground(new java.awt.Color(7, 116, 163));
         createNewQuestionButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         createNewQuestionButton.setForeground(new java.awt.Color(255, 255, 255));
         org.openide.awt.Mnemonics.setLocalizedText(createNewQuestionButton, org.openide.util.NbBundle.getMessage(Main.class, "Main.createNewQuestionButton.text")); // NOI18N
+
+        jScrollPane3.setBorder(null);
+        jScrollPane3.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+        listQuestionTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Question", "Actions"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        listQuestionTable.setRowHeight(35);
+        jScrollPane3.setViewportView(listQuestionTable);
+        if (listQuestionTable.getColumnModel().getColumnCount() > 0) {
+            listQuestionTable.getColumnModel().getColumn(0).setResizable(false);
+            listQuestionTable.getColumnModel().getColumn(0).setPreferredWidth(1800);
+            listQuestionTable.getColumnModel().getColumn(0).setHeaderValue(org.openide.util.NbBundle.getMessage(Main.class, "Main.listQuestionTable.columnModel.title0")); // NOI18N
+            listQuestionTable.getColumnModel().getColumn(1).setResizable(false);
+            listQuestionTable.getColumnModel().getColumn(1).setHeaderValue(org.openide.util.NbBundle.getMessage(Main.class, "Main.listQuestionTable.columnModel.title1")); // NOI18N
+        }
 
         javax.swing.GroupLayout questionTabLayout = new javax.swing.GroupLayout(questionTab);
         questionTab.setLayout(questionTabLayout);
@@ -314,10 +360,12 @@ public class Main extends javax.swing.JFrame {
                                 .addComponent(selectCategoryLabel)
                                 .addGap(18, 18, 18)
                                 .addComponent(selectCategoryDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(showOldQuestionsCheckbox)
                             .addComponent(showSubcategoryCheckbox)
                             .addComponent(createNewQuestionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(1530, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, questionTabLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jScrollPane3))
         );
         questionTabLayout.setVerticalGroup(
             questionTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -332,11 +380,11 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(categoryDescriptionLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(showSubcategoryCheckbox)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(showOldQuestionsCheckbox)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(createNewQuestionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(527, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(270, Short.MAX_VALUE))
         );
 
         menuContent.addTab(org.openide.util.NbBundle.getMessage(Main.class, "Main.questionTab.TabConstraints.tabTitle"), questionTab); // NOI18N
@@ -461,7 +509,7 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(categoryTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(requiredText)
                     .addComponent(requiredLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(261, Short.MAX_VALUE))
+                .addContainerGap(311, Short.MAX_VALUE))
         );
 
         menuContent.addTab(org.openide.util.NbBundle.getMessage(Main.class, "Main.categoryTab.TabConstraints.tabTitle"), categoryTab); // NOI18N
@@ -592,7 +640,7 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(importTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(363, Short.MAX_VALUE))
+                .addContainerGap(433, Short.MAX_VALUE))
         );
 
         menuContent.addTab(org.openide.util.NbBundle.getMessage(Main.class, "Main.importTab.TabConstraints.tabTitle"), importTab); // NOI18N
@@ -607,7 +655,7 @@ public class Main extends javax.swing.JFrame {
         );
         exportTabLayout.setVerticalGroup(
             exportTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 744, Short.MAX_VALUE)
+            .addGap(0, 794, Short.MAX_VALUE)
         );
 
         menuContent.addTab(org.openide.util.NbBundle.getMessage(Main.class, "Main.exportTab.TabConstraints.tabTitle"), exportTab); // NOI18N
@@ -621,8 +669,8 @@ public class Main extends javax.swing.JFrame {
         mainContentLayout.setVerticalGroup(
             mainContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainContentLayout.createSequentialGroup()
-                .addGap(0, 19, Short.MAX_VALUE)
-                .addComponent(menuContent, javax.swing.GroupLayout.PREFERRED_SIZE, 755, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 26, Short.MAX_VALUE)
+                .addComponent(menuContent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         content.add(mainContent, "mainContentCard");
@@ -740,12 +788,11 @@ public class Main extends javax.swing.JFrame {
 
     private void submitImportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitImportButtonActionPerformed
         // TODO add your handling code here:
-        importFile.checkFile(importFile.getImportFile());
+        String result = importFile.checkAikenFile(importFile.getImportFile());
+        System.out.println(result);
     }//GEN-LAST:event_submitImportButtonActionPerformed
 
     private void addDropAndDragFile() {
-//        DragDropListener myDragDropListener = new DragDropListener();
-//        DropTarget dropTarget = new DropTarget(dragdropFileLabel, myDragDropListener);
           dragdropFileLabel.setDropTarget(
                 new DropTarget() {
                     @Override
@@ -781,15 +828,11 @@ public class Main extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        
         //</editor-fold>
 
         /* Create and display the form */
@@ -832,7 +875,9 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JTable listQuestionTable;
     private javax.swing.JLabel listQuestionTitleLabel;
     private javax.swing.JPanel listQuiz;
     private javax.swing.JPanel mainContent;
@@ -855,7 +900,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton selectUploadFileButton;
     private javax.swing.JButton settingButton;
     private javax.swing.JPopupMenu settingMenu;
-    private javax.swing.JCheckBox showOldQuestionsCheckbox;
     private javax.swing.JCheckBox showSubcategoryCheckbox;
     private javax.swing.JButton submitImportButton;
     private javax.swing.JPanel topbar;

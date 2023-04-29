@@ -1,17 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package importFile;
 
-import java.io.File;
+import question.Answer;
+import question.ListQuestion;
+import question.Question;
+
+import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
-/**
- *
- * @author Duc Binh
- */
 public class ImportFile {
     private File importFile;
     
@@ -29,64 +27,108 @@ public class ImportFile {
         this.importFile = file;
     }
 
-    public void checkFile(File file) {
+    public static String checkAikenFile(File file) {
+        // Check file extension
+        String fileName = file.getName();
+        int dotIndex = fileName.lastIndexOf(".");
+        if (dotIndex == -1 || !fileName.substring(dotIndex).equalsIgnoreCase(".txt")) {
+            return "Error at line 1: File must have .txt extension";
+        }
+
         try {
-            Scanner scanner = new Scanner(file);
-            String currentQuestion = null;
-            ArrayList<String> answerChoices = new ArrayList<>();
-            String currentAnswer = null;
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            String line;
+            int totalLine = 0;
+            int lineNum = 1;
+            int answerCount = 0;
             int questionCount = 0;
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                if (line.startsWith("A. ") || line.startsWith("B. ") || line.startsWith("C. ") || line.startsWith("D. ") || line.startsWith("E. ")) {
-                    // This is an answer choice, add it to the list of answer choices
-                    answerChoices.add(line);
-                } else if (line.startsWith("ANSWER: ")) {
-                    // This is the answer to the current question, store it
-                    currentAnswer = line.replace("ANSWER:", "").trim();
-                    // Do something with the question, answer choices, and answer
-                    System.out.println(currentQuestion);
-                    for (String answerChoice : answerChoices) {
-                        System.out.println(answerChoice);
+            boolean questionFound = false;
+            boolean blankLineExpected = false;
+            boolean correctAnswerFound = false;
+            while ((line = reader.readLine()) != null) {
+                if(line.trim().equals("")) {
+                    if (!questionFound || !correctAnswerFound || answerCount < 2 || blankLineExpected) {
+                        reader.close();
+                        return "Error at: line " + (totalLine + lineNum);
                     }
-                    System.out.println("Answer: " + currentAnswer);
+
+                    questionFound = false;
+                    correctAnswerFound = false;
+                    blankLineExpected = false;
+                    answerCount = 0;
+                    totalLine++;
+                    lineNum = 0;
+
+                } else if (lineNum == 1) {
+                    questionFound = true;
                     questionCount++;
-                    // Reset the variables for the next question
-                    currentQuestion = null;
-                    answerChoices.clear();
-                    currentAnswer = null;
-                } else {
-                    // This is a new question, store it
-                    if (currentQuestion != null) {
-                        // We've already read a question but haven't processed it yet
-                        // Do something with the question, answer choices, and answer
-                        System.out.println(currentQuestion);
-                        for (String answerChoice : answerChoices) {
-                            System.out.println(answerChoice);
-                        }
-                        System.out.println("Answer: " + currentAnswer);
-                        questionCount++;
-                        // Reset the variables for the next question
-                        answerChoices.clear();
-                        currentAnswer = null;
+                    answerCount = 0;
+                } else if (lineNum == 2) {
+                    if(line.startsWith("A. ")) {
+                        answerCount++;
+                    } else {
+                        reader.close();
+                        return "Error at: line " + (totalLine + lineNum);
                     }
-                    currentQuestion = line;
+                } else if (lineNum == 3) {
+                    if(line.startsWith("B. ")) {
+                        answerCount++;
+                    } else {
+                        reader.close();
+                        return "Error at: line " + (totalLine + lineNum);
+                    }
+                } else if (lineNum == 4) {
+                    if(line.startsWith("C. ")) {
+                        answerCount++;
+                    } else if (line.startsWith("ANSWER: ")) {
+                        correctAnswerFound = true;
+                        totalLine += lineNum;
+                    }
+                    else {
+                        reader.close();
+                        return "Error at: line " + (totalLine + lineNum);
+                    }
+                } else if (lineNum == 5) {
+                    if(line.startsWith("D. ") && !correctAnswerFound) {
+                        answerCount++;
+                    } else if (line.startsWith("ANSWER: ")) {
+                        correctAnswerFound = true;
+                        totalLine += lineNum;
+                    }
+                    else {
+                        reader.close();
+                        return "Error at: line " + (totalLine + lineNum);
+                    }
+                } else if (lineNum == 6) {
+                    if(line.startsWith("E. ") && !correctAnswerFound) {
+                        answerCount++;
+                    } else if (line.startsWith("ANSWER: ")) {
+                        correctAnswerFound = true;
+                        totalLine += lineNum;
+                    }
+                    else {
+                        reader.close();
+                        return "Error at: line " + (totalLine + lineNum);
+                    }
+                } else if (lineNum == 7) {
+                    if(line.startsWith("ANSWER: ") && !correctAnswerFound) {
+                        correctAnswerFound = true;
+                        totalLine += lineNum;
+                    } else {
+                        reader.close();
+                        return "Error at: line " + (totalLine + lineNum);
+                    }
                 }
+                lineNum++;
             }
-            // Check if there is a final question that we need to process
-            if (currentQuestion != null) {
-                // Do something with the question, answer choices, and answer
-                System.out.println(currentQuestion);
-                for (String answerChoice : answerChoices) {
-                    System.out.println(answerChoice);
-                }
-                System.out.println("Answer: " + currentAnswer);
-                questionCount++;
+            reader.close();
+            if(!questionFound || !correctAnswerFound || answerCount < 2) {
+                return "Error at: line " + (totalLine + lineNum);
             }
-            System.out.println("Total number of questions: " + questionCount);
-            scanner.close();
-        } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
+            // File is valid
+            return "Success - " + questionCount + " questions imported";
+        } catch (IOException e) {
+            return "Error: Unable to read file";
         }
     }
 }
