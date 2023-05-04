@@ -365,7 +365,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
                           <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="740" max="32767" attributes="0"/>
+                          <EmptySpace pref="873" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -481,9 +481,9 @@
                                   <Component id="showSubcategoryCheckbox" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="createNewQuestionButton" min="-2" pref="37" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="jScrollPane3" min="-2" pref="317" max="-2" attributes="0"/>
-                                  <EmptySpace pref="270" max="32767" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="jScrollPane3" min="-2" pref="313" max="-2" attributes="0"/>
+                                  <EmptySpace pref="401" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -571,7 +571,6 @@
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                               <Border info="null"/>
                             </Property>
-                            <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
                           </Properties>
                           <AuxValues>
                             <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
@@ -579,33 +578,32 @@
 
                           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                           <SubComponents>
-                            <Component class="javax.swing.JTable" name="listQuestionTable">
+                            <Component class="components.ListQuestionTable" name="listQuestionTable">
                               <Properties>
                                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                                  <Table columnCount="2" rowCount="15">
-                                    <Column editable="false" title="Question" type="java.lang.String"/>
-                                    <Column editable="false" title="Actions" type="java.lang.String"/>
+                                  <Table columnCount="2" rowCount="0">
+                                    <Column editable="false" title="Question" type="java.lang.Object"/>
+                                    <Column editable="false" title="Actions" type="java.lang.Object"/>
                                   </Table>
                                 </Property>
                                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                                   <TableColumnModel selectionModel="0">
-                                    <Column maxWidth="-1" minWidth="-1" prefWidth="1800" resizable="false">
+                                    <Column maxWidth="-1" minWidth="-1" prefWidth="1800" resizable="true">
                                       <Title editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                                         <ResourceString bundle="Bundle.properties" key="Main.listQuestionTable.columnModel.title0" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
                                       </Title>
                                       <Editor/>
                                       <Renderer/>
                                     </Column>
-                                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                                       <Title editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                                        <ResourceString bundle="Bundle.properties" key="Main.listQuestionTable.columnModel.title1" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+                                        <ResourceString bundle="Bundle.properties" key="Main.listQuestionTable.columnModel.title1_1" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
                                       </Title>
                                       <Editor/>
                                       <Renderer/>
                                     </Column>
                                   </TableColumnModel>
                                 </Property>
-                                <Property name="rowHeight" type="int" value="35"/>
                                 <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                                 </Property>
@@ -719,7 +717,7 @@
                                       <Component id="requiredText" min="-2" max="-2" attributes="0"/>
                                       <Component id="requiredLabel2" min="-2" pref="18" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="311" max="32767" attributes="0"/>
+                                  <EmptySpace pref="444" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -977,7 +975,7 @@
                                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabel3" min="-2" pref="18" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="433" max="32767" attributes="0"/>
+                                  <EmptySpace pref="566" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -1175,7 +1173,7 @@
                         </DimensionLayout>
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="794" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="927" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                       </Layout>

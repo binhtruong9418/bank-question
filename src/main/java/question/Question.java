@@ -3,9 +3,12 @@ package question;
 import category.Category;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Question {
+    
+    public static List<Question> listQuestion = new ArrayList<>();
 
     private String name;
 
@@ -16,6 +19,8 @@ public class Question {
     private Image questionImage;
 
     private List<Answer> answers;
+    
+    private Answer rightAnswer;
 
 
     public Question(String name, Category category, String questionText, Image questionImage, List<Answer> answers) {
@@ -51,6 +56,10 @@ public class Question {
     public List<Answer> getAnswers() {
         return answers;
     }
+    
+    public Answer getRightAnswer () {
+        return rightAnswer;
+    }
 
     public void setName(String name) {
         this.name = name;
@@ -76,13 +85,22 @@ public class Question {
     public void addAnswer(Answer answer) {
         this.answers.add(answer);
     }
+    
+    
+    public void setRightAnswer(Answer answer) {
+        this.rightAnswer = answer;
+    }
 
-
+    @Override
     public String toString() {
         String result =  this.questionText + " ";
         for (Answer answer : answers) {
             result += answer.getText() + " ";
         }
         return result;
+    }
+    
+    public Object[] toRowTable () {
+        return new Object[]{this.toString(), "Edit"};
     }
 }
