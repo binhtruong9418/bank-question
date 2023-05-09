@@ -1,18 +1,7 @@
-import importFile.ImportFile;
 import java.awt.CardLayout;
-import java.awt.datatransfer.DataFlavor;
-import java.awt.datatransfer.UnsupportedFlavorException;
-import java.awt.dnd.DnDConstants;
-import java.awt.dnd.DropTarget;
-import java.awt.dnd.DropTargetDropEvent;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.*;
 
 import org.openide.awt.DropDownButtonFactory;
-import question.Answer;
 import question.Question;
 
 
@@ -34,29 +23,7 @@ public class Main extends javax.swing.JFrame {
     public Main() {
         initComponents();
         setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH); 
-        addDropAndDragFile();
         initListQuestionsTableData();
-    }
-    
-    private void addDropAndDragFile() {
-          dragdropFileLabel.setDropTarget(
-                new DropTarget() {
-                    @Override
-                    public synchronized void drop(DropTargetDropEvent evt) {
-                        try {
-                            evt.acceptDrop(DnDConstants.ACTION_COPY);
-                            List<File> droppedFiles = (List<File>)
-                                evt.getTransferable().getTransferData(DataFlavor.javaFileListFlavor);
-                            for (File file : droppedFiles) {
-                                // process files
-                                importFile.setImportFile(file);
-                                fileNameUploadLabel.setText(file.getAbsolutePath());
-                            }
-                        } catch (UnsupportedFlavorException | IOException ex) {
-                        }
-                    }
-                }
-          );
     }
 
     private void initListQuestionsTableData() {
@@ -123,19 +90,7 @@ public class Main extends javax.swing.JFrame {
         requiredLabel1 = new javax.swing.JLabel();
         requiredLabel2 = new javax.swing.JLabel();
         importTab = new javax.swing.JPanel();
-        importTitleLabel = new javax.swing.JLabel();
-        fileFormatLabel = new javax.swing.JLabel();
-        formatTypeLabel = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
-        importQuestionLabel = new javax.swing.JLabel();
-        selectUploadFileButton = new javax.swing.JButton();
-        requiredLabel3 = new javax.swing.JLabel();
-        maximumSizeLabel = new javax.swing.JLabel();
-        dragdropFileLabel = new javax.swing.JLabel();
-        fileNameUploadLabel = new javax.swing.JLabel();
-        submitImportButton = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        importFile1 = new components.ImportFile();
         exportTab = new javax.swing.JPanel();
 
         settingMenu.setBackground(new java.awt.Color(7, 116, 163));
@@ -291,7 +246,7 @@ public class Main extends javax.swing.JFrame {
             .addGroup(listQuizLayout.createSequentialGroup()
                 .addGap(112, 112, 112)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(977, Short.MAX_VALUE))
+                .addContainerGap(1629, Short.MAX_VALUE))
         );
         listQuizLayout.setVerticalGroup(
             listQuizLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -526,131 +481,15 @@ public class Main extends javax.swing.JFrame {
 
         importTab.setBackground(new java.awt.Color(255, 255, 255));
 
-        importTitleLabel.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        importTitleLabel.setForeground(new java.awt.Color(192, 36, 36));
-        org.openide.awt.Mnemonics.setLocalizedText(importTitleLabel, org.openide.util.NbBundle.getMessage(Main.class, "Main.importTitleLabel.text")); // NOI18N
-
-        fileFormatLabel.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
-        fileFormatLabel.setForeground(new java.awt.Color(192, 36, 36));
-        org.openide.awt.Mnemonics.setLocalizedText(fileFormatLabel, org.openide.util.NbBundle.getMessage(Main.class, "Main.fileFormatLabel.text")); // NOI18N
-
-        formatTypeLabel.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
-        org.openide.awt.Mnemonics.setLocalizedText(formatTypeLabel, org.openide.util.NbBundle.getMessage(Main.class, "Main.formatTypeLabel.text")); // NOI18N
-
-        importQuestionLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        importQuestionLabel.setForeground(new java.awt.Color(192, 36, 36));
-        org.openide.awt.Mnemonics.setLocalizedText(importQuestionLabel, org.openide.util.NbBundle.getMessage(Main.class, "Main.importQuestionLabel.text")); // NOI18N
-
-        selectUploadFileButton.setBackground(new java.awt.Color(7, 116, 163));
-        selectUploadFileButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        selectUploadFileButton.setForeground(new java.awt.Color(255, 255, 255));
-        org.openide.awt.Mnemonics.setLocalizedText(selectUploadFileButton, org.openide.util.NbBundle.getMessage(Main.class, "Main.selectUploadFileButton.text")); // NOI18N
-        selectUploadFileButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                selectUploadFileButtonActionPerformed(evt);
-            }
-        });
-
-        requiredLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        requiredLabel3.setForeground(new java.awt.Color(192, 36, 36));
-        org.openide.awt.Mnemonics.setLocalizedText(requiredLabel3, org.openide.util.NbBundle.getMessage(Main.class, "Main.requiredLabel3.text")); // NOI18N
-
-        maximumSizeLabel.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
-        org.openide.awt.Mnemonics.setLocalizedText(maximumSizeLabel, org.openide.util.NbBundle.getMessage(Main.class, "Main.maximumSizeLabel.text")); // NOI18N
-
-        dragdropFileLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        dragdropFileLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        dragdropFileLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/upload.jpg"))); // NOI18N
-        org.openide.awt.Mnemonics.setLocalizedText(dragdropFileLabel, org.openide.util.NbBundle.getMessage(Main.class, "Main.dragdropFileLabel.text")); // NOI18N
-        dragdropFileLabel.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        dragdropFileLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        dragdropFileLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        dragdropFileLabel.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-
-        org.openide.awt.Mnemonics.setLocalizedText(fileNameUploadLabel, org.openide.util.NbBundle.getMessage(Main.class, "Main.fileNameUploadLabel.text")); // NOI18N
-
-        submitImportButton.setBackground(new java.awt.Color(192, 36, 36));
-        submitImportButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        submitImportButton.setForeground(new java.awt.Color(255, 255, 255));
-        org.openide.awt.Mnemonics.setLocalizedText(submitImportButton, org.openide.util.NbBundle.getMessage(Main.class, "Main.submitImportButton.text")); // NOI18N
-        submitImportButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                submitImportButtonActionPerformed(evt);
-            }
-        });
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel2, org.openide.util.NbBundle.getMessage(Main.class, "Main.jLabel2.text")); // NOI18N
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 0, 51));
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel3, org.openide.util.NbBundle.getMessage(Main.class, "Main.jLabel3.text")); // NOI18N
-
         javax.swing.GroupLayout importTabLayout = new javax.swing.GroupLayout(importTab);
         importTab.setLayout(importTabLayout);
         importTabLayout.setHorizontalGroup(
             importTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(importTabLayout.createSequentialGroup()
-                .addGroup(importTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(importTabLayout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addGroup(importTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 1246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(importTitleLabel)
-                            .addGroup(importTabLayout.createSequentialGroup()
-                                .addComponent(fileFormatLabel)
-                                .addGap(327, 327, 327)
-                                .addComponent(formatTypeLabel))
-                            .addGroup(importTabLayout.createSequentialGroup()
-                                .addComponent(importQuestionLabel)
-                                .addGap(211, 211, 211)
-                                .addComponent(requiredLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(importTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(fileNameUploadLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(importTabLayout.createSequentialGroup()
-                                        .addComponent(selectUploadFileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(maximumSizeLabel))
-                                    .addComponent(dragdropFileLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(submitImportButton, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(importTabLayout.createSequentialGroup()
-                        .addGap(350, 350, 350)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3)))
-                .addContainerGap(667, Short.MAX_VALUE))
+            .addComponent(importFile1, javax.swing.GroupLayout.DEFAULT_SIZE, 1930, Short.MAX_VALUE)
         );
         importTabLayout.setVerticalGroup(
             importTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(importTabLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(importTitleLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(importTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(fileFormatLabel)
-                    .addComponent(formatTypeLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(importTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(importTabLayout.createSequentialGroup()
-                        .addGap(11, 11, 11)
-                        .addComponent(requiredLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(importTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(importQuestionLabel)
-                        .addComponent(selectUploadFileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(maximumSizeLabel)))
-                .addGap(18, 18, 18)
-                .addComponent(dragdropFileLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(fileNameUploadLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
-                .addComponent(submitImportButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(importTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(566, Short.MAX_VALUE))
+            .addComponent(importFile1, javax.swing.GroupLayout.DEFAULT_SIZE, 927, Short.MAX_VALUE)
         );
 
         menuContent.addTab(org.openide.util.NbBundle.getMessage(Main.class, "Main.importTab.TabConstraints.tabTitle"), importTab); // NOI18N
@@ -784,29 +623,6 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_parentCategoryInputActionPerformed
 
-    private void selectUploadFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectUploadFileButtonActionPerformed
-        // TODO add your handling code here:
-         JFileChooser fileChooser = new JFileChooser();
-        int returnValue = fileChooser.showOpenDialog(null);
-        if (returnValue == JFileChooser.APPROVE_OPTION)
-        {
-            File selectedFile = fileChooser.getSelectedFile();
-            importFile.setImportFile(selectedFile);
-            fileNameUploadLabel.setText(selectedFile.getAbsolutePath());
-        }
-    }//GEN-LAST:event_selectUploadFileButtonActionPerformed
-
-    private void submitImportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitImportButtonActionPerformed
-        // TODO add your handling code here:
-        String result = ImportFile.checkAikenFile(importFile.getImportFile());
-        System.out.print(result);
-        if(result.startsWith("Success")) {
-            ImportFile.addQuestionFromFile(importFile.getImportFile());
-            System.out.print("Import Success");
-            initListQuestionsTableData();
-        }
-    }//GEN-LAST:event_submitImportButtonActionPerformed
-
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -835,7 +651,6 @@ public class Main extends javax.swing.JFrame {
     }
 
     private final ImageIcon settingMenuButtonIcon = new ImageIcon(getClass().getResource("/images/settings.png"));
-    private final ImportFile importFile = new ImportFile();
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -851,30 +666,21 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel categoryTab;
     private javax.swing.JPanel content;
     private javax.swing.JButton createNewQuestionButton;
-    private javax.swing.JLabel dragdropFileLabel;
     private javax.swing.JMenuItem exportMenuItem;
     private javax.swing.JPanel exportTab;
-    private javax.swing.JLabel fileFormatLabel;
-    private javax.swing.JLabel fileNameUploadLabel;
-    private javax.swing.JLabel formatTypeLabel;
+    private components.ImportFile importFile1;
     private javax.swing.JMenuItem importMenuItem;
-    private javax.swing.JLabel importQuestionLabel;
     private javax.swing.JPanel importTab;
-    private javax.swing.JLabel importTitleLabel;
     private javax.swing.JLabel itLabel;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JSeparator jSeparator1;
     private components.ListQuestionTable listQuestionTable;
     private javax.swing.JLabel listQuestionTitleLabel;
     private javax.swing.JPanel listQuiz;
     private javax.swing.JPanel mainContent;
-    private javax.swing.JLabel maximumSizeLabel;
     private javax.swing.JTabbedPane menuContent;
     private javax.swing.JTextField nameCategoryInput;
     private javax.swing.JLabel nameCategoryInputLabel;
@@ -886,15 +692,12 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel questionTab;
     private javax.swing.JLabel requiredLabel1;
     private javax.swing.JLabel requiredLabel2;
-    private javax.swing.JLabel requiredLabel3;
     private javax.swing.JLabel requiredText;
     private javax.swing.JComboBox<String> selectCategoryDropdown;
     private javax.swing.JLabel selectCategoryLabel;
-    private javax.swing.JButton selectUploadFileButton;
     private javax.swing.JButton settingButton;
     private javax.swing.JPopupMenu settingMenu;
     private javax.swing.JCheckBox showSubcategoryCheckbox;
-    private javax.swing.JButton submitImportButton;
     private javax.swing.JPanel topbar;
     private javax.swing.JButton turnEditingButton;
     // End of variables declaration//GEN-END:variables
