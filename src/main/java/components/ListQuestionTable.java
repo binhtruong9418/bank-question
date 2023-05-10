@@ -6,6 +6,7 @@ package components;
 
 import java.awt.Color;
 import java.awt.Component;
+import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -40,8 +41,10 @@ public class ListQuestionTable extends JTable{
                 setBorder(noFocusBorder);
                 if (selected) {
                     com.setBackground(new Color(239, 244, 255));
-                } else {
+                } else if (i % 2 == 0 ){
                     com.setBackground(Color.WHITE);
+                } else {
+                    com.setBackground(new Color(242,242,242));
                 }
                 return com;
             }

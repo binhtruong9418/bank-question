@@ -1,4 +1,4 @@
-package question;
+package model;
 
 import java.awt.*;
 

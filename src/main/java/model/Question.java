@@ -1,6 +1,6 @@
-package question;
+package model;
 
-import category.Category;
+import model.Category;
 
 import java.awt.*;
 import java.util.ArrayList;

@@ -17,8 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import question.Answer;
-import question.Question;
+import model.Answer;
+import model.Question;
 
 /**
  *
