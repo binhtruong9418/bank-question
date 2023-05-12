@@ -1,6 +1,7 @@
 import java.awt.CardLayout;
 import javax.swing.*;
 
+import components.QuestionBank;
 import org.openide.awt.DropDownButtonFactory;
 
 public class Main extends javax.swing.JFrame {

@@ -4,8 +4,14 @@
  */
 package components;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import connection.ConnectDB;
 import model.Answer;
 import model.Question;
 
@@ -15,6 +21,7 @@ import model.Question;
  */
 public class QuestionBank extends javax.swing.JPanel {
 
+
     /**
      * Creates new form ListQuestion
      */
@@ -23,20 +30,62 @@ public class QuestionBank extends javax.swing.JPanel {
         initListQuestionsTableData();
     }
     
-    private void initListQuestionsTableData() {
-        
-        for(int i=0; i < 15; i++) {
-            Question question = new Question();
-            question.setQuestionText("this is a question");
-            List<Answer> listAnswer = new ArrayList<>();
-            listAnswer.add(new Answer("A. Answer A"));
-            listAnswer.add(new Answer("B. Answer B"));
-            listAnswer.add(new Answer("C. Answer C"));
-            listAnswer.add(new Answer("D. Answer D"));
-            question.setAnswers(listAnswer);
-//            Question.listQuestion.add(question);
-//            Question question = Question.listQuestion.get(i);
-            listQuestionTable.addRow(question.toRowTable());
+    public void initListQuestionsTableData()  {
+        Connection con = ConnectDB.connect();
+
+        String sql = "SELECT * FROM questions";
+        System.out.println("initListQuestionsTableData");
+        try {
+            PreparedStatement pre = con.prepareStatement(sql);
+            ResultSet rs = pre.executeQuery();
+            if(rs.next()) {
+                String questionText = rs.getString("question_text");
+                String answerA = rs.getString("answer1_text");
+                String answerB = rs.getString("answer2_text");
+                String answerC = rs.getString("answer3_text");
+                String answerD = rs.getString("answer4_text");
+                String answerE = rs.getString("answer5_text");
+                String toString = "" + questionText;
+                if(answerA != null) {
+                    toString = toString + " " + answerA;
+                }
+                if(answerB != null) {
+                    toString = toString + " " + answerB;
+                }
+                if(answerC != null) {
+                    toString = toString + " " + answerC;
+                }
+                if(answerD != null) {
+                    toString = toString + " " + answerD;
+                }
+                if(answerE != null) {
+                    toString = toString + " " + answerE;
+                }
+                System.out.println("a question: " + toString);
+            }
+
+            for (int i = 0; i < Question.listQuestion.size(); i++) {
+                Question question = Question.listQuestion.get(i);
+                listQuestionTable.addRow(question.toRowTable());
+            }
+
+
+//            for(int i=0; i < 15; i++) {
+//                Question question = new Question();
+//                question.setQuestionText("this is a question");
+//                List<Answer> listAnswer = new ArrayList<>();
+//                listAnswer.add(new Answer("A. Answer A"));
+//                listAnswer.add(new Answer("B. Answer B"));
+//                listAnswer.add(new Answer("C. Answer C"));
+//                listAnswer.add(new Answer("D. Answer D"));
+//                question.setAnswers(listAnswer);
+////            Question.listQuestion.add(question);
+////            Question question = Question.listQuestion.get(i);
+//                listQuestionTable.addRow(question.toRowTable());
+//            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
     }
 

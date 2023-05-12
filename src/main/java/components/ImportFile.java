@@ -188,10 +188,8 @@ public class ImportFile extends javax.swing.JPanel {
                 if(!line.trim().equals("")) {
                     if(line.startsWith("A. ") || line.startsWith("B. ") || line.startsWith("C. ") || line.startsWith("D. ") || line.startsWith("E. ")) {
                         listAnswer.add(new Answer(line));
-                        System.out.print(line);
                     } else if(!line.startsWith("ANSWER: ")) {
                         question.setQuestionText(line);
-                        System.out.print(line);
                     }
                 } else {
                     question.setAnswers(listAnswer);
@@ -202,7 +200,7 @@ public class ImportFile extends javax.swing.JPanel {
             }
             
         } catch (IOException e) {
-            
+            System.out.println(e.getMessage());
         }
     }
     
