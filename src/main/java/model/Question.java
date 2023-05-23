@@ -93,10 +93,7 @@ public class Question {
 
     @Override
     public String toString() {
-        String result =  this.questionText + " ";
-        for (Answer answer : answers) {
-            result += answer.getText() + " ";
-        }
+        String result =  this.name + " " + this.questionText;
         return result;
     }
     

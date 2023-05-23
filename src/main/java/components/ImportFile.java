@@ -183,22 +183,46 @@ public class ImportFile extends javax.swing.JPanel {
             String line;
             List<Answer> listAnswer;
             listAnswer = new ArrayList<>();
-            Question question = new Question();
+            String questionText = "";
             while ((line = reader.readLine()) != null) {
                 if(!line.trim().equals("")) {
                     if(line.startsWith("A. ") || line.startsWith("B. ") || line.startsWith("C. ") || line.startsWith("D. ") || line.startsWith("E. ")) {
-                        listAnswer.add(new Answer(line));
+                        Answer answer = new Answer(line);
+                        listAnswer.add(answer);
                     } else if(!line.startsWith("ANSWER: ")) {
-                        question.setQuestionText(line);
+                        questionText = line;
+                    } else if(line.startsWith("ANSWER: ")){
+                        String correctAnswer = line.substring(line.length() - 1);
+                        if(null != correctAnswer) switch (correctAnswer) {
+                            case "A":
+                                listAnswer.get(0).setGrade(Float.valueOf(100));
+                                break;
+                            case "B":
+                                listAnswer.get(1).setGrade(Float.valueOf(100));
+                                break;
+                            case "C":
+                                listAnswer.get(2).setGrade(Float.valueOf(100));
+                                break;
+                            case "D":
+                                listAnswer.get(3).setGrade(Float.valueOf(100));
+                                break;
+                            case "E":
+                                listAnswer.get(4).setGrade(Float.valueOf(100));
+                                break;
+                            default:
+                                break;
+                        }
+                        Question question = new Question();
+                        question.setQuestionText(questionText);
+                        question.setAnswers(listAnswer);
+                        Question.listQuestion.add(question);
+                        System.out.println("Question answer size: " + Question.listQuestion.get(0).toString());
+                        listAnswer.clear();
+                        questionText = "";
                     }
-                } else {
-                    question.setAnswers(listAnswer);
-                    Question.listQuestion.add(question);
-                    listAnswer.clear();
-                    question = new Question();
                 }
             }
-            
+            reader.close();
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }

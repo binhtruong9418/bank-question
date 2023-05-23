@@ -26,6 +26,9 @@ public class ListQuestionTable extends JTable{
             @Override
             public Component getTableCellRendererComponent(JTable jtable, Object o, boolean bln, boolean bln1, int i, int i1) {
                 ListQuestionTableHeader header = new ListQuestionTableHeader(o + "");
+                 if (i1 == 1) {
+                    header.setHorizontalAlignment(JLabel.CENTER);
+                }
                 return header;
             }
         });
@@ -44,7 +47,7 @@ public class ListQuestionTable extends JTable{
                 } else if (i % 2 == 0 ){
                     com.setBackground(Color.WHITE);
                 } else {
-                    com.setBackground(new Color(242,242,242));
+                    com.setBackground(new Color(242, 242, 242));
                 }
                 return com;
             }
