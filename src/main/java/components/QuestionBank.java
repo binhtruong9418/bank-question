@@ -13,6 +13,7 @@ import java.util.List;
 
 import connection.ConnectDB;
 import model.Answer;
+import model.Category;
 import model.Question;
 
 /**
@@ -20,17 +21,13 @@ import model.Question;
  * @author Duc Binh
  */
 public class QuestionBank extends javax.swing.JPanel {
-<<<<<<< HEAD
     Connection con = null;
     PreparedStatement pre = null;
     ResultSet rs = null;
     
     public static Integer currentCategory = -1;
     List<Category> listCategory = new ArrayList<>();
-=======
 
-
->>>>>>> parent of 1c17015 (add database 2)
     /**
      * Creates new form ListQuestion
      */

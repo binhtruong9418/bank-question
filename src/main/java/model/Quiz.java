@@ -1,7 +1,5 @@
 package model;
 
-import model.Question;
-
 import java.util.Date;
 import java.util.List;
 
