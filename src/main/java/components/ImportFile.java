@@ -179,26 +179,50 @@ public class ImportFile extends javax.swing.JPanel {
     
     private void addQuestionFromFile (File file) {
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(file));
-            String line;
-            List<Answer> listAnswer;
-            listAnswer = new ArrayList<>();
-            Question question = new Question();
-            while ((line = reader.readLine()) != null) {
-                if(!line.trim().equals("")) {
-                    if(line.startsWith("A. ") || line.startsWith("B. ") || line.startsWith("C. ") || line.startsWith("D. ") || line.startsWith("E. ")) {
-                        listAnswer.add(new Answer(line));
-                    } else if(!line.startsWith("ANSWER: ")) {
-                        question.setQuestionText(line);
+            try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+                String line;
+                List<Answer> listAnswer;
+                listAnswer = new ArrayList<>();
+                String questionText = "";
+                while ((line = reader.readLine()) != null) {
+                    if(!line.trim().equals("")) {
+                        if(line.startsWith("A. ") || line.startsWith("B. ") || line.startsWith("C. ") || line.startsWith("D. ") || line.startsWith("E. ")) {
+                            listAnswer.add(new Answer(line));
+                        } else if(!line.startsWith("ANSWER: ")) {
+                            questionText = line;
+                        } else if(line.startsWith("ANSWER: ")){
+                            String correctAnswer = line.substring(line.length() - 1);
+                            if(null != correctAnswer)
+                                switch (correctAnswer) {
+                                    case "A":
+                                        listAnswer.get(0).setGrade(Float.valueOf(100));
+                                        break;
+                                    case "B":
+                                        listAnswer.get(1).setGrade(Float.valueOf(100));
+                                        break;
+                                    case "C":
+                                        listAnswer.get(2).setGrade(Float.valueOf(100));
+                                        break;
+                                    case "D":
+                                        listAnswer.get(3).setGrade(Float.valueOf(100));
+                                        break;
+                                    case "E":
+                                        listAnswer.get(4).setGrade(Float.valueOf(100));
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            Question question = new Question();
+                            question.setQuestionText(questionText);
+                            question.setAnswers(listAnswer);
+                            Question.listQuestion.add(question);
+                            System.out.println("Question answer size: " + Question.listQuestion.get(0).toString());
+                            listAnswer.clear();
+                            questionText = "";
+                        }
                     }
-                } else {
-                    question.setAnswers(listAnswer);
-                    Question.listQuestion.add(question);
-                    listAnswer.clear();
-                    question = new Question();
                 }
             }
-            
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }

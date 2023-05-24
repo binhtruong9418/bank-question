@@ -12,9 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import connection.ConnectDB;
-import model.Answer;
 import model.Category;
 import model.Question;
+import org.openide.util.Exceptions;
 
 /**
  *
@@ -33,62 +33,62 @@ public class QuestionBank extends javax.swing.JPanel {
      */
     public QuestionBank() {
         initComponents();
+        con = ConnectDB.connect();
         initListQuestionsTableData();
+        initDropdownCategoryData();
     }
     
-    public void initListQuestionsTableData()  {
-        Connection con = ConnectDB.connect();
+    private void initDropdownCategoryData () {
+        String sql = "SELECT * FROM categories";
+        try {
+        pre = con.prepareStatement(sql);
+            rs = pre.executeQuery();
+            if(rs.next()) {
+              String categoryName = rs.getString("name");
+                Integer countQuestion = rs.getInt("count_question");
+                Category category = new Category();
+                category.setCount(countQuestion);
+                category.setName(categoryName);
+                System.out.println(categoryName);
+                listCategory.add(category);
+            }
+            
+            System.out.println(listCategory.size());
+            for (int i = 0; i < listCategory.size(); i++) {
+                Category category = listCategory.get(i);
+                String toString = "";
+                if(category.getCount() != 0) {
+                    toString = toString + category.getName() + " (" + category.getCount() + ")";
+                } else {
+                    toString = toString + category.getName();
+                }
+                selectCategoryDropdown.addItem(toString);
+            }
+        } catch (SQLException ex) {
+            Exceptions.printStackTrace(ex);
+        }
+    }
+    
+    private void initListQuestionsTableData()  {
 
         String sql = "SELECT * FROM questions";
         System.out.println("initListQuestionsTableData");
         try {
-            PreparedStatement pre = con.prepareStatement(sql);
-            ResultSet rs = pre.executeQuery();
-            if(rs.next()) {
+            pre = con.prepareStatement(sql);
+            rs = pre.executeQuery();
+             if(rs.next()) {
                 String questionText = rs.getString("question_text");
-                String answerA = rs.getString("answer1_text");
-                String answerB = rs.getString("answer2_text");
-                String answerC = rs.getString("answer3_text");
-                String answerD = rs.getString("answer4_text");
-                String answerE = rs.getString("answer5_text");
-                String toString = "" + questionText;
-                if(answerA != null) {
-                    toString = toString + " " + answerA;
-                }
-                if(answerB != null) {
-                    toString = toString + " " + answerB;
-                }
-                if(answerC != null) {
-                    toString = toString + " " + answerC;
-                }
-                if(answerD != null) {
-                    toString = toString + " " + answerD;
-                }
-                if(answerE != null) {
-                    toString = toString + " " + answerE;
-                }
-                System.out.println("a question: " + toString);
+                String name = rs.getString("name");
+                Question question = new Question();
+                question.setQuestionText(questionText);
+                question.setName(name);
+                listQuestionTable.addRow(question.toRowTable());
             }
 
             for (int i = 0; i < Question.listQuestion.size(); i++) {
                 Question question = Question.listQuestion.get(i);
                 listQuestionTable.addRow(question.toRowTable());
             }
-
-
-//            for(int i=0; i < 15; i++) {
-//                Question question = new Question();
-//                question.setQuestionText("this is a question");
-//                List<Answer> listAnswer = new ArrayList<>();
-//                listAnswer.add(new Answer("A. Answer A"));
-//                listAnswer.add(new Answer("B. Answer B"));
-//                listAnswer.add(new Answer("C. Answer C"));
-//                listAnswer.add(new Answer("D. Answer D"));
-//                question.setAnswers(listAnswer);
-////            Question.listQuestion.add(question);
-////            Question question = Question.listQuestion.get(i);
-//                listQuestionTable.addRow(question.toRowTable());
-//            }
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
