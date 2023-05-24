@@ -110,8 +110,6 @@ public class QuestionBank extends javax.swing.JPanel {
         categoryDescriptionLabel = new javax.swing.JLabel();
         showSubcategoryCheckbox = new javax.swing.JCheckBox();
         createNewQuestionButton = new javax.swing.JButton();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        listQuestionTable = new components.ListQuestionTable();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -135,31 +133,11 @@ public class QuestionBank extends javax.swing.JPanel {
         createNewQuestionButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         createNewQuestionButton.setForeground(new java.awt.Color(255, 255, 255));
         org.openide.awt.Mnemonics.setLocalizedText(createNewQuestionButton, org.openide.util.NbBundle.getMessage(QuestionBank.class, "QuestionBank.createNewQuestionButton.text")); // NOI18N
-
-        jScrollPane3.setBorder(null);
-
-        listQuestionTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Question", "Actions"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+        createNewQuestionButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createNewQuestionButtonActionPerformed(evt);
             }
         });
-        jScrollPane3.setViewportView(listQuestionTable);
-        if (listQuestionTable.getColumnModel().getColumnCount() > 0) {
-            listQuestionTable.getColumnModel().getColumn(0).setPreferredWidth(1800);
-            listQuestionTable.getColumnModel().getColumn(0).setHeaderValue(org.openide.util.NbBundle.getMessage(QuestionBank.class, "QuestionBank.listQuestionTable.columnModel.title0")); // NOI18N
-            listQuestionTable.getColumnModel().getColumn(1).setHeaderValue(org.openide.util.NbBundle.getMessage(QuestionBank.class, "QuestionBank.listQuestionTable.columnModel.title1")); // NOI18N
-        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -168,18 +146,15 @@ public class QuestionBank extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3)
+                    .addComponent(createNewQuestionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(showSubcategoryCheckbox)
+                    .addComponent(categoryDescriptionLabel)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(createNewQuestionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(showSubcategoryCheckbox)
-                            .addComponent(categoryDescriptionLabel)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(selectCategoryLabel)
-                                .addGap(36, 36, 36)
-                                .addComponent(selectCategoryDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(listQuestionTitleLabel))
-                        .addContainerGap(635, Short.MAX_VALUE))))
+                        .addComponent(selectCategoryLabel)
+                        .addGap(36, 36, 36)
+                        .addComponent(selectCategoryDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(listQuestionTitleLabel))
+                .addContainerGap(635, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,18 +171,19 @@ public class QuestionBank extends javax.swing.JPanel {
                 .addComponent(showSubcategoryCheckbox)
                 .addGap(18, 18, 18)
                 .addComponent(createNewQuestionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap(353, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void createNewQuestionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createNewQuestionButtonActionPerformed
+              AddQuestionView addquestionview =new AddQuestionView();
+              addquestionview.setVisible(true);// TODO add your handling code here:
+    }//GEN-LAST:event_createNewQuestionButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel categoryDescriptionLabel;
     private javax.swing.JButton createNewQuestionButton;
-    private javax.swing.JScrollPane jScrollPane3;
-    private components.ListQuestionTable listQuestionTable;
     private javax.swing.JLabel listQuestionTitleLabel;
     private javax.swing.JComboBox<String> selectCategoryDropdown;
     private javax.swing.JLabel selectCategoryLabel;
