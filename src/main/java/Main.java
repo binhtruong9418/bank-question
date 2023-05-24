@@ -1,5 +1,7 @@
 import java.awt.CardLayout;
 import javax.swing.*;
+
+import components.QuestionBank;
 import org.openide.awt.DropDownButtonFactory;
 
 public class Main extends javax.swing.JFrame {
@@ -36,11 +38,11 @@ public class Main extends javax.swing.JFrame {
         mainContent = new javax.swing.JPanel();
         menuContent = new javax.swing.JTabbedPane();
         questionTab = new javax.swing.JPanel();
-        questionBank = new components.QuestionBank();
+        questionBank1 = new components.QuestionBank();
         categoryTab = new javax.swing.JPanel();
-        addCategory = new components.AddCategory();
+        addCategory1 = new components.AddCategory();
         importTab = new javax.swing.JPanel();
-        importFile = new components.ImportFile();
+        importFile1 = new components.ImportFile();
         exportTab = new javax.swing.JPanel();
 
         settingMenu.setBackground(new java.awt.Color(7, 116, 163));
@@ -216,12 +218,12 @@ public class Main extends javax.swing.JFrame {
         questionTab.setLayout(questionTabLayout);
         questionTabLayout.setHorizontalGroup(
             questionTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(questionBank, javax.swing.GroupLayout.DEFAULT_SIZE, 1930, Short.MAX_VALUE)
+            .addComponent(questionBank1, javax.swing.GroupLayout.DEFAULT_SIZE, 1930, Short.MAX_VALUE)
         );
         questionTabLayout.setVerticalGroup(
             questionTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(questionTabLayout.createSequentialGroup()
-                .addComponent(questionBank, javax.swing.GroupLayout.PREFERRED_SIZE, 828, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(questionBank1, javax.swing.GroupLayout.PREFERRED_SIZE, 828, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 99, Short.MAX_VALUE))
         );
 
@@ -233,11 +235,11 @@ public class Main extends javax.swing.JFrame {
         categoryTab.setLayout(categoryTabLayout);
         categoryTabLayout.setHorizontalGroup(
             categoryTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(addCategory, javax.swing.GroupLayout.DEFAULT_SIZE, 1930, Short.MAX_VALUE)
+            .addComponent(addCategory1, javax.swing.GroupLayout.DEFAULT_SIZE, 1930, Short.MAX_VALUE)
         );
         categoryTabLayout.setVerticalGroup(
             categoryTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(addCategory, javax.swing.GroupLayout.DEFAULT_SIZE, 927, Short.MAX_VALUE)
+            .addComponent(addCategory1, javax.swing.GroupLayout.DEFAULT_SIZE, 927, Short.MAX_VALUE)
         );
 
         menuContent.addTab(org.openide.util.NbBundle.getMessage(Main.class, "Main.categoryTab.TabConstraints.tabTitle"), categoryTab); // NOI18N
@@ -248,11 +250,11 @@ public class Main extends javax.swing.JFrame {
         importTab.setLayout(importTabLayout);
         importTabLayout.setHorizontalGroup(
             importTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(importFile, javax.swing.GroupLayout.DEFAULT_SIZE, 1930, Short.MAX_VALUE)
+            .addComponent(importFile1, javax.swing.GroupLayout.DEFAULT_SIZE, 1930, Short.MAX_VALUE)
         );
         importTabLayout.setVerticalGroup(
             importTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(importFile, javax.swing.GroupLayout.DEFAULT_SIZE, 927, Short.MAX_VALUE)
+            .addComponent(importFile1, javax.swing.GroupLayout.DEFAULT_SIZE, 927, Short.MAX_VALUE)
         );
 
         menuContent.addTab(org.openide.util.NbBundle.getMessage(Main.class, "Main.importTab.TabConstraints.tabTitle"), importTab); // NOI18N
@@ -408,14 +410,14 @@ public class Main extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private components.AddCategory addCategory;
+    private components.AddCategory addCategory1;
     private javax.swing.JPanel bg;
     private javax.swing.JMenuItem categoryMenuItem;
     private javax.swing.JPanel categoryTab;
     private javax.swing.JPanel content;
     private javax.swing.JMenuItem exportMenuItem;
     private javax.swing.JPanel exportTab;
-    private components.ImportFile importFile;
+    private components.ImportFile importFile1;
     private javax.swing.JMenuItem importMenuItem;
     private javax.swing.JPanel importTab;
     private javax.swing.JLabel itLabel;
@@ -427,7 +429,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTabbedPane menuContent;
     private javax.swing.JPanel page;
     private javax.swing.JLabel pageLink;
-    private components.QuestionBank questionBank;
+    private components.QuestionBank questionBank1;
     private javax.swing.JMenuItem questionMenuItem;
     private javax.swing.JPanel questionTab;
     private javax.swing.JButton settingButton;

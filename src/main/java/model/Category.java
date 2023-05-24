@@ -3,20 +3,17 @@ package model;
 public class Category {
     private String name;
 
-    private Integer parentCategory;
+    private Category parentCategory;
 
     private String info;
 
     private Integer IdNumber;
 
-    private Integer count;
-    
-    public Category(String name, Integer parentCategory, String info, Integer IdNumber, Integer count) {
+    public Category(String name, Category parentCategory, String info, Integer IdNumber) {
         this.name = name;
         this.parentCategory = parentCategory;
         this.info = info;
         this.IdNumber = IdNumber;
-        this.count = count;
     }
 
     public Category() {
@@ -27,7 +24,7 @@ public class Category {
         return name;
     }
 
-    public Integer getParentCategory() {
+    public Category getParentCategory() {
         return parentCategory;
     }
 
@@ -39,14 +36,11 @@ public class Category {
         return IdNumber;
     }
 
-    public Integer getCount() {
-        return count;
-    }
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setParentCategory(Integer parentCategory) {
+    public void setParentCategory(Category parentCategory) {
         this.parentCategory = parentCategory;
     }
 
@@ -56,9 +50,5 @@ public class Category {
 
     public void setIdNumber(Integer IdNumber) {
         this.IdNumber = IdNumber;
-    }
-    
-    public void setCount(Integer count) {
-        this.count = count;
     }
 }
