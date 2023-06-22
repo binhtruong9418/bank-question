@@ -1,4 +1,5 @@
 import components.AddingANewQuizView;
+
 import java.awt.CardLayout;
 import javax.swing.*;
 //quang test thử
@@ -36,6 +37,7 @@ public class Main extends javax.swing.JFrame {
         content = new javax.swing.JPanel();
         listQuiz = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         mainContent = new javax.swing.JPanel();
         menuContent = new javax.swing.JTabbedPane();
         questionTab = new javax.swing.JPanel();
@@ -45,6 +47,36 @@ public class Main extends javax.swing.JFrame {
         importTab = new javax.swing.JPanel();
         importFile1 = new components.ImportFile();
         exportTab = new javax.swing.JPanel();
+        CongNgheView = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel8 = new javax.swing.JLabel();
+        EditQuizCongNghe = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jButton6 = new javax.swing.JButton();
+        jLabel13 = new javax.swing.JLabel();
+        jCheckBox1 = new javax.swing.JCheckBox();
+        jLabel14 = new javax.swing.JLabel();
+        PreviewQuiz = new javax.swing.JPanel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JSeparator();
+        jButton7 = new javax.swing.JButton();
+        jButton8 = new javax.swing.JButton();
+        jLabel18 = new javax.swing.JLabel();
 
         settingMenu.setBackground(new java.awt.Color(7, 116, 163));
         settingMenu.setForeground(new java.awt.Color(7, 116, 163));
@@ -166,7 +198,7 @@ public class Main extends javax.swing.JFrame {
                         .addComponent(pageLink)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(turnEditingButton)))
-                .addGap(16, 16, 16))
+                .addContainerGap())
         );
         pageLayout.setVerticalGroup(
             pageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -191,22 +223,41 @@ public class Main extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/quiz.png"))); // NOI18N
         org.openide.awt.Mnemonics.setLocalizedText(jLabel1, org.openide.util.NbBundle.getMessage(Main.class, "Main.jLabel1.text")); // NOI18N
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/quiz.png"))); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel2, org.openide.util.NbBundle.getMessage(Main.class, "Main.jLabel2.text")); // NOI18N
 
         javax.swing.GroupLayout listQuizLayout = new javax.swing.GroupLayout(listQuiz);
         listQuiz.setLayout(listQuizLayout);
         listQuizLayout.setHorizontalGroup(
             listQuizLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(listQuizLayout.createSequentialGroup()
-                .addGap(112, 112, 112)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1629, Short.MAX_VALUE))
+                .addGap(123, 123, 123)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(1451, Short.MAX_VALUE))
+            .addGroup(listQuizLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(listQuizLayout.createSequentialGroup()
+                    .addGap(122, 122, 122)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(1607, Short.MAX_VALUE)))
         );
         listQuizLayout.setVerticalGroup(
             listQuizLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(listQuizLayout.createSequentialGroup()
-                .addGap(86, 86, 86)
+                .addGap(136, 136, 136)
                 .addComponent(jLabel1)
-                .addContainerGap(873, Short.MAX_VALUE))
+                .addContainerGap(904, Short.MAX_VALUE))
+            .addGroup(listQuizLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(listQuizLayout.createSequentialGroup()
+                    .addGap(96, 96, 96)
+                    .addComponent(jLabel2)
+                    .addContainerGap(944, Short.MAX_VALUE)))
         );
 
         content.add(listQuiz, "card2");
@@ -219,7 +270,7 @@ public class Main extends javax.swing.JFrame {
         questionTab.setLayout(questionTabLayout);
         questionTabLayout.setHorizontalGroup(
             questionTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(questionBank1, javax.swing.GroupLayout.DEFAULT_SIZE, 1930, Short.MAX_VALUE)
+            .addComponent(questionBank1, javax.swing.GroupLayout.DEFAULT_SIZE, 1918, Short.MAX_VALUE)
         );
         questionTabLayout.setVerticalGroup(
             questionTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -236,7 +287,7 @@ public class Main extends javax.swing.JFrame {
         categoryTab.setLayout(categoryTabLayout);
         categoryTabLayout.setHorizontalGroup(
             categoryTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(addCategory1, javax.swing.GroupLayout.DEFAULT_SIZE, 1930, Short.MAX_VALUE)
+            .addComponent(addCategory1, javax.swing.GroupLayout.DEFAULT_SIZE, 1918, Short.MAX_VALUE)
         );
         categoryTabLayout.setVerticalGroup(
             categoryTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -251,7 +302,7 @@ public class Main extends javax.swing.JFrame {
         importTab.setLayout(importTabLayout);
         importTabLayout.setHorizontalGroup(
             importTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(importFile1, javax.swing.GroupLayout.DEFAULT_SIZE, 1930, Short.MAX_VALUE)
+            .addComponent(importFile1, javax.swing.GroupLayout.DEFAULT_SIZE, 1918, Short.MAX_VALUE)
         );
         importTabLayout.setVerticalGroup(
             importTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -266,7 +317,7 @@ public class Main extends javax.swing.JFrame {
         exportTab.setLayout(exportTabLayout);
         exportTabLayout.setHorizontalGroup(
             exportTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1930, Short.MAX_VALUE)
+            .addGap(0, 1918, Short.MAX_VALUE)
         );
         exportTabLayout.setVerticalGroup(
             exportTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -284,18 +335,248 @@ public class Main extends javax.swing.JFrame {
         mainContentLayout.setVerticalGroup(
             mainContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainContentLayout.createSequentialGroup()
-                .addGap(0, 26, Short.MAX_VALUE)
+                .addGap(0, 107, Short.MAX_VALUE)
                 .addComponent(menuContent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         content.add(mainContent, "mainContentCard");
+
+        CongNgheView.setBackground(new java.awt.Color(255, 255, 255));
+        CongNgheView.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(204, 0, 0));
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel3, org.openide.util.NbBundle.getMessage(Main.class, "Main.jLabel3.text")); // NOI18N
+        CongNgheView.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 33, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel4, org.openide.util.NbBundle.getMessage(Main.class, "Main.jLabel4.text")); // NOI18N
+        CongNgheView.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 80, -1, -1));
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel5, org.openide.util.NbBundle.getMessage(Main.class, "Main.jLabel5.text")); // NOI18N
+        CongNgheView.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 110, -1, -1));
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(204, 0, 0));
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel6, org.openide.util.NbBundle.getMessage(Main.class, "Main.jLabel6.text")); // NOI18N
+        CongNgheView.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 161, -1, -1));
+
+        jLabel7.setBackground(new java.awt.Color(0, 204, 255));
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel7, org.openide.util.NbBundle.getMessage(Main.class, "Main.jLabel7.text")); // NOI18N
+        jLabel7.setOpaque(true);
+        CongNgheView.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, 1320, 30));
+
+        jLabel9.setBackground(new java.awt.Color(225, 225, 225));
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel9, org.openide.util.NbBundle.getMessage(Main.class, "Main.jLabel9.text")); // NOI18N
+        jLabel9.setOpaque(true);
+        CongNgheView.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 220, 1320, 30));
+
+        jButton3.setBackground(new java.awt.Color(51, 204, 255));
+        jButton3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(255, 255, 255));
+        org.openide.awt.Mnemonics.setLocalizedText(jButton3, org.openide.util.NbBundle.getMessage(Main.class, "Main.jButton3.text")); // NOI18N
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        CongNgheView.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 340, -1, -1));
+
+        jComboBox1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Jump to ...", "Item 2", "Item 3", "Item 4" }));
+        CongNgheView.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 400, -1, -1));
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/settings.png"))); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel8, org.openide.util.NbBundle.getMessage(Main.class, "Main.jLabel8.text")); // NOI18N
+        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel8MouseClicked(evt);
+            }
+        });
+        CongNgheView.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(1360, 30, 30, 30));
+
+        content.add(CongNgheView, "CongNgheViewCard");
+
+        EditQuizCongNghe.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(204, 0, 0));
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel10, org.openide.util.NbBundle.getMessage(Main.class, "Main.jLabel10.text")); // NOI18N
+
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel11, org.openide.util.NbBundle.getMessage(Main.class, "Main.jLabel11.text")); // NOI18N
+
+        jButton4.setBackground(new java.awt.Color(51, 204, 255));
+        jButton4.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
+        jButton4.setForeground(new java.awt.Color(255, 255, 255));
+        org.openide.awt.Mnemonics.setLocalizedText(jButton4, org.openide.util.NbBundle.getMessage(Main.class, "Main.jButton4.text")); // NOI18N
+
+        jButton5.setBackground(new java.awt.Color(51, 204, 255));
+        jButton5.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
+        jButton5.setForeground(new java.awt.Color(255, 255, 255));
+        org.openide.awt.Mnemonics.setLocalizedText(jButton5, org.openide.util.NbBundle.getMessage(Main.class, "Main.jButton5.text")); // NOI18N
+
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel12, org.openide.util.NbBundle.getMessage(Main.class, "Main.jLabel12.text")); // NOI18N
+
+        jTextField1.setText(org.openide.util.NbBundle.getMessage(Main.class, "Main.jTextField1.text")); // NOI18N
+
+        jButton6.setBackground(new java.awt.Color(51, 204, 255));
+        jButton6.setForeground(new java.awt.Color(255, 255, 255));
+        org.openide.awt.Mnemonics.setLocalizedText(jButton6, org.openide.util.NbBundle.getMessage(Main.class, "Main.jButton6.text")); // NOI18N
+
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel13, org.openide.util.NbBundle.getMessage(Main.class, "Main.jLabel13.text")); // NOI18N
+
+        org.openide.awt.Mnemonics.setLocalizedText(jCheckBox1, org.openide.util.NbBundle.getMessage(Main.class, "Main.jCheckBox1.text")); // NOI18N
+
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel14, org.openide.util.NbBundle.getMessage(Main.class, "Main.jLabel14.text")); // NOI18N
+
+        javax.swing.GroupLayout EditQuizCongNgheLayout = new javax.swing.GroupLayout(EditQuizCongNghe);
+        EditQuizCongNghe.setLayout(EditQuizCongNgheLayout);
+        EditQuizCongNgheLayout.setHorizontalGroup(
+            EditQuizCongNgheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(EditQuizCongNgheLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(EditQuizCongNgheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(EditQuizCongNgheLayout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EditQuizCongNgheLayout.createSequentialGroup()
+                        .addGroup(EditQuizCongNgheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(EditQuizCongNgheLayout.createSequentialGroup()
+                                .addComponent(jButton4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1221, Short.MAX_VALUE)
+                                .addComponent(jLabel13))
+                            .addGroup(EditQuizCongNgheLayout.createSequentialGroup()
+                                .addComponent(jLabel11)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel12)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(EditQuizCongNgheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(EditQuizCongNgheLayout.createSequentialGroup()
+                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButton6)))))
+                        .addGap(259, 259, 259))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EditQuizCongNgheLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel14)
+                .addGap(350, 350, 350))
+        );
+        EditQuizCongNgheLayout.setVerticalGroup(
+            EditQuizCongNgheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(EditQuizCongNgheLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel10)
+                .addGap(28, 28, 28)
+                .addGroup(EditQuizCongNgheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel12)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
+                .addGroup(EditQuizCongNgheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(EditQuizCongNgheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                        .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel13))
+                .addGap(8, 8, 8)
+                .addComponent(jCheckBox1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel14)
+                .addContainerGap(829, Short.MAX_VALUE))
+        );
+
+        content.add(EditQuizCongNghe, "EditQuizCongNgheCard");
+
+        PreviewQuiz.setBackground(new java.awt.Color(255, 255, 255));
+        PreviewQuiz.setPreferredSize(new java.awt.Dimension(1909, 1063));
+
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel15, org.openide.util.NbBundle.getMessage(Main.class, "Main.jLabel15.text")); // NOI18N
+
+        jLabel16.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(204, 0, 0));
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel16, org.openide.util.NbBundle.getMessage(Main.class, "Main.jLabel16.text")); // NOI18N
+
+        jLabel17.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel17, org.openide.util.NbBundle.getMessage(Main.class, "Main.jLabel17.text")); // NOI18N
+
+        jButton7.setBackground(new java.awt.Color(204, 0, 0));
+        jButton7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton7.setForeground(new java.awt.Color(255, 255, 255));
+        org.openide.awt.Mnemonics.setLocalizedText(jButton7, org.openide.util.NbBundle.getMessage(Main.class, "Main.jButton7.text")); // NOI18N
+
+        jButton8.setBackground(new java.awt.Color(51, 153, 255));
+        jButton8.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton8.setForeground(new java.awt.Color(255, 255, 255));
+        org.openide.awt.Mnemonics.setLocalizedText(jButton8, org.openide.util.NbBundle.getMessage(Main.class, "Main.jButton8.text")); // NOI18N
+
+        jLabel18.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel18, org.openide.util.NbBundle.getMessage(Main.class, "Main.jLabel18.text")); // NOI18N
+
+        javax.swing.GroupLayout PreviewQuizLayout = new javax.swing.GroupLayout(PreviewQuiz);
+        PreviewQuiz.setLayout(PreviewQuizLayout);
+        PreviewQuizLayout.setHorizontalGroup(
+            PreviewQuizLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PreviewQuizLayout.createSequentialGroup()
+                .addGroup(PreviewQuizLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PreviewQuizLayout.createSequentialGroup()
+                        .addGap(132, 132, 132)
+                        .addComponent(jButton7)
+                        .addGap(134, 134, 134)
+                        .addComponent(jButton8))
+                    .addGroup(PreviewQuizLayout.createSequentialGroup()
+                        .addGap(48, 48, 48)
+                        .addComponent(jLabel15))
+                    .addGroup(PreviewQuizLayout.createSequentialGroup()
+                        .addGap(67, 67, 67)
+                        .addGroup(PreviewQuizLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel17)
+                            .addComponent(jLabel16)
+                            .addComponent(jLabel18)))
+                    .addGroup(PreviewQuizLayout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addGroup(PreviewQuizLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jSeparator2, javax.swing.GroupLayout.DEFAULT_SIZE, 1244, Short.MAX_VALUE)
+                            .addComponent(jSeparator1))))
+                .addContainerGap(631, Short.MAX_VALUE))
+        );
+        PreviewQuizLayout.setVerticalGroup(
+            PreviewQuizLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PreviewQuizLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jLabel15)
+                .addGap(32, 32, 32)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel16)
+                .addGap(28, 28, 28)
+                .addComponent(jLabel17)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel18)
+                .addGap(35, 35, 35)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(PreviewQuizLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton7)
+                    .addComponent(jButton8))
+                .addContainerGap(732, Short.MAX_VALUE))
+        );
+
+        content.add(PreviewQuiz, "PreviewQuiz");
 
         javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
         bg.setLayout(bgLayout);
         bgLayout.setHorizontalGroup(
             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(topbar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(page, javax.swing.GroupLayout.DEFAULT_SIZE, 1932, Short.MAX_VALUE)
+            .addComponent(page, javax.swing.GroupLayout.DEFAULT_SIZE, 1920, Short.MAX_VALUE)
             .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         bgLayout.setVerticalGroup(
@@ -312,7 +593,10 @@ public class Main extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -387,6 +671,25 @@ public class Main extends javax.swing.JFrame {
         addingANewQuizView.setVisible(true);
     }//GEN-LAST:event_turnEditingButtonActionPerformed
 
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        // TODO add your handling code here:
+        CardLayout contentLayout = (CardLayout) (content.getLayout());
+        contentLayout.show(content, "CongNgheViewCard");
+                
+    }//GEN-LAST:event_jLabel1MouseClicked
+
+    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
+        // TODO add your handling code here:
+        CardLayout contentLayout = (CardLayout) (content.getLayout());
+        contentLayout.show(content, "EditQuizCongNgheCard");
+    }//GEN-LAST:event_jLabel8MouseClicked
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        CardLayout contentLayout = (CardLayout) (content.getLayout());
+        contentLayout.show(content,"PreviewQuiz");
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     
     public static void main(String args[]) {
         try {
@@ -413,6 +716,9 @@ public class Main extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel CongNgheView;
+    private javax.swing.JPanel EditQuizCongNghe;
+    private javax.swing.JPanel PreviewQuiz;
     private components.AddCategory addCategory1;
     private javax.swing.JPanel bg;
     private javax.swing.JMenuItem categoryMenuItem;
@@ -426,7 +732,35 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel itLabel;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JPanel listQuiz;
     private javax.swing.JPanel mainContent;
     private javax.swing.JTabbedPane menuContent;
