@@ -5,15 +5,7 @@ import java.awt.*;
 public class Answer {
     private String text;
 
-    private Image image;
-
     private Float grade;
-
-    public Answer(String text, Image image, Float grade) {
-        this.text = text;
-        this.image = image;
-        this.grade = grade;
-    }
 
     public Answer(String text, Float grade) {
         this.text = text;
@@ -32,20 +24,12 @@ public class Answer {
         return text;
     }
 
-    public Image getImage() {
-        return image;
-    }
-
     public Float getGrade() {
         return grade;
     }
 
     public void setText(String text) {
         this.text = text;
-    }
-
-    public void setImage(Image image) {
-        this.image = image;
     }
 
     public void setGrade(Float grade) {

@@ -1,7 +1,7 @@
-
 package components;
 
 import connection.ConnectDB;
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,27 +21,26 @@ public class AddCategory extends javax.swing.JPanel {
     Connection con = null;
     PreparedStatement pre = null;
     ResultSet rs = null;
-    
-    
-    public static Integer currentCategory = -1;
+
     List<Category> listCategory = new ArrayList<>();
+
     public AddCategory() {
         initComponents();
         con = ConnectDB.connect();
         initDropdownCategoryData();
 
     }
-    
-    private void initDropdownCategoryData () {
+
+    private void initDropdownCategoryData() {
         // Clear existing items in the dropdown
         parentCategoryInput.removeAllItems();
         String sql = "SELECT * FROM categories";
         try {
             pre = con.prepareStatement(sql);
             rs = pre.executeQuery();
-            
+
             // Clear the existing category data
-            listCategory.clear(); 
+            listCategory.clear();
             parentCategoryInput.addItem("Default");
             while (rs.next()) {
                 int id = rs.getInt("ID");
@@ -52,12 +51,12 @@ public class AddCategory extends javax.swing.JPanel {
                 category.setCount(countQuestion);
                 category.setName(categoryName);
                 listCategory.add(category); // Add the updated category to the list
-            
+
                 String toString = category.getName();
                 if (category.getCount() != 0) {
                     toString += " (" + category.getCount() + ")";
                 }
-            
+
                 parentCategoryInput.addItem(toString); // Add the category to the dropdown
             }
         } catch (SQLException ex) {
@@ -230,7 +229,12 @@ public class AddCategory extends javax.swing.JPanel {
     private void addCategoryButtonSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCategoryButtonSubmitActionPerformed
         // TODO add your handling code here:
         int index = parentCategoryInput.getSelectedIndex();
-        int parentCategory = listCategory.get(index).getId();
+        int parentCategory;
+        if (index != 0) {
+            parentCategory = listCategory.get(index).getId();
+        } else {
+            parentCategory = 0;
+        }
         String name = nameCategoryInput.getText();
         String info = categoryInfoInput.getText();
         int idNumber = Integer.parseInt(IDNumberInput.getText());
@@ -256,11 +260,14 @@ public class AddCategory extends javax.swing.JPanel {
 
     private void IDNumberInputKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_IDNumberInputKeyPressed
         // TODO add your handling code here:
-            if (evt.getKeyChar() >= '0' && evt.getKeyChar() <= '9') {
-               IDNumberInput.setEditable(true);
-            } else {
-               IDNumberInput.setEditable(false);
-            }
+        char keyChar = evt.getKeyChar();
+        int keyCode = evt.getKeyCode();
+
+        if (Character.isDigit(keyChar) || keyCode == KeyEvent.VK_DELETE) {
+            IDNumberInput.setEditable(true);
+        } else {
+            IDNumberInput.setEditable(false);
+        }
     }//GEN-LAST:event_IDNumberInputKeyPressed
 
 

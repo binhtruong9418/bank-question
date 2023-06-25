@@ -134,6 +134,9 @@ public class QuestionBank extends javax.swing.JPanel {
         selectCategoryLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         org.openide.awt.Mnemonics.setLocalizedText(selectCategoryLabel, org.openide.util.NbBundle.getMessage(QuestionBank.class, "QuestionBank.selectCategoryLabel.text")); // NOI18N
 
+        selectCategoryDropdown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Default" }));
+        selectCategoryDropdown.setToolTipText(org.openide.util.NbBundle.getMessage(QuestionBank.class, "QuestionBank.selectCategoryDropdown.toolTipText")); // NOI18N
+
         categoryDescriptionLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         org.openide.awt.Mnemonics.setLocalizedText(categoryDescriptionLabel, org.openide.util.NbBundle.getMessage(QuestionBank.class, "QuestionBank.categoryDescriptionLabel.text")); // NOI18N
         categoryDescriptionLabel.setToolTipText(org.openide.util.NbBundle.getMessage(QuestionBank.class, "QuestionBank.categoryDescriptionLabel.toolTipText")); // NOI18N
@@ -158,10 +161,18 @@ public class QuestionBank extends javax.swing.JPanel {
             new String [] {
                 "Questions", "Actions"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(listQuestionTable);
         if (listQuestionTable.getColumnModel().getColumnCount() > 0) {
-            listQuestionTable.getColumnModel().getColumn(0).setPreferredWidth(1800);
+            listQuestionTable.getColumnModel().getColumn(0).setPreferredWidth(1700);
             listQuestionTable.getColumnModel().getColumn(0).setHeaderValue(org.openide.util.NbBundle.getMessage(QuestionBank.class, "QuestionBank.listQuestionTable.columnModel.title0")); // NOI18N
             listQuestionTable.getColumnModel().getColumn(1).setHeaderValue(org.openide.util.NbBundle.getMessage(QuestionBank.class, "QuestionBank.listQuestionTable.columnModel.title1")); // NOI18N
         }
@@ -173,7 +184,7 @@ public class QuestionBank extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1027, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(createNewQuestionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -184,8 +195,7 @@ public class QuestionBank extends javax.swing.JPanel {
                                 .addGap(36, 36, 36)
                                 .addComponent(selectCategoryDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(listQuestionTitleLabel))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addContainerGap(635, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
