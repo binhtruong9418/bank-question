@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import connection.ConnectDB;
-import javax.swing.table.DefaultTableModel;
 import model.Category;
 import model.Question;
 import org.openide.util.Exceptions;
@@ -39,42 +38,31 @@ public class QuestionBank extends javax.swing.JPanel {
         initDropdownCategoryData();
     }
     
-    public void refreshQuestionsTable() {
-    // Clear the existing data in the questions table
-    DefaultTableModel tableModel = (DefaultTableModel) listQuestionTable.getModel();
-    tableModel.setRowCount(0);
-
-    // Reload the table with updated data from the database
-    initListQuestionsTableData();
-
-    // Update the dropdown category data
-    selectCategoryDropdown.removeAllItems();
-    initDropdownCategoryData();
-}
-    
     private void initDropdownCategoryData () {
-        selectCategoryDropdown.removeAllItems();
-
         String sql = "SELECT * FROM categories";
         try {
-            pre = con.prepareStatement(sql);
+        pre = con.prepareStatement(sql);
             rs = pre.executeQuery();
-            
-            listCategory.clear(); // Clear the existing category data
-            while (rs.next()) {
-                String categoryName = rs.getString("name");
-                int countQuestion = rs.getInt("count_question");
+            if(rs.next()) {
+              String categoryName = rs.getString("name");
+                Integer countQuestion = rs.getInt("count_question");
                 Category category = new Category();
                 category.setCount(countQuestion);
                 category.setName(categoryName);
-                listCategory.add(category); // Add the updated category to the list
+                System.out.println(categoryName);
+                listCategory.add(category);
+            }
             
-                String toString = category.getName();
-                if (category.getCount() != 0) {
-                    toString += " (" + category.getCount() + ")";
+            System.out.println(listCategory.size());
+            for (int i = 0; i < listCategory.size(); i++) {
+                Category category = listCategory.get(i);
+                String toString = "";
+                if(category.getCount() != 0) {
+                    toString = toString + category.getName() + " (" + category.getCount() + ")";
+                } else {
+                    toString = toString + category.getName();
                 }
-            
-                selectCategoryDropdown.addItem(toString); // Add the category to the dropdown
+                selectCategoryDropdown.addItem(toString);
             }
         } catch (SQLException ex) {
             Exceptions.printStackTrace(ex);
@@ -133,6 +121,8 @@ public class QuestionBank extends javax.swing.JPanel {
 
         selectCategoryLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         org.openide.awt.Mnemonics.setLocalizedText(selectCategoryLabel, org.openide.util.NbBundle.getMessage(QuestionBank.class, "QuestionBank.selectCategoryLabel.text")); // NOI18N
+
+        selectCategoryDropdown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         categoryDescriptionLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         org.openide.awt.Mnemonics.setLocalizedText(categoryDescriptionLabel, org.openide.util.NbBundle.getMessage(QuestionBank.class, "QuestionBank.categoryDescriptionLabel.text")); // NOI18N
@@ -211,7 +201,6 @@ public class QuestionBank extends javax.swing.JPanel {
     private void createNewQuestionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createNewQuestionButtonActionPerformed
               AddQuestionView addquestionview = new AddQuestionView();
               addquestionview.setVisible(true);// TODO add your handling code here:
-
     }//GEN-LAST:event_createNewQuestionButtonActionPerformed
 
 

@@ -667,8 +667,11 @@ public class Main extends javax.swing.JFrame {
 
     private void turnEditingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_turnEditingButtonActionPerformed
         // TODO add your handling code here:
-        AddingANewQuizView addingANewQuizView = new AddingANewQuizView();
-        addingANewQuizView.setVisible(true);
+        AddingANewQuizView a;
+        a= new AddingANewQuizView();
+        a.setVisible(true);
+        a.setLocationRelativeTo(null);
+        a.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
     }//GEN-LAST:event_turnEditingButtonActionPerformed
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked

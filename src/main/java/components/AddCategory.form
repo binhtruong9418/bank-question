@@ -145,12 +145,12 @@
     <Component class="javax.swing.JComboBox" name="parentCategoryInput">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="1">
-            <StringItem index="0" value="Default"/>
+          <StringArray count="4">
+            <StringItem index="0" value="Item 1"/>
+            <StringItem index="1" value="Item 2"/>
+            <StringItem index="2" value="Item 3"/>
+            <StringItem index="3" value="Item 4"/>
           </StringArray>
-        </Property>
-        <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="components/Bundle.properties" key="AddCategory.parentCategoryInput.toolTipText" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
         </Property>
       </Properties>
       <Events>
@@ -231,9 +231,6 @@
           <ResourceString bundle="components/Bundle.properties" key="AddCategory.IDNumberInput.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="IDNumberInputKeyPressed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="addCategoryButtonSubmit">
       <Properties>
@@ -250,9 +247,6 @@
           <ResourceString bundle="components/Bundle.properties" key="AddCategory.addCategoryButtonSubmit.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addCategoryButtonSubmitActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="requiredText">
       <Properties>
