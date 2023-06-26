@@ -22,11 +22,10 @@ import org.openide.util.Exceptions;
  * @author Duc Binh
  */
 public class QuestionBank extends javax.swing.JPanel {
+
     Connection con = null;
-    PreparedStatement pre = null;
-    ResultSet rs = null;
-    
-    public static Integer currentCategory = -1;
+
+    public Integer currentCategory = 0;
     List<Category> listCategory = new ArrayList<>();
 
     /**
@@ -38,67 +37,60 @@ public class QuestionBank extends javax.swing.JPanel {
         initListQuestionsTableData();
         initDropdownCategoryData();
     }
-    
+
     public void refreshQuestionsTable() {
-    // Clear the existing data in the questions table
-    DefaultTableModel tableModel = (DefaultTableModel) listQuestionTable.getModel();
-    tableModel.setRowCount(0);
+        // Clear the existing data in the questions table
+        // Reload the table with updated data from the database
+        initListQuestionsTableData();
 
-    // Reload the table with updated data from the database
-    initListQuestionsTableData();
+        // Update the dropdown category data
+        initDropdownCategoryData();
+    }
 
-    // Update the dropdown category data
-    selectCategoryDropdown.removeAllItems();
-    initDropdownCategoryData();
-}
-    
-    private void initDropdownCategoryData () {
+    private void initDropdownCategoryData() {
         selectCategoryDropdown.removeAllItems();
-
         String sql = "SELECT * FROM categories";
         try {
-            pre = con.prepareStatement(sql);
-            rs = pre.executeQuery();
-            
+            PreparedStatement pre = con.prepareStatement(sql);
+            ResultSet rs = pre.executeQuery();
+
             listCategory.clear(); // Clear the existing category data
             while (rs.next()) {
-                String categoryName = rs.getString("name");
-                int countQuestion = rs.getInt("count_question");
+                int id = rs.getInt("category_id");
+                String categoryName = rs.getString("category_name");
+                int countQuestion = rs.getInt("category_count_question");
                 Category category = new Category();
+                category.setId(id);
                 category.setCount(countQuestion);
                 category.setName(categoryName);
                 listCategory.add(category); // Add the updated category to the list
-            
+
                 String toString = category.getName();
                 if (category.getCount() != 0) {
                     toString += " (" + category.getCount() + ")";
                 }
-            
+
                 selectCategoryDropdown.addItem(toString); // Add the category to the dropdown
             }
         } catch (SQLException ex) {
             Exceptions.printStackTrace(ex);
         }
     }
-    
-    private void initListQuestionsTableData()  {
 
-        String sql = "SELECT * FROM questions";
-        System.out.println("initListQuestionsTableData");
+    private void initListQuestionsTableData() {
+        DefaultTableModel tableModel = (DefaultTableModel) listQuestionTable.getModel();
+        tableModel.setRowCount(0);
+        String sql = "SELECT * FROM questions WHERE question_category = ?";
         try {
-            pre = con.prepareStatement(sql);
-            rs = pre.executeQuery();
-             if(rs.next()) {
+            PreparedStatement pre = con.prepareStatement(sql);
+            pre.setInt(1, currentCategory);
+            ResultSet rs = pre.executeQuery();
+            if (rs.next()) {
                 String questionText = rs.getString("question_text");
-                String name = rs.getString("name");
+                String name = rs.getString("question_name");
                 Question question = new Question();
                 question.setQuestionText(questionText);
                 question.setName(name);
-                listQuestionTable.addRow(question.toRowTable());
-            }
-
-            for (int i = 0; i < Question.listQuestion.size(); i++) {
-                Question question = Question.listQuestion.get(i);
                 listQuestionTable.addRow(question.toRowTable());
             }
 
@@ -134,8 +126,12 @@ public class QuestionBank extends javax.swing.JPanel {
         selectCategoryLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         org.openide.awt.Mnemonics.setLocalizedText(selectCategoryLabel, org.openide.util.NbBundle.getMessage(QuestionBank.class, "QuestionBank.selectCategoryLabel.text")); // NOI18N
 
-        selectCategoryDropdown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Default" }));
         selectCategoryDropdown.setToolTipText(org.openide.util.NbBundle.getMessage(QuestionBank.class, "QuestionBank.selectCategoryDropdown.toolTipText")); // NOI18N
+        selectCategoryDropdown.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selectCategoryDropdownActionPerformed(evt);
+            }
+        });
 
         categoryDescriptionLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         org.openide.awt.Mnemonics.setLocalizedText(categoryDescriptionLabel, org.openide.util.NbBundle.getMessage(QuestionBank.class, "QuestionBank.categoryDescriptionLabel.text")); // NOI18N
@@ -219,10 +215,18 @@ public class QuestionBank extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void createNewQuestionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createNewQuestionButtonActionPerformed
-              AddQuestionView addquestionview = new AddQuestionView();
-              addquestionview.setVisible(true);// TODO add your handling code here:
+        AddQuestionView addquestionview = new AddQuestionView();
+        addquestionview.setVisible(true);// TODO add your handling code here:
 
     }//GEN-LAST:event_createNewQuestionButtonActionPerformed
+
+    private void selectCategoryDropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectCategoryDropdownActionPerformed
+        // TODO add your handling code here:
+        int index = selectCategoryDropdown.getSelectedIndex();
+        int categoryId = listCategory.get(index).getId();
+        currentCategory = categoryId;
+        initListQuestionsTableData();
+    }//GEN-LAST:event_selectCategoryDropdownActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

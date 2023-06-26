@@ -44,11 +44,10 @@ public class AddQuestionView extends javax.swing.JFrame {
 
             // Clear the existing category data
             listCategory.clear();
-            categoryDropdown.addItem("Default");
             while (rs.next()) {
-                int id = rs.getInt("ID");
-                String categoryName = rs.getString("name");
-                int countQuestion = rs.getInt("count_question");
+                int id = rs.getInt("category_id");
+                String categoryName = rs.getString("category_name");
+                int countQuestion = rs.getInt("category_count_question");
                 Category category = new Category();
                 category.setId(id);
                 category.setCount(countQuestion);
@@ -112,8 +111,6 @@ public class AddQuestionView extends javax.swing.JFrame {
         org.openide.awt.Mnemonics.setLocalizedText(jLabel5, org.openide.util.NbBundle.getMessage(AddQuestionView.class, "AddQuestionView.jLabel5.text")); // NOI18N
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel6, org.openide.util.NbBundle.getMessage(AddQuestionView.class, "AddQuestionView.jLabel6.text")); // NOI18N
-
-        categoryDropdown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Default" }));
 
         nameInput.setText(org.openide.util.NbBundle.getMessage(AddQuestionView.class, "AddQuestionView.nameInput.text")); // NOI18N
 

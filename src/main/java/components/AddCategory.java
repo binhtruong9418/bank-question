@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import static java.sql.Types.NULL;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -41,11 +42,10 @@ public class AddCategory extends javax.swing.JPanel {
 
             // Clear the existing category data
             listCategory.clear();
-            parentCategoryInput.addItem("Default");
             while (rs.next()) {
-                int id = rs.getInt("ID");
-                String categoryName = rs.getString("name");
-                int countQuestion = rs.getInt("count_question");
+                int id = rs.getInt("category_id");
+                String categoryName = rs.getString("category_name");
+                int countQuestion = rs.getInt("category_count_question");
                 Category category = new Category();
                 category.setId(id);
                 category.setCount(countQuestion);
@@ -92,7 +92,6 @@ public class AddCategory extends javax.swing.JPanel {
         parentCategoryInputLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         org.openide.awt.Mnemonics.setLocalizedText(parentCategoryInputLabel, org.openide.util.NbBundle.getMessage(AddCategory.class, "AddCategory.parentCategoryInputLabel.text")); // NOI18N
 
-        parentCategoryInput.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Default" }));
         parentCategoryInput.setToolTipText(org.openide.util.NbBundle.getMessage(AddCategory.class, "AddCategory.parentCategoryInput.toolTipText")); // NOI18N
         parentCategoryInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -229,22 +228,34 @@ public class AddCategory extends javax.swing.JPanel {
     private void addCategoryButtonSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCategoryButtonSubmitActionPerformed
         // TODO add your handling code here:
         int index = parentCategoryInput.getSelectedIndex();
-        int parentCategory;
-        if (index != 0) {
-            parentCategory = listCategory.get(index).getId();
-        } else {
-            parentCategory = 0;
-        }
+        int parentCategory = listCategory.get(index).getId();
         String name = nameCategoryInput.getText();
         String info = categoryInfoInput.getText();
-        int idNumber = Integer.parseInt(IDNumberInput.getText());
-        String sql = "INSERT INTO categories (name,parent_category,info,id_number,count_question) VALUES (?,?,?,?,0)";
+        int idNumber = -1;
+        System.out.println("name: " + name);
+        System.out.println("info: " + info);
+        System.out.println("parentCategory: " + parentCategory);
+        System.out.println("idNumber: " + idNumber);
+
+        String sql = "INSERT INTO categories (category_name,category_parent,category_info,category_id_number,category_count_question) VALUES (?,?,?,?,0)";
         try {
             pre = con.prepareStatement(sql);
             pre.setString(1, name);
-            pre.setInt(2, parentCategory);
-            pre.setString(3, info);
-            pre.setInt(4, idNumber);
+            if (parentCategory == 0) {
+                pre.setNull(2, NULL);
+            } else {
+                pre.setInt(2, parentCategory);
+            }
+            if (info.isEmpty()) {
+                pre.setNull(3, NULL);
+            } else {
+                pre.setString(3, info);
+            }
+            if (idNumber == -1) {
+                pre.setNull(4, NULL);
+            } else {
+                pre.setInt(4, Integer.parseInt(IDNumberInput.getText()));
+            }
             pre.executeUpdate();
             JOptionPane.showMessageDialog(this, "Add category successful!");
             QuestionBank questionBank = new QuestionBank();

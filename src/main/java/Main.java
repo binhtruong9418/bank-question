@@ -1,8 +1,8 @@
+
 import components.AddingANewQuizView;
 import java.awt.CardLayout;
 import javax.swing.*;
 //quang test thử
-import components.QuestionBank;
 import org.openide.awt.DropDownButtonFactory;
 
 public class Main extends javax.swing.JFrame {
@@ -332,7 +332,7 @@ public class Main extends javax.swing.JFrame {
             JMenuItem clickedMenuItem = (JMenuItem) source;
             String menuText = clickedMenuItem.getText();
             if ("Question".equals(menuText)) {
-                CardLayout contentLayout = (CardLayout)content.getLayout();
+                CardLayout contentLayout = (CardLayout) content.getLayout();
                 contentLayout.show(content, "mainContentCard");
                 menuContent.setSelectedIndex(0);
             }
@@ -346,7 +346,7 @@ public class Main extends javax.swing.JFrame {
             JMenuItem clickedMenuItem = (JMenuItem) source;
             String menuText = clickedMenuItem.getText();
             if ("Categories".equals(menuText)) {
-                CardLayout contentLayout = (CardLayout)content.getLayout();
+                CardLayout contentLayout = (CardLayout) content.getLayout();
                 contentLayout.show(content, "mainContentCard");
                 menuContent.setSelectedIndex(1);
             }
@@ -360,7 +360,7 @@ public class Main extends javax.swing.JFrame {
             JMenuItem clickedMenuItem = (JMenuItem) source;
             String menuText = clickedMenuItem.getText();
             if ("Import".equals(menuText)) {
-                CardLayout contentLayout = (CardLayout)content.getLayout();
+                CardLayout contentLayout = (CardLayout) content.getLayout();
                 contentLayout.show(content, "mainContentCard");
                 menuContent.setSelectedIndex(2);
             }
@@ -374,7 +374,7 @@ public class Main extends javax.swing.JFrame {
             JMenuItem clickedMenuItem = (JMenuItem) source;
             String menuText = clickedMenuItem.getText();
             if ("Export".equals(menuText)) {
-                CardLayout contentLayout = (CardLayout)content.getLayout();
+                CardLayout contentLayout = (CardLayout) content.getLayout();
                 contentLayout.show(content, "mainContentCard");
                 menuContent.setSelectedIndex(3);
             }
@@ -387,7 +387,6 @@ public class Main extends javax.swing.JFrame {
         addingANewQuizView.setVisible(true);
     }//GEN-LAST:event_turnEditingButtonActionPerformed
 
-    
     public static void main(String args[]) {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -400,7 +399,7 @@ public class Main extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
+
         //</editor-fold>
 
         /* Create and display the form */
@@ -440,5 +439,5 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel topbar;
     private javax.swing.JButton turnEditingButton;
     // End of variables declaration//GEN-END:variables
-     
+
 }
