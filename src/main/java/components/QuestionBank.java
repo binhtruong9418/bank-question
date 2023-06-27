@@ -49,6 +49,7 @@ public class QuestionBank extends javax.swing.JPanel {
 
     private void initDropdownCategoryData() {
         selectCategoryDropdown.removeAllItems();
+        listCategory.clear();
         String sql = "SELECT * FROM categories";
         try {
             PreparedStatement pre = con.prepareStatement(sql);
