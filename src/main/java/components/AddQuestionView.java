@@ -359,7 +359,7 @@ public class AddQuestionView extends javax.swing.JFrame {
             return;
         }
 
-        String sql = "INSERT INTO questions (question_name,question_category,category_text,question_mark,answer1_test,answer1_grade,answer2_test,answer2_grade,answer3_test,answer3_grade,answer4_test,answer4_grade,answer5_test,answer5_grade) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO questions (question_name,question_category,question_text,question_mark,answer1_text,answer1_grade,answer2_text,answer2_grade,answer3_text,answer3_grade,answer4_text,answer4_grade,answer5_text,answer5_grade) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
             pre = con.prepareStatement(sql);
             pre.setString(1, name);
@@ -374,8 +374,9 @@ public class AddQuestionView extends javax.swing.JFrame {
                 pre.setString(5 + 2 * i, listAnswerInput.get(i).getText());
                 pre.setFloat(6 + 2 * i, listAnswerInput.get(i).getGrade());
             }
-            for (int i = 5 - listAnswerInput.size(); i < 5; i++) {
-
+            for (int i = listAnswerInput.size(); i < 5; i++) {
+                pre.setNull(5 + 2 * i, NULL);
+                pre.setFloat(6 + 2 * i, (float) 0);
             }
             pre.executeUpdate();
             JOptionPane.showMessageDialog(null, "Add Question successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
