@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import connection.ConnectDB;
+import function.ArrangeCategory;
 import javax.swing.table.DefaultTableModel;
 import model.Category;
 import model.Question;
@@ -39,12 +40,12 @@ public class QuestionBank extends javax.swing.JPanel {
     }
 
     public void refreshQuestionsTable() {
-        // Clear the existing data in the questions table
-        // Reload the table with updated data from the database
         initListQuestionsTableData();
-
-        // Update the dropdown category data
         initDropdownCategoryData();
+        selectCategoryDropdown.revalidate();
+        selectCategoryDropdown.repaint();
+        listQuestionTable.revalidate();
+        listQuestionTable.repaint();
     }
 
     private void initDropdownCategoryData() {
@@ -60,17 +61,37 @@ public class QuestionBank extends javax.swing.JPanel {
                 int id = rs.getInt("category_id");
                 String categoryName = rs.getString("category_name");
                 int countQuestion = rs.getInt("category_count_question");
+                Integer parentCategory = (Integer) rs.getObject("category_parent");
+                if (parentCategory == null) {
+                    parentCategory = -1;
+                }
                 Category category = new Category();
                 category.setId(id);
                 category.setCount(countQuestion);
                 category.setName(categoryName);
+                category.setParentCategory(parentCategory);
                 listCategory.add(category); // Add the updated category to the list
+            }
+            listCategory = ArrangeCategory.arrangeCategories(listCategory);
+            for (Category category : listCategory) {
 
-                String toString = category.getName();
+                String toString = "";
+                String name = category.getName();
+
+                int level = ArrangeCategory.getCategoryLevel(category, listCategory);
+                int numSpaces = level * 5; // 5 spaces for each level
+
+                for (int i = 0; i < numSpaces; i++) {
+                    toString += " ";
+                }
+
+                // Add the category name
+                toString += name;
+
+                // Add the count if applicable
                 if (category.getCount() != 0) {
                     toString += " (" + category.getCount() + ")";
                 }
-
                 selectCategoryDropdown.addItem(toString); // Add the category to the dropdown
             }
         } catch (SQLException ex) {
@@ -224,8 +245,11 @@ public class QuestionBank extends javax.swing.JPanel {
     private void selectCategoryDropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectCategoryDropdownActionPerformed
         // TODO add your handling code here:
         int index = selectCategoryDropdown.getSelectedIndex();
-        int categoryId = listCategory.get(index).getId();
-        currentCategory = categoryId;
+        if (index == -1) {
+            currentCategory = 0;
+        } else {
+            currentCategory = listCategory.get(index).getId();
+        }
         initListQuestionsTableData();
     }//GEN-LAST:event_selectCategoryDropdownActionPerformed
 

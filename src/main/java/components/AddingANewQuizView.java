@@ -15,6 +15,7 @@ public class AddingANewQuizView extends javax.swing.JFrame {
      */
     public AddingANewQuizView() {
         initComponents();
+        setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
     }
