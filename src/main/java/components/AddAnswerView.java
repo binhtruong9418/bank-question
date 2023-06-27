@@ -1,5 +1,7 @@
 package components;
 
+import model.Answer;
+
 public class AddAnswerView extends javax.swing.JPanel {
 
     public AddAnswerView() {
@@ -76,13 +78,20 @@ public class AddAnswerView extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_gradeActionPerformed
 
-    public String getAnswer() {
+    public Answer getAnswer() {
         String inputAnswer = answer.getText();
         int index = grade.getSelectedIndex();
         String value = grade.getItemAt(index);
-        return inputAnswer + value;
+        if (value == "None") {
+            return new Answer(inputAnswer, (float) 0);
+        } else {
+            String floatString = value.replace("%", "");
+            // Parse the remaining string as a float
+            float floatValue = Float.parseFloat(floatString);
+            return new Answer(inputAnswer, floatValue);
+        }
     }
-    
+
     public void setChoiceLabel(String text) {
         choiceLabel.setText(text);
     }

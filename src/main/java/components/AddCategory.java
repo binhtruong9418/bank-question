@@ -1,5 +1,6 @@
 package components;
 
+import function.ArrangeCategory;
 import connection.ConnectDB;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
@@ -19,6 +20,7 @@ import org.openide.util.Exceptions;
  */
 public class AddCategory extends javax.swing.JPanel {
 
+    private QuestionBank questionBank;
     Connection con = null;
     PreparedStatement pre = null;
     ResultSet rs = null;
@@ -29,7 +31,10 @@ public class AddCategory extends javax.swing.JPanel {
         initComponents();
         con = ConnectDB.connect();
         initDropdownCategoryData();
+    }
 
+    public void getQuestionBank(QuestionBank questionBank) {
+        this.questionBank = questionBank;
     }
 
     private void initDropdownCategoryData() {
@@ -46,17 +51,37 @@ public class AddCategory extends javax.swing.JPanel {
                 int id = rs.getInt("category_id");
                 String categoryName = rs.getString("category_name");
                 int countQuestion = rs.getInt("category_count_question");
+                Integer parentCategory = (Integer) rs.getObject("category_parent");
+                if (parentCategory == null) {
+                    parentCategory = -1;
+                }
                 Category category = new Category();
                 category.setId(id);
                 category.setCount(countQuestion);
                 category.setName(categoryName);
+                category.setParentCategory(parentCategory);
                 listCategory.add(category); // Add the updated category to the list
 
-                String toString = category.getName();
+            }
+            listCategory = ArrangeCategory.arrangeCategories(listCategory);
+            for (Category category : listCategory) {
+
+                String toString = "";
+                String name = category.getName();
+
+                int level = ArrangeCategory.getCategoryLevel(category, listCategory);
+                int numSpaces = level * 5; // 5 spaces for each level
+                for (int i = 0; i < numSpaces; i++) {
+                    toString += " ";
+                }
+
+                // Add the category name
+                toString += name;
+
+                // Add the count if applicable
                 if (category.getCount() != 0) {
                     toString += " (" + category.getCount() + ")";
                 }
-
                 parentCategoryInput.addItem(toString); // Add the category to the dropdown
             }
         } catch (SQLException ex) {
@@ -228,7 +253,12 @@ public class AddCategory extends javax.swing.JPanel {
     private void addCategoryButtonSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCategoryButtonSubmitActionPerformed
         // TODO add your handling code here:
         int index = parentCategoryInput.getSelectedIndex();
-        int parentCategory = listCategory.get(index).getId();
+        int parentCategory;
+        if (index == -1) {
+            parentCategory = 0;
+        } else {
+            parentCategory = listCategory.get(index).getId();
+        }
         String name = nameCategoryInput.getText();
         String info = categoryInfoInput.getText();
         int idNumber = -1;
@@ -257,13 +287,12 @@ public class AddCategory extends javax.swing.JPanel {
                 pre.setInt(4, Integer.parseInt(IDNumberInput.getText()));
             }
             pre.executeUpdate();
-            JOptionPane.showMessageDialog(this, "Add category successful!");
-            QuestionBank questionBank = new QuestionBank();
-            questionBank.refreshQuestionsTable();
+            JOptionPane.showMessageDialog(null, "Add category successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
             initDropdownCategoryData();
             nameCategoryInput.setText("");
             categoryInfoInput.setText("");
             IDNumberInput.setText("");
+            questionBank.refreshQuestionsTable();
         } catch (SQLException ex) {
             System.out.println("Error adding category to the database: " + ex.getMessage());
         }
@@ -274,7 +303,7 @@ public class AddCategory extends javax.swing.JPanel {
         char keyChar = evt.getKeyChar();
         int keyCode = evt.getKeyCode();
 
-        if (Character.isDigit(keyChar) || keyCode == KeyEvent.VK_DELETE) {
+        if (Character.isDigit(keyChar) || keyCode == KeyEvent.VK_BACK_SPACE) {
             IDNumberInput.setEditable(true);
         } else {
             IDNumberInput.setEditable(false);

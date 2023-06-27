@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import connection.ConnectDB;
+import function.ArrangeCategory;
 import javax.swing.table.DefaultTableModel;
 import model.Category;
 import model.Question;
@@ -22,9 +23,9 @@ import org.openide.util.Exceptions;
  * @author Duc Binh
  */
 public class QuestionBank extends javax.swing.JPanel {
-
+    
     Connection con = null;
-
+    
     public Integer currentCategory = 0;
     List<Category> listCategory = new ArrayList<>();
 
@@ -37,16 +38,16 @@ public class QuestionBank extends javax.swing.JPanel {
         initListQuestionsTableData();
         initDropdownCategoryData();
     }
-
+    
     public void refreshQuestionsTable() {
-        // Clear the existing data in the questions table
-        // Reload the table with updated data from the database
         initListQuestionsTableData();
-
-        // Update the dropdown category data
         initDropdownCategoryData();
+        selectCategoryDropdown.revalidate();
+        selectCategoryDropdown.repaint();
+        listQuestionTable.revalidate();
+        listQuestionTable.repaint();
     }
-
+    
     private void initDropdownCategoryData() {
         selectCategoryDropdown.removeAllItems();
         listCategory.clear();
@@ -54,30 +55,50 @@ public class QuestionBank extends javax.swing.JPanel {
         try {
             PreparedStatement pre = con.prepareStatement(sql);
             ResultSet rs = pre.executeQuery();
-
+            
             listCategory.clear(); // Clear the existing category data
             while (rs.next()) {
                 int id = rs.getInt("category_id");
                 String categoryName = rs.getString("category_name");
                 int countQuestion = rs.getInt("category_count_question");
+                Integer parentCategory = (Integer) rs.getObject("category_parent");
+                if (parentCategory == null) {
+                    parentCategory = -1;
+                }
                 Category category = new Category();
                 category.setId(id);
                 category.setCount(countQuestion);
                 category.setName(categoryName);
+                category.setParentCategory(parentCategory);
                 listCategory.add(category); // Add the updated category to the list
+            }
+            listCategory = ArrangeCategory.arrangeCategories(listCategory);
+            for (Category category : listCategory) {
+                
+                String toString = "";
+                String name = category.getName();
+                
+                int level = ArrangeCategory.getCategoryLevel(category, listCategory);
+                int numSpaces = level * 5; // 5 spaces for each level
 
-                String toString = category.getName();
+                for (int i = 0; i < numSpaces; i++) {
+                    toString += " ";
+                }
+
+                // Add the category name
+                toString += name;
+
+                // Add the count if applicable
                 if (category.getCount() != 0) {
                     toString += " (" + category.getCount() + ")";
                 }
-
                 selectCategoryDropdown.addItem(toString); // Add the category to the dropdown
             }
         } catch (SQLException ex) {
             Exceptions.printStackTrace(ex);
         }
     }
-
+    
     private void initListQuestionsTableData() {
         DefaultTableModel tableModel = (DefaultTableModel) listQuestionTable.getModel();
         tableModel.setRowCount(0);
@@ -86,15 +107,15 @@ public class QuestionBank extends javax.swing.JPanel {
             PreparedStatement pre = con.prepareStatement(sql);
             pre.setInt(1, currentCategory);
             ResultSet rs = pre.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 String questionText = rs.getString("question_text");
                 String name = rs.getString("question_name");
                 Question question = new Question();
                 question.setQuestionText(questionText);
                 question.setName(name);
                 listQuestionTable.addRow(question.toRowTable());
+                
             }
-
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -218,14 +239,16 @@ public class QuestionBank extends javax.swing.JPanel {
     private void createNewQuestionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createNewQuestionButtonActionPerformed
         AddQuestionView addquestionview = new AddQuestionView();
         addquestionview.setVisible(true);// TODO add your handling code here:
-
     }//GEN-LAST:event_createNewQuestionButtonActionPerformed
 
     private void selectCategoryDropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectCategoryDropdownActionPerformed
         // TODO add your handling code here:
         int index = selectCategoryDropdown.getSelectedIndex();
-        int categoryId = listCategory.get(index).getId();
-        currentCategory = categoryId;
+        if (index == -1) {
+            currentCategory = 0;
+        } else {
+            currentCategory = listCategory.get(index).getId();
+        }
         initListQuestionsTableData();
     }//GEN-LAST:event_selectCategoryDropdownActionPerformed
 

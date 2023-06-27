@@ -8,9 +8,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import static java.sql.Types.NULL;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.Box;
+import javax.swing.JOptionPane;
+import model.Answer;
 import model.Category;
 import org.openide.util.Exceptions;
 
@@ -91,18 +94,21 @@ public class AddQuestionView extends javax.swing.JFrame {
         saveChangeButton = new javax.swing.JButton();
         getMoreChoiceButton = new javax.swing.JButton();
         saveChangeAndEditButton = new javax.swing.JButton();
+        requiredLabel1 = new javax.swing.JLabel();
+        requiredLabel2 = new javax.swing.JLabel();
+        requiredLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel1, org.openide.util.NbBundle.getMessage(AddQuestionView.class, "AddQuestionView.jLabel1.text")); // NOI18N
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 25)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 0, 0));
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel1, org.openide.util.NbBundle.getMessage(AddQuestionView.class, "AddQuestionView.jLabel1.text")); // NOI18N
 
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel2, org.openide.util.NbBundle.getMessage(AddQuestionView.class, "AddQuestionView.jLabel2.text")); // NOI18N
         jLabel2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 0, 0));
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel2, org.openide.util.NbBundle.getMessage(AddQuestionView.class, "AddQuestionView.jLabel2.text")); // NOI18N
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel3, org.openide.util.NbBundle.getMessage(AddQuestionView.class, "AddQuestionView.jLabel3.text")); // NOI18N
 
@@ -184,7 +190,7 @@ public class AddQuestionView extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(listButtonLayout.createSequentialGroup()
                         .addGap(15, 15, 15)
-                        .addComponent(saveChangeAndEditButton, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)))
+                        .addComponent(saveChangeAndEditButton, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(listButtonLayout.createSequentialGroup()
                 .addGap(24, 24, 24)
@@ -206,60 +212,94 @@ public class AddQuestionView extends javax.swing.JFrame {
 
         bottomPanel.add(listButton, java.awt.BorderLayout.SOUTH);
 
+        requiredLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        requiredLabel1.setForeground(new java.awt.Color(255, 0, 51));
+        org.openide.awt.Mnemonics.setLocalizedText(requiredLabel1, org.openide.util.NbBundle.getMessage(AddQuestionView.class, "AddQuestionView.requiredLabel1.text")); // NOI18N
+
+        requiredLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        requiredLabel2.setForeground(new java.awt.Color(255, 0, 51));
+        org.openide.awt.Mnemonics.setLocalizedText(requiredLabel2, org.openide.util.NbBundle.getMessage(AddQuestionView.class, "AddQuestionView.requiredLabel2.text")); // NOI18N
+
+        requiredLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        requiredLabel3.setForeground(new java.awt.Color(255, 0, 51));
+        org.openide.awt.Mnemonics.setLocalizedText(requiredLabel3, org.openide.util.NbBundle.getMessage(AddQuestionView.class, "AddQuestionView.requiredLabel3.text")); // NOI18N
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(36, 36, 36)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(246, 246, 246)
+                        .addGap(36, 36, 36)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(bottomPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(categoryDropdown, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(nameInput)
-                            .addComponent(markInput, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1)))))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(298, 298, 298)
+                                .addComponent(categoryDropdown, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(263, 263, 263)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(requiredLabel2)
+                                    .addComponent(requiredLabel1)
+                                    .addComponent(requiredLabel3))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(bottomPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(markInput, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane1)
+                                    .addComponent(nameInput)))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(536, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2)
-                .addGap(26, 26, 26)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(categoryDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nameInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(markInput, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
-                        .addComponent(bottomPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 541, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel2)
+                        .addGap(26, 26, 26)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(categoryDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(32, 32, 32)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(nameInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(5, 5, 5)
+                                        .addComponent(requiredLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(markInput, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(requiredLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(27, 27, 27)
+                                .addComponent(bottomPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 541, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addGap(226, 226, 226)
+                                .addComponent(jLabel6)))
+                        .addContainerGap(12, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(226, 226, 226)
-                        .addComponent(jLabel6)
+                        .addGap(121, 121, 121)
+                        .addComponent(requiredLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
@@ -279,6 +319,73 @@ public class AddQuestionView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void saveChangeAndEditButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveChangeAndEditButtonActionPerformed
+        // TODO add your handling code here:
+        if (nameInput.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Please input name.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (questionTextInput.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Please input question text.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (markInput.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Please input mark.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        List<Answer> listAnswerInput = new ArrayList<>();
+        Float totalMark = (float) 0;
+        String name = nameInput.getText();
+        String questionText = questionTextInput.getText();
+        int index = categoryDropdown.getSelectedIndex();
+        int category;
+        if (index != 0) {
+            category = listCategory.get(index).getId();
+        } else {
+            category = 0;
+        }
+        int mark = Integer.parseInt(markInput.getText());
+        Component[] components = listAnswer.getComponents();
+        for (Component compo : components) {
+            if (compo instanceof AddAnswerView) {
+                AddAnswerView addAnswer = (AddAnswerView) compo;
+                Answer answer = addAnswer.getAnswer();
+                listAnswerInput.add(answer);
+                totalMark += answer.getGrade();
+            }
+        }
+        if (totalMark != (float) 100) {
+            JOptionPane.showMessageDialog(null, "Total mark is not equal 100%", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        String sql = "INSERT INTO questions (question_name,question_category,question_text,question_mark,answer1_text,answer1_grade,answer2_text,answer2_grade,answer3_text,answer3_grade,answer4_text,answer4_grade,answer5_text,answer5_grade) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        try {
+            pre = con.prepareStatement(sql);
+            pre.setString(1, name);
+            if (category == 0) {
+                pre.setNull(2, NULL);
+            } else {
+                pre.setInt(2, category);
+            }
+            pre.setString(3, questionText);
+            pre.setInt(4, mark);
+            for (int i = 0; i < listAnswerInput.size(); i++) {
+                pre.setString(5 + 2 * i, listAnswerInput.get(i).getText());
+                pre.setFloat(6 + 2 * i, listAnswerInput.get(i).getGrade());
+            }
+            for (int i = listAnswerInput.size(); i < 5; i++) {
+                pre.setNull(5 + 2 * i, NULL);
+                pre.setFloat(6 + 2 * i, (float) 0);
+            }
+            pre.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Add Question successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            initDropdownCategoryData();
+        } catch (SQLException ex) {
+            System.out.println("Error adding category to the database: " + ex.getMessage());
+        }
+    }//GEN-LAST:event_saveChangeAndEditButtonActionPerformed
+
     private void getMoreChoiceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getMoreChoiceButtonActionPerformed
         // TODO add your handling code here:
         addAnswerChoices(3);
@@ -293,34 +400,12 @@ public class AddQuestionView extends javax.swing.JFrame {
         char keyChar = evt.getKeyChar();
         int keyCode = evt.getKeyCode();
 
-        if (Character.isDigit(keyChar) || keyCode == KeyEvent.VK_DELETE) {
+        if (Character.isDigit(keyChar) || keyCode == KeyEvent.VK_BACK_SPACE || keyChar == '.') {
             markInput.setEditable(true);
         } else {
             markInput.setEditable(false);
         }
     }//GEN-LAST:event_markInputKeyPressed
-
-    private void saveChangeAndEditButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveChangeAndEditButtonActionPerformed
-        // TODO add your handling code here:
-        String name = nameInput.getText();
-        String questionText = questionTextInput.getText();
-        int index = categoryDropdown.getSelectedIndex();
-        int category;
-        if (index != 0) {
-            category = listCategory.get(index).getId();
-        } else {
-            category = 0;
-        }
-        int idNumber = Integer.parseInt(markInput.getText());
-        Component[] components = listAnswer.getComponents();
-        for (Component compo : components) {
-            if (compo instanceof AddAnswerView) {
-                AddAnswerView addAnswer = (AddAnswerView) compo;
-                String answer = addAnswer.getAnswer();
-                System.out.println(answer);
-            }
-        }
-    }//GEN-LAST:event_saveChangeAndEditButtonActionPerformed
 
     private void addAnswerChoices(int count) {
         for (int i = currentAnswer; i < count + currentAnswer; i++) {
@@ -355,6 +440,9 @@ public class AddQuestionView extends javax.swing.JFrame {
     private javax.swing.JTextField markInput;
     private javax.swing.JTextField nameInput;
     private javax.swing.JTextArea questionTextInput;
+    private javax.swing.JLabel requiredLabel1;
+    private javax.swing.JLabel requiredLabel2;
+    private javax.swing.JLabel requiredLabel3;
     private javax.swing.JButton saveChangeAndEditButton;
     private javax.swing.JButton saveChangeButton;
     // End of variables declaration//GEN-END:variables
