@@ -45,11 +45,11 @@ public class Main extends javax.swing.JFrame {
         mainContent = new javax.swing.JPanel();
         menuContent = new javax.swing.JTabbedPane();
         questionTab = new javax.swing.JPanel();
-        questionBank = new components.QuestionBank();
+        questionBank = new view.question.QuestionBank();
         categoryTab = new javax.swing.JPanel();
-        addCategory = new components.AddCategory();
+        addCategory = new view.category.AddCategory();
         importTab = new javax.swing.JPanel();
-        importFile = new components.ImportFile();
+        importFile = new view.question.ImportFile();
         exportTab = new javax.swing.JPanel();
 
         settingMenu.setBackground(new java.awt.Color(7, 116, 163));
@@ -418,14 +418,14 @@ public class Main extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private components.AddCategory addCategory;
+    private view.category.AddCategory addCategory;
     private javax.swing.JPanel bg;
     private javax.swing.JMenuItem categoryMenuItem;
     private javax.swing.JPanel categoryTab;
     private javax.swing.JPanel content;
     private javax.swing.JMenuItem exportMenuItem;
     private javax.swing.JPanel exportTab;
-    private components.ImportFile importFile;
+    private view.question.ImportFile importFile;
     private javax.swing.JMenuItem importMenuItem;
     private javax.swing.JPanel importTab;
     private javax.swing.JLabel itLabel;
@@ -437,7 +437,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTabbedPane menuContent;
     private javax.swing.JPanel page;
     private javax.swing.JLabel pageLink;
-    private components.QuestionBank questionBank;
+    private view.question.QuestionBank questionBank;
     private javax.swing.JMenuItem questionMenuItem;
     private javax.swing.JPanel questionTab;
     private javax.swing.JButton settingButton;

@@ -1,27 +1,33 @@
-package components;
+package view.question;
 
 import connection.ConnectDB;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.HeadlessException;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import static java.sql.Types.NULL;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.Box;
 import javax.swing.JOptionPane;
 import model.Answer;
 import model.Category;
-import org.openide.util.Exceptions;
+import model.Question;
+import repository.category.GetAllCategory;
+import repository.question.AddNewQuestion;
+import service.ArrangeCategory;
 
 public class AddQuestionView extends javax.swing.JFrame {
 
     Connection con = null;
     PreparedStatement pre = null;
     ResultSet rs = null;
+
+    private Question questionInput;
+
+    private QuestionBank questionBank;
 
     List<Category> listCategory = new ArrayList<>();
     int currentAnswer = 0;
@@ -37,35 +43,37 @@ public class AddQuestionView extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }
 
+    public void setQuestionBank(QuestionBank questionBank) {
+        this.questionBank = questionBank;
+    }
+
     private void initDropdownCategoryData() {
         // Clear existing items in the dropdown
+        // Clear existing items in the dropdown
         categoryDropdown.removeAllItems();
-        String sql = "SELECT * FROM categories";
-        try {
-            pre = con.prepareStatement(sql);
-            rs = pre.executeQuery();
+        listCategory.clear();
+        GetAllCategory getAllCategory = new GetAllCategory();
+        listCategory = getAllCategory.getAllCategory();
 
-            // Clear the existing category data
-            listCategory.clear();
-            while (rs.next()) {
-                int id = rs.getInt("category_id");
-                String categoryName = rs.getString("category_name");
-                int countQuestion = rs.getInt("category_count_question");
-                Category category = new Category();
-                category.setId(id);
-                category.setCount(countQuestion);
-                category.setName(categoryName);
-                listCategory.add(category); // Add the updated category to the list
+        for (Category category : listCategory) {
 
-                String toString = category.getName();
-                if (category.getCount() != 0) {
-                    toString += " (" + category.getCount() + ")";
-                }
+            String toString = "";
+            String name = category.getName();
 
-                categoryDropdown.addItem(toString); // Add the category to the dropdown
+            int level = ArrangeCategory.getCategoryLevel(category, listCategory);
+            int numSpaces = level * 5; // 5 spaces for each level
+            for (int i = 0; i < numSpaces; i++) {
+                toString += " ";
             }
-        } catch (SQLException ex) {
-            Exceptions.printStackTrace(ex);
+
+            // Add the category name
+            toString += name;
+
+            // Add the count if applicable
+            if (category.getCount() != 0) {
+                toString += " (" + category.getCount() + ")";
+            }
+            categoryDropdown.addItem(toString); // Add the category to the dropdown
         }
     }
 
@@ -157,6 +165,11 @@ public class AddQuestionView extends javax.swing.JFrame {
         saveChangeButton.setBackground(new java.awt.Color(7, 116, 163));
         saveChangeButton.setForeground(new java.awt.Color(255, 255, 255));
         org.openide.awt.Mnemonics.setLocalizedText(saveChangeButton, org.openide.util.NbBundle.getMessage(AddQuestionView.class, "AddQuestionView.saveChangeButton.text")); // NOI18N
+        saveChangeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveChangeButtonActionPerformed(evt);
+            }
+        });
 
         getMoreChoiceButton.setBackground(new java.awt.Color(7, 116, 163));
         getMoreChoiceButton.setForeground(new java.awt.Color(255, 255, 255));
@@ -321,68 +334,62 @@ public class AddQuestionView extends javax.swing.JFrame {
 
     private void saveChangeAndEditButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveChangeAndEditButtonActionPerformed
         // TODO add your handling code here:
-        if (nameInput.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Please input name.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        if (questionTextInput.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Please input question text.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        if (markInput.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Please input mark.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        List<Answer> listAnswerInput = new ArrayList<>();
-        Float totalMark = (float) 0;
-        String name = nameInput.getText();
-        String questionText = questionTextInput.getText();
-        int index = categoryDropdown.getSelectedIndex();
-        int category;
-        if (index != 0) {
-            category = listCategory.get(index).getId();
-        } else {
-            category = 0;
-        }
-        int mark = Integer.parseInt(markInput.getText());
-        Component[] components = listAnswer.getComponents();
-        for (Component compo : components) {
-            if (compo instanceof AddAnswerView) {
-                AddAnswerView addAnswer = (AddAnswerView) compo;
-                Answer answer = addAnswer.getAnswer();
-                listAnswerInput.add(answer);
-                totalMark += answer.getGrade();
-            }
-        }
-        if (totalMark != (float) 100) {
-            JOptionPane.showMessageDialog(null, "Total mark is not equal 100%", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        String sql = "INSERT INTO questions (question_name,question_category,question_text,question_mark,answer1_text,answer1_grade,answer2_text,answer2_grade,answer3_text,answer3_grade,answer4_text,answer4_grade,answer5_text,answer5_grade) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
-            pre = con.prepareStatement(sql);
-            pre.setString(1, name);
-            if (category == 0) {
-                pre.setNull(2, NULL);
+
+            if (nameInput.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Please input name.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (questionTextInput.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Please input question text.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (markInput.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Please input mark.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            List<Answer> listAnswerInput = new ArrayList<>();
+            Float totalMark = (float) 0;
+            String name = nameInput.getText();
+            String questionText = questionTextInput.getText();
+            int index = categoryDropdown.getSelectedIndex();
+            int category;
+            if (index != 0) {
+                category = listCategory.get(index).getId();
             } else {
-                pre.setInt(2, category);
+                category = 0;
             }
-            pre.setString(3, questionText);
-            pre.setInt(4, mark);
-            for (int i = 0; i < listAnswerInput.size(); i++) {
-                pre.setString(5 + 2 * i, listAnswerInput.get(i).getText());
-                pre.setFloat(6 + 2 * i, listAnswerInput.get(i).getGrade());
+            float mark = Float.parseFloat(markInput.getText());
+            Component[] components = listAnswer.getComponents();
+            for (Component compo : components) {
+                if (compo instanceof AddAnswerView) {
+                    AddAnswerView addAnswer = (AddAnswerView) compo;
+                    Answer answer = addAnswer.getAnswer();
+                    listAnswerInput.add(answer);
+                    totalMark += answer.getGrade();
+                }
             }
-            for (int i = listAnswerInput.size(); i < 5; i++) {
-                pre.setNull(5 + 2 * i, NULL);
-                pre.setFloat(6 + 2 * i, (float) 0);
+            if (totalMark != (float) 100) {
+                JOptionPane.showMessageDialog(null, "Total mark is not equal 100%", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
             }
-            pre.executeUpdate();
+            Question question = new Question();
+            question.setName(nameInput.getText());
+            question.setQuestionText(questionTextInput.getText());
+            question.setCategory(category);
+            question.setMark(mark);
+            question.setAnswers(listAnswerInput);
+            AddNewQuestion addNewQuestion = new AddNewQuestion();
+            addNewQuestion.addANewQuestion(question);
             JOptionPane.showMessageDialog(null, "Add Question successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
-            initDropdownCategoryData();
-        } catch (SQLException ex) {
-            System.out.println("Error adding category to the database: " + ex.getMessage());
+            questionBank.refreshQuestionData();
+            nameInput.setText("");
+            questionTextInput.setText("");
+            markInput.setText("1");
+            listAnswer.removeAll();
+            addAnswerChoices(2);
+        } catch (HeadlessException | NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Add Question failed!", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_saveChangeAndEditButtonActionPerformed
 
@@ -393,6 +400,7 @@ public class AddQuestionView extends javax.swing.JFrame {
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void markInputKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_markInputKeyPressed
@@ -406,6 +414,63 @@ public class AddQuestionView extends javax.swing.JFrame {
             markInput.setEditable(false);
         }
     }//GEN-LAST:event_markInputKeyPressed
+
+    private void saveChangeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveChangeButtonActionPerformed
+        // TODO add your handling code here:
+        try {
+
+            if (nameInput.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Please input name.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (questionTextInput.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Please input question text.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (markInput.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Please input mark.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            List<Answer> listAnswerInput = new ArrayList<>();
+            Float totalMark = (float) 0;
+            String name = nameInput.getText();
+            String questionText = questionTextInput.getText();
+            int index = categoryDropdown.getSelectedIndex();
+            int category;
+            if (index != 0) {
+                category = listCategory.get(index).getId();
+            } else {
+                category = 0;
+            }
+            float mark = Float.parseFloat(markInput.getText());
+            Component[] components = listAnswer.getComponents();
+            for (Component compo : components) {
+                if (compo instanceof AddAnswerView) {
+                    AddAnswerView addAnswer = (AddAnswerView) compo;
+                    Answer answer = addAnswer.getAnswer();
+                    listAnswerInput.add(answer);
+                    totalMark += answer.getGrade();
+                }
+            }
+            if (totalMark != (float) 100) {
+                JOptionPane.showMessageDialog(null, "Total mark is not equal 100%", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            Question question = new Question();
+            question.setName(nameInput.getText());
+            question.setQuestionText(questionTextInput.getText());
+            question.setCategory(category);
+            question.setMark(mark);
+            question.setAnswers(listAnswerInput);
+            AddNewQuestion addNewQuestion = new AddNewQuestion();
+            addNewQuestion.addANewQuestion(question);
+            JOptionPane.showMessageDialog(null, "Add Question successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            questionBank.refreshQuestionData();
+            this.dispose();
+        } catch (HeadlessException | NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Add Question failed!", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_saveChangeButtonActionPerformed
 
     private void addAnswerChoices(int count) {
         for (int i = currentAnswer; i < count + currentAnswer; i++) {

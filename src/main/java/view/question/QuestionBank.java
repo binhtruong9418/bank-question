@@ -2,21 +2,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package components;
+package view.question;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import connection.ConnectDB;
-import function.ArrangeCategory;
+import service.ArrangeCategory;
+import java.awt.event.ItemEvent;
 import javax.swing.table.DefaultTableModel;
 import model.Category;
 import model.Question;
-import org.openide.util.Exceptions;
+import repository.category.GetAllCategory;
+import repository.question.GetAllQuestion;
 
 /**
  *
@@ -28,6 +27,8 @@ public class QuestionBank extends javax.swing.JPanel {
     
     public Integer currentCategory = 0;
     List<Category> listCategory = new ArrayList<>();
+    
+    Boolean showSubCategory = false;
 
     /**
      * Creates new form ListQuestion
@@ -39,93 +40,61 @@ public class QuestionBank extends javax.swing.JPanel {
         initDropdownCategoryData();
     }
     
-    public void refreshQuestionsTable() {
+    public void refreshQuestionData() {
         initListQuestionsTableData();
+    }
+    
+    public void refreshQuestionCategory() {
         initDropdownCategoryData();
-        selectCategoryDropdown.revalidate();
-        selectCategoryDropdown.repaint();
-        listQuestionTable.revalidate();
-        listQuestionTable.repaint();
     }
     
     private void initDropdownCategoryData() {
         selectCategoryDropdown.removeAllItems();
         listCategory.clear();
-        String sql = "SELECT * FROM categories";
-        try {
-            PreparedStatement pre = con.prepareStatement(sql);
-            ResultSet rs = pre.executeQuery();
+        
+        GetAllCategory getAllCategory = new GetAllCategory();
+        listCategory = getAllCategory.getAllCategory();
+        
+        for (Category category : listCategory) {
             
-            listCategory.clear(); // Clear the existing category data
-            while (rs.next()) {
-                int id = rs.getInt("category_id");
-                String categoryName = rs.getString("category_name");
-                int countQuestion = rs.getInt("category_count_question");
-                Integer parentCategory = (Integer) rs.getObject("category_parent");
-                if (parentCategory == null) {
-                    parentCategory = -1;
-                }
-                Category category = new Category();
-                category.setId(id);
-                category.setCount(countQuestion);
-                category.setName(categoryName);
-                category.setParentCategory(parentCategory);
-                listCategory.add(category); // Add the updated category to the list
+            String toString = "";
+            String name = category.getName();
+            
+            int level = ArrangeCategory.getCategoryLevel(category, listCategory);
+            int numSpaces = level * 5; // 5 spaces for each level
+
+            for (int i = 0; i < numSpaces; i++) {
+                toString += " ";
             }
-            listCategory = ArrangeCategory.arrangeCategories(listCategory);
-            for (Category category : listCategory) {
-                
-                String toString = "";
-                String name = category.getName();
-                
-                int level = ArrangeCategory.getCategoryLevel(category, listCategory);
-                int numSpaces = level * 5; // 5 spaces for each level
 
-                for (int i = 0; i < numSpaces; i++) {
-                    toString += " ";
-                }
+            // Add the category name
+            toString += name;
 
-                // Add the category name
-                toString += name;
-
-                // Add the count if applicable
-                if (category.getCount() != 0) {
-                    toString += " (" + category.getCount() + ")";
-                }
-                selectCategoryDropdown.addItem(toString); // Add the category to the dropdown
+            // Add the count if applicable
+            if (category.getCount() != 0) {
+                toString += " (" + category.getCount() + ")";
             }
-        } catch (SQLException ex) {
-            Exceptions.printStackTrace(ex);
+            selectCategoryDropdown.addItem(toString); // Add the category to the dropdown
         }
     }
     
     private void initListQuestionsTableData() {
         DefaultTableModel tableModel = (DefaultTableModel) listQuestionTable.getModel();
         tableModel.setRowCount(0);
-        String sql = "SELECT * FROM questions WHERE question_category = ?";
-        try {
-            PreparedStatement pre = con.prepareStatement(sql);
-            pre.setInt(1, currentCategory);
-            ResultSet rs = pre.executeQuery();
-            while (rs.next()) {
-                String questionText = rs.getString("question_text");
-                String name = rs.getString("question_name");
-                Question question = new Question();
-                question.setQuestionText(questionText);
-                question.setName(name);
-                listQuestionTable.addRow(question.toRowTable());
-                
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
+        GetAllQuestion getAllQuestion = new GetAllQuestion();
+        List<Question> listQuestion = new ArrayList<>();
+        if (!showSubCategory) {
+            listQuestion.addAll(getAllQuestion.getAllQuestionByCategoryId(currentCategory));
+        } else {
+            List<Integer> listSubCategory = ArrangeCategory.getListCategoryChildren(currentCategory, listCategory);
+            listSubCategory.add(currentCategory);
+            listQuestion.addAll(getAllQuestion.getAllQuestionByListCategoryId(listSubCategory));
+        }
+        for (Question question : listQuestion) {
+            listQuestionTable.addRow(question.toRowTable());
         }
     }
-
-    /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
-     */
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -137,7 +106,7 @@ public class QuestionBank extends javax.swing.JPanel {
         showSubcategoryCheckbox = new javax.swing.JCheckBox();
         createNewQuestionButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        listQuestionTable = new components.ListQuestionTable();
+        listQuestionTable = new view.question.ListQuestionTable();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -161,6 +130,11 @@ public class QuestionBank extends javax.swing.JPanel {
 
         showSubcategoryCheckbox.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         org.openide.awt.Mnemonics.setLocalizedText(showSubcategoryCheckbox, org.openide.util.NbBundle.getMessage(QuestionBank.class, "QuestionBank.showSubcategoryCheckbox.text")); // NOI18N
+        showSubcategoryCheckbox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                showSubcategoryCheckboxItemStateChanged(evt);
+            }
+        });
 
         createNewQuestionButton.setBackground(new java.awt.Color(7, 116, 163));
         createNewQuestionButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -238,6 +212,7 @@ public class QuestionBank extends javax.swing.JPanel {
 
     private void createNewQuestionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createNewQuestionButtonActionPerformed
         AddQuestionView addquestionview = new AddQuestionView();
+        addquestionview.setQuestionBank(this);
         addquestionview.setVisible(true);// TODO add your handling code here:
     }//GEN-LAST:event_createNewQuestionButtonActionPerformed
 
@@ -252,12 +227,18 @@ public class QuestionBank extends javax.swing.JPanel {
         initListQuestionsTableData();
     }//GEN-LAST:event_selectCategoryDropdownActionPerformed
 
+    private void showSubcategoryCheckboxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_showSubcategoryCheckboxItemStateChanged
+        // TODO add your handling code here:
+        showSubCategory = evt.getStateChange() == ItemEvent.SELECTED;
+        initListQuestionsTableData();
+    }//GEN-LAST:event_showSubcategoryCheckboxItemStateChanged
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel categoryDescriptionLabel;
     private javax.swing.JButton createNewQuestionButton;
     private javax.swing.JScrollPane jScrollPane1;
-    private components.ListQuestionTable listQuestionTable;
+    private view.question.ListQuestionTable listQuestionTable;
     private javax.swing.JLabel listQuestionTitleLabel;
     private javax.swing.JComboBox<String> selectCategoryDropdown;
     private javax.swing.JLabel selectCategoryLabel;

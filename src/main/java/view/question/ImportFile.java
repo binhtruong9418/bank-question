@@ -1,6 +1,7 @@
 
-package components;
+package view.question;
 
+import view.question.QuestionBank;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.dnd.DnDConstants;
@@ -200,8 +201,6 @@ public class ImportFile extends javax.swing.JPanel {
                             Question question = new Question();
                             question.setQuestionText(questionText);
                             question.setAnswers(listAnswer);
-                            Question.listQuestion.add(question);
-                            System.out.println("Question answer size: " + Question.listQuestion.get(0).toString());
                             listAnswer.clear();
                             questionText = "";
                         }

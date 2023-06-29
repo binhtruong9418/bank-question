@@ -1,31 +1,30 @@
 package model;
-import java.awt.*;
-import java.util.ArrayList;
+
 import java.util.List;
 
 public class Question {
-    
-    public static List<Question> listQuestion = new ArrayList<>();
+
+    private Integer id;
 
     private String name;
 
-    private Category category;
+    private Integer category;
 
     private String questionText;
 
-    private Image questionImage;
-
     private List<Answer> answers;
-    
+
     private Answer rightAnswer;
 
+    private Float mark;
 
-    public Question(String name, Category category, String questionText, Image questionImage, List<Answer> answers) {
+    public Question(String name, int category, String questionText, Float mark, List<Answer> answers, int id) {
         this.name = name;
         this.category = category;
         this.questionText = questionText;
-        this.questionImage = questionImage;
+        this.mark = mark;
         this.answers = answers;
+        this.id = id;
     }
 
     public Question() {
@@ -33,12 +32,15 @@ public class Question {
     }
 
     //geters and setters
+    public Integer getId() {
+        return id;
+    }
 
     public String getName() {
         return name;
     }
 
-    public Category getCategory() {
+    public Integer getCategory() {
         return category;
     }
 
@@ -46,33 +48,28 @@ public class Question {
         return questionText;
     }
 
-    public Image getQuestionImage() {
-        return questionImage;
-    }
-
     public List<Answer> getAnswers() {
         return answers;
     }
-    
-    public Answer getRightAnswer () {
-        return rightAnswer;
+
+    public Float getMark() {
+        return mark;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setCategory(Category category) {
+    public void setCategory(int category) {
         this.category = category;
     }
 
-
     public void setQuestionText(String questionText) {
         this.questionText = questionText;
-    }
-
-    public void setQuestionImage(Image questionImage) {
-        this.questionImage = questionImage;
     }
 
     public void setAnswers(List<Answer> answers) {
@@ -82,19 +79,18 @@ public class Question {
     public void addAnswer(Answer answer) {
         this.answers.add(answer);
     }
-    
-    
-    public void setRightAnswer(Answer answer) {
-        this.rightAnswer = answer;
+
+    public void setMark(Float mark) {
+        this.mark = mark;
     }
 
     @Override
     public String toString() {
-        String result =  this.name + " " + this.questionText;
+        String result = this.name + " " + this.questionText;
         return result;
     }
-    
-    public Object[] toRowTable () {
+
+    public Object[] toRowTable() {
         return new Object[]{this.toString(), "Edit"};
     }
 }

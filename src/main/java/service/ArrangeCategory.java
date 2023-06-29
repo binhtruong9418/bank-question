@@ -1,6 +1,5 @@
-package function;
+package service;
 
-import static java.sql.Types.NULL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -71,5 +70,17 @@ public class ArrangeCategory {
             }
         }
         return null; // Return null if category with the specified ID is not found
+    }
+
+    public static List<Integer> getListCategoryChildren(int categoryId, List<Category> listCategory) {
+        List<Integer> listChildrenCategory = new ArrayList<>();
+        for (Category category : listCategory) {
+            if (categoryId == category.getParentCategory()) {
+                List<Integer> children = getListCategoryChildren(category.getId(), listCategory);
+                listChildrenCategory.addAll(children);
+                listChildrenCategory.add(category.getId());
+            }
+        }
+        return listChildrenCategory;
     }
 }

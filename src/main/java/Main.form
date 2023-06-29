@@ -450,7 +450,7 @@
                         </DimensionLayout>
                       </Layout>
                       <SubComponents>
-                        <Component class="components.QuestionBank" name="questionBank">
+                        <Component class="view.question.QuestionBank" name="questionBank">
                         </Component>
                       </SubComponents>
                     </Container>
@@ -483,7 +483,7 @@
                         </DimensionLayout>
                       </Layout>
                       <SubComponents>
-                        <Component class="components.AddCategory" name="addCategory">
+                        <Component class="view.category.AddCategory" name="addCategory">
                         </Component>
                       </SubComponents>
                     </Container>
@@ -516,7 +516,7 @@
                         </DimensionLayout>
                       </Layout>
                       <SubComponents>
-                        <Component class="components.ImportFile" name="importFile">
+                        <Component class="view.question.ImportFile" name="importFile">
                         </Component>
                       </SubComponents>
                     </Container>

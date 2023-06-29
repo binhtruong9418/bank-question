@@ -1,18 +1,15 @@
-package components;
+package view.category;
 
-import function.ArrangeCategory;
-import connection.ConnectDB;
+import view.question.QuestionBank;
+import service.ArrangeCategory;
+import java.awt.HeadlessException;
 import java.awt.event.KeyEvent;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import static java.sql.Types.NULL;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import model.Category;
-import org.openide.util.Exceptions;
+import repository.category.AddNewCategory;
+import repository.category.GetAllCategory;
 
 /**
  *
@@ -21,15 +18,11 @@ import org.openide.util.Exceptions;
 public class AddCategory extends javax.swing.JPanel {
 
     private QuestionBank questionBank;
-    Connection con = null;
-    PreparedStatement pre = null;
-    ResultSet rs = null;
 
     List<Category> listCategory = new ArrayList<>();
 
     public AddCategory() {
         initComponents();
-        con = ConnectDB.connect();
         initDropdownCategoryData();
     }
 
@@ -40,52 +33,29 @@ public class AddCategory extends javax.swing.JPanel {
     private void initDropdownCategoryData() {
         // Clear existing items in the dropdown
         parentCategoryInput.removeAllItems();
-        String sql = "SELECT * FROM categories";
-        try {
-            pre = con.prepareStatement(sql);
-            rs = pre.executeQuery();
+        listCategory.clear();
+        GetAllCategory getAllCategory = new GetAllCategory();
+        listCategory = getAllCategory.getAllCategory();
 
-            // Clear the existing category data
-            listCategory.clear();
-            while (rs.next()) {
-                int id = rs.getInt("category_id");
-                String categoryName = rs.getString("category_name");
-                int countQuestion = rs.getInt("category_count_question");
-                Integer parentCategory = (Integer) rs.getObject("category_parent");
-                if (parentCategory == null) {
-                    parentCategory = -1;
-                }
-                Category category = new Category();
-                category.setId(id);
-                category.setCount(countQuestion);
-                category.setName(categoryName);
-                category.setParentCategory(parentCategory);
-                listCategory.add(category); // Add the updated category to the list
+        for (Category category : listCategory) {
 
+            String toString = "";
+            String name = category.getName();
+
+            int level = ArrangeCategory.getCategoryLevel(category, listCategory);
+            int numSpaces = level * 5; // 5 spaces for each level
+            for (int i = 0; i < numSpaces; i++) {
+                toString += " ";
             }
-            listCategory = ArrangeCategory.arrangeCategories(listCategory);
-            for (Category category : listCategory) {
 
-                String toString = "";
-                String name = category.getName();
+            // Add the category name
+            toString += name;
 
-                int level = ArrangeCategory.getCategoryLevel(category, listCategory);
-                int numSpaces = level * 5; // 5 spaces for each level
-                for (int i = 0; i < numSpaces; i++) {
-                    toString += " ";
-                }
-
-                // Add the category name
-                toString += name;
-
-                // Add the count if applicable
-                if (category.getCount() != 0) {
-                    toString += " (" + category.getCount() + ")";
-                }
-                parentCategoryInput.addItem(toString); // Add the category to the dropdown
+            // Add the count if applicable
+            if (category.getCount() != 0) {
+                toString += " (" + category.getCount() + ")";
             }
-        } catch (SQLException ex) {
-            Exceptions.printStackTrace(ex);
+            parentCategoryInput.addItem(toString); // Add the category to the dropdown
         }
     }
 
@@ -252,50 +222,32 @@ public class AddCategory extends javax.swing.JPanel {
 
     private void addCategoryButtonSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCategoryButtonSubmitActionPerformed
         // TODO add your handling code here:
-        int index = parentCategoryInput.getSelectedIndex();
-        int parentCategory;
-        if (index == -1) {
-            parentCategory = 0;
-        } else {
-            parentCategory = listCategory.get(index).getId();
-        }
-        String name = nameCategoryInput.getText();
-        String info = categoryInfoInput.getText();
-        int idNumber = -1;
-        System.out.println("name: " + name);
-        System.out.println("info: " + info);
-        System.out.println("parentCategory: " + parentCategory);
-        System.out.println("idNumber: " + idNumber);
-
-        String sql = "INSERT INTO categories (category_name,category_parent,category_info,category_id_number,category_count_question) VALUES (?,?,?,?,0)";
         try {
-            pre = con.prepareStatement(sql);
-            pre.setString(1, name);
-            if (parentCategory == 0) {
-                pre.setNull(2, NULL);
+
+            int index = parentCategoryInput.getSelectedIndex();
+            int parentCategory;
+            if (index == -1) {
+                parentCategory = 0;
             } else {
-                pre.setInt(2, parentCategory);
+                parentCategory = listCategory.get(index).getId();
             }
-            if (info.isEmpty()) {
-                pre.setNull(3, NULL);
-            } else {
-                pre.setString(3, info);
-            }
-            if (idNumber == -1) {
-                pre.setNull(4, NULL);
-            } else {
-                pre.setInt(4, Integer.parseInt(IDNumberInput.getText()));
-            }
-            pre.executeUpdate();
+            String name = nameCategoryInput.getText();
+            String info = categoryInfoInput.getText();
+            String idNumber = IDNumberInput.getText();
+
+            AddNewCategory addNewCategory = new AddNewCategory();
+            addNewCategory.addNewCategory(name, info, parentCategory, idNumber);
+
             JOptionPane.showMessageDialog(null, "Add category successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
             initDropdownCategoryData();
             nameCategoryInput.setText("");
             categoryInfoInput.setText("");
             IDNumberInput.setText("");
-            questionBank.refreshQuestionsTable();
-        } catch (SQLException ex) {
-            System.out.println("Error adding category to the database: " + ex.getMessage());
+            questionBank.refreshQuestionCategory();
+        } catch (HeadlessException e) {
+            JOptionPane.showMessageDialog(null, "Add category failed!", "Error", JOptionPane.ERROR_MESSAGE);
         }
+
     }//GEN-LAST:event_addCategoryButtonSubmitActionPerformed
 
     private void IDNumberInputKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_IDNumberInputKeyPressed
@@ -327,4 +279,8 @@ public class AddCategory extends javax.swing.JPanel {
     private javax.swing.JLabel requiredLabel2;
     private javax.swing.JLabel requiredText;
     // End of variables declaration//GEN-END:variables
+
+    private Object GetAllCategory() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
