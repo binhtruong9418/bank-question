@@ -37,6 +37,7 @@ public class QuestionBank extends javax.swing.JPanel {
         initComponents();
         con = ConnectDB.connect();
         initDropdownCategoryData();
+        listQuestionTable.setQuestionBank(this);
     }
 
     public void refreshQuestionData() {
@@ -90,6 +91,7 @@ public class QuestionBank extends javax.swing.JPanel {
             listQuestion.addAll(getAllQuestion.getAllQuestionByListCategoryId(listSubCategory));
         }
         for (Question question : listQuestion) {
+            System.out.println(question.getId());
             listQuestionTable.addRow(question.toRowTable());
         }
     }
@@ -210,8 +212,8 @@ public class QuestionBank extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(createNewQuestionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(17, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

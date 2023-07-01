@@ -230,8 +230,8 @@ public class Main extends javax.swing.JFrame {
         questionTabLayout.setVerticalGroup(
             questionTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(questionTabLayout.createSequentialGroup()
-                .addComponent(questionBank, javax.swing.GroupLayout.PREFERRED_SIZE, 828, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 99, Short.MAX_VALUE))
+                .addComponent(questionBank, javax.swing.GroupLayout.PREFERRED_SIZE, 696, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 231, Short.MAX_VALUE))
         );
 
         menuContent.addTab(org.openide.util.NbBundle.getMessage(Main.class, "Main.questionTab.TabConstraints.tabTitle"), questionTab); // NOI18N

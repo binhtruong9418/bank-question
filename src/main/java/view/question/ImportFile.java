@@ -1,4 +1,3 @@
-
 package view.question;
 
 import view.question.QuestionBank;
@@ -17,6 +16,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import model.Answer;
 import model.Question;
+import repository.question.AddNewQuestion;
 
 public class ImportFile extends javax.swing.JPanel {
 
@@ -164,35 +164,38 @@ public class ImportFile extends javax.swing.JPanel {
 
     private void addQuestionFromFile(File file) {
         try {
+            List<Question> listQuestion = new ArrayList<>();
             try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
                 String line;
-                List<Answer> listAnswer;
-                listAnswer = new ArrayList<>();
+                List<Answer> listAnswer = new ArrayList<>();
                 String questionText = "";
                 while ((line = reader.readLine()) != null) {
                     if (!line.trim().equals("")) {
                         if (line.startsWith("A. ") || line.startsWith("B. ") || line.startsWith("C. ") || line.startsWith("D. ") || line.startsWith("E. ")) {
-                            listAnswer.add(new Answer(line));
+                            Answer answer = new Answer();
+                            answer.setText(line.substring(3));
+                            answer.setGrade((float) 0);
+                            listAnswer.add(answer);
                         } else if (!line.startsWith("ANSWER: ")) {
                             questionText = line;
                         } else if (line.startsWith("ANSWER: ")) {
-                            String correctAnswer = line.substring(line.length() - 1);
-                            if (null != correctAnswer) {
+                            String correctAnswer = line.trim().substring(line.length() - 1);
+                            if (correctAnswer != null) {
                                 switch (correctAnswer) {
                                     case "A":
-                                        listAnswer.get(0).setGrade(Float.valueOf(100));
+                                        listAnswer.get(0).setGrade((float) 100);
                                         break;
                                     case "B":
-                                        listAnswer.get(1).setGrade(Float.valueOf(100));
+                                        listAnswer.get(1).setGrade((float) 100);
                                         break;
                                     case "C":
-                                        listAnswer.get(2).setGrade(Float.valueOf(100));
+                                        listAnswer.get(2).setGrade((float) 100);
                                         break;
                                     case "D":
-                                        listAnswer.get(3).setGrade(Float.valueOf(100));
+                                        listAnswer.get(3).setGrade((float) 100);
                                         break;
                                     case "E":
-                                        listAnswer.get(4).setGrade(Float.valueOf(100));
+                                        listAnswer.get(4).setGrade((float) 100);
                                         break;
                                     default:
                                         break;
@@ -200,13 +203,20 @@ public class ImportFile extends javax.swing.JPanel {
                             }
                             Question question = new Question();
                             question.setQuestionText(questionText);
-                            question.setAnswers(listAnswer);
+                            question.setAnswers(new ArrayList<>(listAnswer));
+                            question.setMark((float) 1);
+                            question.setCategory(1);
+                            question.setName(questionText);
+                            listQuestion.add(question);
                             listAnswer.clear();
                             questionText = "";
                         }
                     }
                 }
             }
+            AddNewQuestion addNewQuestion = new AddNewQuestion();
+            addNewQuestion.addListNewQuestion(listQuestion);
+            questionBank.refreshQuestionData();
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }

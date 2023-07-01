@@ -91,6 +91,6 @@ public class Question {
     }
 
     public Object[] toRowTable() {
-        return new Object[]{this.toString(), "Edit"};
+        return new Object[]{this, "Edit"};
     }
 }

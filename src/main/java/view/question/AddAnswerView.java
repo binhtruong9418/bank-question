@@ -1,5 +1,7 @@
 package view.question;
 
+import java.awt.Component;
+import javax.swing.ComboBoxModel;
 import model.Answer;
 
 public class AddAnswerView extends javax.swing.JPanel {
@@ -94,6 +96,42 @@ public class AddAnswerView extends javax.swing.JPanel {
 
     public void setChoiceLabel(String text) {
         choiceLabel.setText(text);
+    }
+
+    public void setAnswerText(String text) {
+        answer.setText(text);
+    }
+
+    public void setGrade(float mygrade) {
+        grade.setSelectedIndex(getSelectedIndex(mygrade));
+    }
+
+    private int getSelectedIndex(float number) {
+        if (number == (float) 0) {
+            return 0;
+        }
+        ComboBoxModel<String> model = grade.getModel();
+        int itemCount = model.getSize();
+        for (int i = 1; i < itemCount; i++) {
+            String item = model.getElementAt(i);
+            String data = item.replace("%", "");
+            float floatValue = Float.parseFloat(data);
+            if (number == (float) 0) {
+                return 0;
+            }
+            if (number == (int) floatValue) {
+                return i;
+            } else if (areFloatsEqual(floatValue, number)) {
+                return i;
+            }
+
+        }
+        return 0;
+    }
+
+    private boolean areFloatsEqual(float a, float b) {
+        float tolerance = 0.0001f;
+        return Math.abs(a - b) <= tolerance;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
