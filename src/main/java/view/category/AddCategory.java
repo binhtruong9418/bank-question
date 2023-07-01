@@ -17,6 +17,7 @@ import repository.category.GetAllCategory;
  */
 public class AddCategory extends javax.swing.JPanel {
 
+    private Boolean firstSelect = true;
     private QuestionBank questionBank;
 
     List<Category> listCategory = new ArrayList<>();
@@ -30,10 +31,15 @@ public class AddCategory extends javax.swing.JPanel {
         this.questionBank = questionBank;
     }
 
-    private void initDropdownCategoryData() {
-        // Clear existing items in the dropdown
+    private void refreshDropdownCategoryData() {
+
         parentCategoryInput.removeAllItems();
         listCategory.clear();
+        initDropdownCategoryData();
+    }
+
+    private void initDropdownCategoryData() {
+        // Clear existing items in the dropdown
         GetAllCategory getAllCategory = new GetAllCategory();
         listCategory = getAllCategory.getAllCategory();
 
@@ -87,10 +93,11 @@ public class AddCategory extends javax.swing.JPanel {
         parentCategoryInputLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         org.openide.awt.Mnemonics.setLocalizedText(parentCategoryInputLabel, org.openide.util.NbBundle.getMessage(AddCategory.class, "AddCategory.parentCategoryInputLabel.text")); // NOI18N
 
+        parentCategoryInput.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Default" }));
         parentCategoryInput.setToolTipText(org.openide.util.NbBundle.getMessage(AddCategory.class, "AddCategory.parentCategoryInput.toolTipText")); // NOI18N
-        parentCategoryInput.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                parentCategoryInputActionPerformed(evt);
+        parentCategoryInput.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                parentCategoryInputMouseClicked(evt);
             }
         });
 
@@ -216,10 +223,6 @@ public class AddCategory extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void parentCategoryInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_parentCategoryInputActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_parentCategoryInputActionPerformed
-
     private void addCategoryButtonSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCategoryButtonSubmitActionPerformed
         // TODO add your handling code here:
         try {
@@ -239,7 +242,7 @@ public class AddCategory extends javax.swing.JPanel {
             addNewCategory.addNewCategory(name, info, parentCategory, idNumber);
 
             JOptionPane.showMessageDialog(null, "Add category successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
-            initDropdownCategoryData();
+            refreshDropdownCategoryData();
             nameCategoryInput.setText("");
             categoryInfoInput.setText("");
             IDNumberInput.setText("");
@@ -261,6 +264,14 @@ public class AddCategory extends javax.swing.JPanel {
             IDNumberInput.setEditable(false);
         }
     }//GEN-LAST:event_IDNumberInputKeyPressed
+
+    private void parentCategoryInputMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_parentCategoryInputMouseClicked
+        // TODO add your handling code here:
+        if (firstSelect) {
+            parentCategoryInput.removeItemAt(0);
+            firstSelect = false;
+        }
+    }//GEN-LAST:event_parentCategoryInputMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -22,12 +22,12 @@ import repository.question.GetAllQuestion;
  * @author Duc Binh
  */
 public class QuestionBank extends javax.swing.JPanel {
-    
+
     Connection con = null;
-    
+    private Boolean firstSelect = true;
     public Integer currentCategory = 0;
     List<Category> listCategory = new ArrayList<>();
-    
+
     Boolean showSubCategory = false;
 
     /**
@@ -36,30 +36,31 @@ public class QuestionBank extends javax.swing.JPanel {
     public QuestionBank() {
         initComponents();
         con = ConnectDB.connect();
-        initListQuestionsTableData();
         initDropdownCategoryData();
     }
-    
+
     public void refreshQuestionData() {
+        DefaultTableModel tableModel = (DefaultTableModel) listQuestionTable.getModel();
+        tableModel.setRowCount(0);
         initListQuestionsTableData();
     }
-    
+
     public void refreshQuestionCategory() {
-        initDropdownCategoryData();
-    }
-    
-    private void initDropdownCategoryData() {
         selectCategoryDropdown.removeAllItems();
         listCategory.clear();
-        
+        initDropdownCategoryData();
+    }
+
+    private void initDropdownCategoryData() {
+
         GetAllCategory getAllCategory = new GetAllCategory();
         listCategory = getAllCategory.getAllCategory();
-        
+
         for (Category category : listCategory) {
-            
+
             String toString = "";
             String name = category.getName();
-            
+
             int level = ArrangeCategory.getCategoryLevel(category, listCategory);
             int numSpaces = level * 5; // 5 spaces for each level
 
@@ -77,10 +78,8 @@ public class QuestionBank extends javax.swing.JPanel {
             selectCategoryDropdown.addItem(toString); // Add the category to the dropdown
         }
     }
-    
+
     private void initListQuestionsTableData() {
-        DefaultTableModel tableModel = (DefaultTableModel) listQuestionTable.getModel();
-        tableModel.setRowCount(0);
         GetAllQuestion getAllQuestion = new GetAllQuestion();
         List<Question> listQuestion = new ArrayList<>();
         if (!showSubCategory) {
@@ -94,7 +93,7 @@ public class QuestionBank extends javax.swing.JPanel {
             listQuestionTable.addRow(question.toRowTable());
         }
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -117,7 +116,13 @@ public class QuestionBank extends javax.swing.JPanel {
         selectCategoryLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         org.openide.awt.Mnemonics.setLocalizedText(selectCategoryLabel, org.openide.util.NbBundle.getMessage(QuestionBank.class, "QuestionBank.selectCategoryLabel.text")); // NOI18N
 
+        selectCategoryDropdown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Default" }));
         selectCategoryDropdown.setToolTipText(org.openide.util.NbBundle.getMessage(QuestionBank.class, "QuestionBank.selectCategoryDropdown.toolTipText")); // NOI18N
+        selectCategoryDropdown.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                selectCategoryDropdownMouseClicked(evt);
+            }
+        });
         selectCategoryDropdown.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 selectCategoryDropdownActionPerformed(evt);
@@ -218,20 +223,26 @@ public class QuestionBank extends javax.swing.JPanel {
 
     private void selectCategoryDropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectCategoryDropdownActionPerformed
         // TODO add your handling code here:
-        int index = selectCategoryDropdown.getSelectedIndex();
-        if (index == -1) {
-            currentCategory = 0;
-        } else {
+        if (!firstSelect) {
+            int index = selectCategoryDropdown.getSelectedIndex();
             currentCategory = listCategory.get(index).getId();
+            refreshQuestionData();
         }
-        initListQuestionsTableData();
     }//GEN-LAST:event_selectCategoryDropdownActionPerformed
 
     private void showSubcategoryCheckboxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_showSubcategoryCheckboxItemStateChanged
         // TODO add your handling code here:
         showSubCategory = evt.getStateChange() == ItemEvent.SELECTED;
-        initListQuestionsTableData();
+        refreshQuestionData();
     }//GEN-LAST:event_showSubcategoryCheckboxItemStateChanged
+
+    private void selectCategoryDropdownMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_selectCategoryDropdownMouseClicked
+        // TODO add your handling code here:
+        if (firstSelect) {
+            selectCategoryDropdown.removeItemAt(0);
+            firstSelect = false;
+        }
+    }//GEN-LAST:event_selectCategoryDropdownMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
