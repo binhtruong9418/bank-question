@@ -394,15 +394,19 @@ public class ImportFile extends javax.swing.JPanel {
 
     private void submitImportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitImportButtonActionPerformed
         // TODO add your handling code here:
-        String result = checkAikenFile(importFile);
-        if (result.startsWith("Success")) {
-            addQuestionFromFile(importFile);
-        } else if (result.startsWith("Error")) {
-            System.out.print("Import Error");
-            JOptionPane.showMessageDialog(null, result, "Error", JOptionPane.ERROR_MESSAGE);
+        if (importFile == null) {
+            JOptionPane.showMessageDialog(null, "Please select file!", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
-            System.out.print("Import Error");
-            JOptionPane.showMessageDialog(null, "Import Error");
+            String result = checkAikenFile(importFile);
+            if (result.startsWith("Success")) {
+                addQuestionFromFile(importFile);
+            } else if (result.startsWith("Error")) {
+                System.out.print("Import Error");
+                JOptionPane.showMessageDialog(null, result, "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                System.out.print("Import Error");
+                JOptionPane.showMessageDialog(null, "Import Error");
+            }
         }
     }//GEN-LAST:event_submitImportButtonActionPerformed
 

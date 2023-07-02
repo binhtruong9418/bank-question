@@ -1,4 +1,4 @@
-package components;
+package view.quiz;
 
 import java.awt.BorderLayout;
 import java.awt.Component;

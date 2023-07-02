@@ -4,30 +4,37 @@ import java.util.Date;
 import java.util.List;
 
 public class Quiz {
+    
+    private int id;
+    
     private String name;
 
     private String description;
 
-    private Date openTime;
+    private long timeStart;
 
-    private Date closeTime;
+    private long timeEnd;
 
-    private Integer timeLimit;
+    private int timeLimit;
 
     private List<Question> questions;
 
     private Float mark;
 
-    public Quiz(String name, String description, Date openTime, Date closeTime, Integer timeLimit) {
+    public Quiz(int id, String name, String description, long timeStart, long timeEnd, int timeLimit) {
         this.name = name;
         this.description = description;
-        this.openTime = openTime;
-        this.closeTime = closeTime;
+        this.timeStart = timeStart;
+        this.timeEnd = timeEnd;
         this.timeLimit = timeLimit;
     }
 
     public Quiz() {
 
+    }
+    
+    public Integer getId() {
+        return id;
     }
 
     public String getName() {
@@ -38,12 +45,12 @@ public class Quiz {
         return description;
     }
 
-    public Date getOpenTime() {
-        return openTime;
+    public long getTimeStart() {
+        return timeStart;
     }
 
-    public Date getCloseTime() {
-        return closeTime;
+    public long getTimeEnd() {
+        return timeEnd;
     }
 
     public Integer getTimeLimit() {
@@ -57,6 +64,10 @@ public class Quiz {
     public Float getMark() {
         return mark;
     }
+    
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public void setName(String name) {
         this.name = name;
@@ -66,12 +77,12 @@ public class Quiz {
         this.description = description;
     }
 
-    public void setOpenTime(Date openTime) {
-        this.openTime = openTime;
+    public void setTimeStart(long timeStart) {
+        this.timeStart = timeStart;
     }
 
-    public void setCloseTime(Date closeTime) {
-        this.closeTime = closeTime;
+    public void setTimeEnd(long timeEnd) {
+        this.timeEnd = timeEnd;
     }
 
     public void setTimeLimit(Integer timeLimit) {

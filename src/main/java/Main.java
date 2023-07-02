@@ -1,5 +1,5 @@
 
-import components.AddingANewQuizView;
+import view.quiz.AddingANewQuizView;
 import java.awt.CardLayout;
 import javax.swing.*;
 //quang test thử
@@ -15,8 +15,8 @@ public class Main extends javax.swing.JFrame {
         setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
         importQuestionBankToOtherTab();
     }
-    
-    private void importQuestionBankToOtherTab () {
+
+    private void importQuestionBankToOtherTab() {
         addCategory.getQuestionBank(questionBank);
         importFile.getQuestionBank(questionBank);
     }
@@ -32,7 +32,7 @@ public class Main extends javax.swing.JFrame {
         exportMenuItem = new javax.swing.JMenuItem();
         bg = new javax.swing.JPanel();
         topbar = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        homeButton = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         page = new javax.swing.JPanel();
         itLabel = new javax.swing.JLabel();
@@ -41,7 +41,7 @@ public class Main extends javax.swing.JFrame {
         settingButton = DropDownButtonFactory.createDropDownButton(settingMenuButtonIcon, settingMenu);
         content = new javax.swing.JPanel();
         listQuiz = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        listQuizView = new view.quiz.ListQuizView();
         mainContent = new javax.swing.JPanel();
         menuContent = new javax.swing.JTabbedPane();
         questionTab = new javax.swing.JPanel();
@@ -97,8 +97,15 @@ public class Main extends javax.swing.JFrame {
 
         topbar.setBackground(new java.awt.Color(7, 116, 163));
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/menu.png"))); // NOI18N
-        org.openide.awt.Mnemonics.setLocalizedText(jButton1, org.openide.util.NbBundle.getMessage(Main.class, "Main.jButton1.text")); // NOI18N
+        homeButton.setBackground(new java.awt.Color(7, 116, 163));
+        homeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/home.png"))); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(homeButton, org.openide.util.NbBundle.getMessage(Main.class, "Main.homeButton.text")); // NOI18N
+        homeButton.setBorder(null);
+        homeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                homeButtonActionPerformed(evt);
+            }
+        });
 
         jButton2.setBackground(new java.awt.Color(7, 116, 163));
         jButton2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -115,8 +122,8 @@ public class Main extends javax.swing.JFrame {
         topbarLayout.setHorizontalGroup(
             topbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(topbarLayout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(jButton1)
+                .addGap(38, 38, 38)
+                .addComponent(homeButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(23, 23, 23))
@@ -126,7 +133,7 @@ public class Main extends javax.swing.JFrame {
             .addGroup(topbarLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addGroup(topbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
+                    .addComponent(homeButton)
                     .addComponent(jButton2))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
@@ -194,28 +201,24 @@ public class Main extends javax.swing.JFrame {
 
         listQuiz.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/quiz.png"))); // NOI18N
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel1, org.openide.util.NbBundle.getMessage(Main.class, "Main.jLabel1.text")); // NOI18N
-
         javax.swing.GroupLayout listQuizLayout = new javax.swing.GroupLayout(listQuiz);
         listQuiz.setLayout(listQuizLayout);
         listQuizLayout.setHorizontalGroup(
             listQuizLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(listQuizLayout.createSequentialGroup()
-                .addGap(112, 112, 112)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1629, Short.MAX_VALUE))
+                .addGap(197, 197, 197)
+                .addComponent(listQuizView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(907, Short.MAX_VALUE))
         );
         listQuizLayout.setVerticalGroup(
             listQuizLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(listQuizLayout.createSequentialGroup()
-                .addGap(86, 86, 86)
-                .addComponent(jLabel1)
-                .addContainerGap(873, Short.MAX_VALUE))
+                .addGap(59, 59, 59)
+                .addComponent(listQuizView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(432, Short.MAX_VALUE))
         );
 
-        content.add(listQuiz, "card2");
+        content.add(listQuiz, "listQuizCard");
 
         mainContent.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -290,7 +293,7 @@ public class Main extends javax.swing.JFrame {
         mainContentLayout.setVerticalGroup(
             mainContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainContentLayout.createSequentialGroup()
-                .addGap(0, 26, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(menuContent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -390,8 +393,15 @@ public class Main extends javax.swing.JFrame {
     private void turnEditingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_turnEditingButtonActionPerformed
         // TODO add your handling code here:
         AddingANewQuizView addingANewQuizView = new AddingANewQuizView();
+        addingANewQuizView.setListQuizView(listQuizView);
         addingANewQuizView.setVisible(true);
     }//GEN-LAST:event_turnEditingButtonActionPerformed
+
+    private void homeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeButtonActionPerformed
+        // TODO add your handling code here:
+        CardLayout contentLayout = (CardLayout) content.getLayout();
+        contentLayout.show(content, "listQuizCard");
+    }//GEN-LAST:event_homeButtonActionPerformed
 
     public static void main(String args[]) {
         try {
@@ -425,14 +435,14 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel content;
     private javax.swing.JMenuItem exportMenuItem;
     private javax.swing.JPanel exportTab;
+    private javax.swing.JButton homeButton;
     private view.question.ImportFile importFile;
     private javax.swing.JMenuItem importMenuItem;
     private javax.swing.JPanel importTab;
     private javax.swing.JLabel itLabel;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel listQuiz;
+    private view.quiz.ListQuizView listQuizView;
     private javax.swing.JPanel mainContent;
     private javax.swing.JTabbedPane menuContent;
     private javax.swing.JPanel page;
