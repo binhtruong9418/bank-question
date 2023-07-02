@@ -6,7 +6,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import model.Category;
 import org.openide.util.Exceptions;
@@ -60,5 +62,27 @@ public class GetAllCategory {
             Exceptions.printStackTrace(ex);
             return listCategory;
         }
+    }
+
+    public Category getRandomCategory() {
+        List<Category> allCategories = getAllCategory();
+        if (allCategories.isEmpty()) {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+            String categoryName = dateFormat.format(new Date());
+            Category newCategory = new Category();
+            newCategory.setName(categoryName);
+            newCategory.setInfo(categoryName);
+            newCategory.setParentCategory(0);
+            AddNewCategory addNewCategory = new AddNewCategory();
+            int newCategoryId = addNewCategory.addNewCategory(categoryName, categoryName, 0, "");
+            if (newCategoryId != -1) {
+                newCategory.setId(newCategoryId);
+                return newCategory;
+            } else {
+                return null;
+            }
+        }
+        int randomIndex = (int) (Math.random() * allCategories.size());
+        return allCategories.get(randomIndex);
     }
 }

@@ -15,7 +15,9 @@ import java.util.List;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import model.Answer;
+import model.Category;
 import model.Question;
+import repository.category.GetAllCategory;
 import repository.question.AddNewQuestion;
 
 public class ImportFile extends javax.swing.JPanel {
@@ -205,7 +207,6 @@ public class ImportFile extends javax.swing.JPanel {
                             question.setQuestionText(questionText);
                             question.setAnswers(new ArrayList<>(listAnswer));
                             question.setMark((float) 1);
-                            question.setCategory(1);
                             question.setName(questionText);
                             listQuestion.add(question);
                             listAnswer.clear();
@@ -214,11 +215,21 @@ public class ImportFile extends javax.swing.JPanel {
                     }
                 }
             }
+            Category randomCategory = new GetAllCategory().getRandomCategory();
+            for (Question question : listQuestion) {
+                question.setCategory(randomCategory.getId());
+            }
             AddNewQuestion addNewQuestion = new AddNewQuestion();
-            addNewQuestion.addListNewQuestion(listQuestion);
-            questionBank.refreshQuestionData();
+            int listQuestionLength = addNewQuestion.addListNewQuestion(listQuestion);
+            if (listQuestionLength == 0) {
+                JOptionPane.showMessageDialog(null, "Import questions failed!", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Success: " + listQuestionLength + " questions import to " + randomCategory.getName(), "Success", JOptionPane.INFORMATION_MESSAGE);
+                questionBank.refreshQuestionData();
+            }
         } catch (IOException e) {
             System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(null, "Import questions failed!", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -386,7 +397,6 @@ public class ImportFile extends javax.swing.JPanel {
         String result = checkAikenFile(importFile);
         if (result.startsWith("Success")) {
             addQuestionFromFile(importFile);
-            JOptionPane.showMessageDialog(null, result, "Success", JOptionPane.INFORMATION_MESSAGE);
         } else if (result.startsWith("Error")) {
             System.out.print("Import Error");
             JOptionPane.showMessageDialog(null, result, "Error", JOptionPane.ERROR_MESSAGE);

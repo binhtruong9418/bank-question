@@ -62,6 +62,7 @@ public class AddCategory extends javax.swing.JPanel {
                 toString += " (" + category.getCount() + ")";
             }
             parentCategoryInput.addItem(toString); // Add the category to the dropdown
+            parentCategoryInput.setSelectedIndex(0);
         }
     }
 
@@ -226,12 +227,9 @@ public class AddCategory extends javax.swing.JPanel {
     private void addCategoryButtonSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCategoryButtonSubmitActionPerformed
         // TODO add your handling code here:
         try {
-
             int index = parentCategoryInput.getSelectedIndex();
-            int parentCategory;
-            if (index == -1) {
-                parentCategory = 0;
-            } else {
+            int parentCategory = 0;
+            if (index != 0) {
                 parentCategory = listCategory.get(index).getId();
             }
             String name = nameCategoryInput.getText();
@@ -239,14 +237,18 @@ public class AddCategory extends javax.swing.JPanel {
             String idNumber = IDNumberInput.getText();
 
             AddNewCategory addNewCategory = new AddNewCategory();
-            addNewCategory.addNewCategory(name, info, parentCategory, idNumber);
+            int categoryId = addNewCategory.addNewCategory(name, info, parentCategory, idNumber);
 
-            JOptionPane.showMessageDialog(null, "Add category successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
-            refreshDropdownCategoryData();
-            nameCategoryInput.setText("");
-            categoryInfoInput.setText("");
-            IDNumberInput.setText("");
-            questionBank.refreshQuestionCategory();
+            if (categoryId == -1) {
+                JOptionPane.showMessageDialog(null, "Add category failed!", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Add category successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                refreshDropdownCategoryData();
+                nameCategoryInput.setText("");
+                categoryInfoInput.setText("");
+                IDNumberInput.setText("");
+                questionBank.refreshQuestionCategory();
+            }
         } catch (HeadlessException e) {
             JOptionPane.showMessageDialog(null, "Add category failed!", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -267,10 +269,6 @@ public class AddCategory extends javax.swing.JPanel {
 
     private void parentCategoryInputMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_parentCategoryInputMouseClicked
         // TODO add your handling code here:
-        if (firstSelect) {
-            parentCategoryInput.removeItemAt(0);
-            firstSelect = false;
-        }
     }//GEN-LAST:event_parentCategoryInputMouseClicked
 
 

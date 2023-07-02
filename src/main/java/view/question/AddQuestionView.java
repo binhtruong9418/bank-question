@@ -20,18 +20,18 @@ import repository.question.AddNewQuestion;
 import service.ArrangeCategory;
 
 public class AddQuestionView extends javax.swing.JFrame {
-    
+
     Connection con = null;
     PreparedStatement pre = null;
     ResultSet rs = null;
-    
+
     private Question questionInput;
-    
+
     private QuestionBank questionBank;
-    
+
     List<Category> listCategory = new ArrayList<>();
     int currentAnswer = 0;
-    
+
     public AddQuestionView() {
         initComponents();
         addAnswerChoices(2);
@@ -42,11 +42,11 @@ public class AddQuestionView extends javax.swing.JFrame {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
     }
-    
+
     public void setQuestionBank(QuestionBank questionBank) {
         this.questionBank = questionBank;
     }
-    
+
     private void initDropdownCategoryData() {
         // Clear existing items in the dropdown
         // Clear existing items in the dropdown
@@ -54,12 +54,12 @@ public class AddQuestionView extends javax.swing.JFrame {
         listCategory.clear();
         GetAllCategory getAllCategory = new GetAllCategory();
         listCategory = getAllCategory.getAllCategory();
-        
+
         for (Category category : listCategory) {
-            
+
             String toString = "";
             String name = category.getName();
-            
+
             int level = ArrangeCategory.getCategoryLevel(category, listCategory);
             int numSpaces = level * 5; // 5 spaces for each level
             for (int i = 0; i < numSpaces; i++) {
@@ -77,7 +77,7 @@ public class AddQuestionView extends javax.swing.JFrame {
             categoryDropdown.setSelectedIndex(0);
         }
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -338,7 +338,7 @@ public class AddQuestionView extends javax.swing.JFrame {
     private void saveChangeAndEditButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveChangeAndEditButtonActionPerformed
         // TODO add your handling code here:
         try {
-            
+
             if (nameInput.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Please input name.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
@@ -380,15 +380,19 @@ public class AddQuestionView extends javax.swing.JFrame {
             question.setMark(mark);
             question.setAnswers(listAnswerInput);
             AddNewQuestion addNewQuestion = new AddNewQuestion();
-            addNewQuestion.addANewQuestion(question);
-            JOptionPane.showMessageDialog(null, "Add Question successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
-            questionBank.refreshQuestionData();
-            nameInput.setText("");
-            questionTextInput.setText("");
-            markInput.setText("1");
-            listAnswer.removeAll();
-            addAnswerChoices(2);
-        } catch (Exception e) {
+            int questionId = addNewQuestion.addANewQuestion(question);
+            if (questionId == -1) {
+                JOptionPane.showMessageDialog(null, "Add Question failed!", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Add Question successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                questionBank.refreshQuestionData();
+                nameInput.setText("");
+                questionTextInput.setText("");
+                markInput.setText("1");
+                listAnswer.removeAll();
+                addAnswerChoices(2);
+            }
+        } catch (HeadlessException | NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Add Question failed!", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_saveChangeAndEditButtonActionPerformed
@@ -408,7 +412,7 @@ public class AddQuestionView extends javax.swing.JFrame {
         // TODO add your handling code here:
         char keyChar = evt.getKeyChar();
         int keyCode = evt.getKeyCode();
-        
+
         if (Character.isDigit(keyChar) || keyCode == KeyEvent.VK_BACK_SPACE || keyChar == '.') {
             markInput.setEditable(true);
         } else {
@@ -419,7 +423,7 @@ public class AddQuestionView extends javax.swing.JFrame {
     private void saveChangeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveChangeButtonActionPerformed
         // TODO add your handling code here:
         try {
-            
+
             if (nameInput.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Please input name.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
@@ -461,15 +465,19 @@ public class AddQuestionView extends javax.swing.JFrame {
             question.setMark(mark);
             question.setAnswers(listAnswerInput);
             AddNewQuestion addNewQuestion = new AddNewQuestion();
-            addNewQuestion.addANewQuestion(question);
-            JOptionPane.showMessageDialog(null, "Add Question successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
-            questionBank.refreshQuestionData();
-            this.dispose();
+            int questionId = addNewQuestion.addANewQuestion(question);
+            if (questionId == -1) {
+                JOptionPane.showMessageDialog(null, "Add Question failed!", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Add Question successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                questionBank.refreshQuestionData();
+                this.dispose();
+            }
         } catch (HeadlessException | NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Add Question failed!", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_saveChangeButtonActionPerformed
-    
+
     private void addAnswerChoices(int count) {
         for (int i = currentAnswer; i < count + currentAnswer; i++) {
             AddAnswerView answerView = new AddAnswerView();
@@ -479,7 +487,7 @@ public class AddQuestionView extends javax.swing.JFrame {
             }
             listAnswer.add(answerView);
         }
-        
+
         listAnswer.revalidate();
         listAnswer.repaint();
     }
