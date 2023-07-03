@@ -41,11 +41,15 @@ public class Main extends javax.swing.JFrame {
         settingButton = DropDownButtonFactory.createDropDownButton(settingMenuButtonIcon, settingMenu);
         content = new javax.swing.JPanel();
         listQuiz = new javax.swing.JPanel();
+        listQuizView = new view.quiz.ListQuizView();
         mainContent = new javax.swing.JPanel();
         menuContent = new javax.swing.JTabbedPane();
         questionTab = new javax.swing.JPanel();
+        questionBank = new view.question.QuestionBank();
         categoryTab = new javax.swing.JPanel();
+        addCategory = new view.category.AddCategory();
         importTab = new javax.swing.JPanel();
+        importFile = new view.question.ImportFile();
         exportTab = new javax.swing.JPanel();
 
         settingMenu.setBackground(new java.awt.Color(7, 116, 163));
@@ -201,11 +205,17 @@ public class Main extends javax.swing.JFrame {
         listQuiz.setLayout(listQuizLayout);
         listQuizLayout.setHorizontalGroup(
             listQuizLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1930, Short.MAX_VALUE)
+            .addGroup(listQuizLayout.createSequentialGroup()
+                .addGap(94, 94, 94)
+                .addComponent(listQuizView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(1010, Short.MAX_VALUE))
         );
         listQuizLayout.setVerticalGroup(
             listQuizLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 958, Short.MAX_VALUE)
+            .addGroup(listQuizLayout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addComponent(listQuizView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(457, Short.MAX_VALUE))
         );
 
         content.add(listQuiz, "listQuizCard");
@@ -218,11 +228,13 @@ public class Main extends javax.swing.JFrame {
         questionTab.setLayout(questionTabLayout);
         questionTabLayout.setHorizontalGroup(
             questionTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1930, Short.MAX_VALUE)
+            .addComponent(questionBank, javax.swing.GroupLayout.DEFAULT_SIZE, 1930, Short.MAX_VALUE)
         );
         questionTabLayout.setVerticalGroup(
             questionTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 927, Short.MAX_VALUE)
+            .addGroup(questionTabLayout.createSequentialGroup()
+                .addComponent(questionBank, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 318, Short.MAX_VALUE))
         );
 
         menuContent.addTab(org.openide.util.NbBundle.getMessage(Main.class, "Main.questionTab.TabConstraints.tabTitle"), questionTab); // NOI18N
@@ -233,11 +245,13 @@ public class Main extends javax.swing.JFrame {
         categoryTab.setLayout(categoryTabLayout);
         categoryTabLayout.setHorizontalGroup(
             categoryTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1930, Short.MAX_VALUE)
+            .addComponent(addCategory, javax.swing.GroupLayout.DEFAULT_SIZE, 1930, Short.MAX_VALUE)
         );
         categoryTabLayout.setVerticalGroup(
             categoryTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 927, Short.MAX_VALUE)
+            .addGroup(categoryTabLayout.createSequentialGroup()
+                .addComponent(addCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 395, Short.MAX_VALUE))
         );
 
         menuContent.addTab(org.openide.util.NbBundle.getMessage(Main.class, "Main.categoryTab.TabConstraints.tabTitle"), categoryTab); // NOI18N
@@ -248,11 +262,13 @@ public class Main extends javax.swing.JFrame {
         importTab.setLayout(importTabLayout);
         importTabLayout.setHorizontalGroup(
             importTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1930, Short.MAX_VALUE)
+            .addComponent(importFile, javax.swing.GroupLayout.DEFAULT_SIZE, 1930, Short.MAX_VALUE)
         );
         importTabLayout.setVerticalGroup(
             importTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 927, Short.MAX_VALUE)
+            .addGroup(importTabLayout.createSequentialGroup()
+                .addComponent(importFile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 476, Short.MAX_VALUE))
         );
 
         menuContent.addTab(org.openide.util.NbBundle.getMessage(Main.class, "Main.importTab.TabConstraints.tabTitle"), importTab); // NOI18N
@@ -416,6 +432,7 @@ public class Main extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private view.category.AddCategory addCategory;
     private javax.swing.JPanel bg;
     private javax.swing.JMenuItem categoryMenuItem;
     private javax.swing.JPanel categoryTab;
@@ -423,15 +440,18 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenuItem exportMenuItem;
     private javax.swing.JPanel exportTab;
     private javax.swing.JButton homeButton;
+    private view.question.ImportFile importFile;
     private javax.swing.JMenuItem importMenuItem;
     private javax.swing.JPanel importTab;
     private javax.swing.JLabel itLabel;
     private javax.swing.JButton jButton2;
     private javax.swing.JPanel listQuiz;
+    private view.quiz.ListQuizView listQuizView;
     private javax.swing.JPanel mainContent;
     private javax.swing.JTabbedPane menuContent;
     private javax.swing.JPanel page;
     private javax.swing.JLabel pageLink;
+    private view.question.QuestionBank questionBank;
     private javax.swing.JMenuItem questionMenuItem;
     private javax.swing.JPanel questionTab;
     private javax.swing.JButton settingButton;
