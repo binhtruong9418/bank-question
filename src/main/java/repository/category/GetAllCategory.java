@@ -15,20 +15,16 @@ import org.openide.util.Exceptions;
 
 public class GetAllCategory {
 
-    private Connection con = null;
-    private PreparedStatement pre = null;
-    private ResultSet rs = null;
-
     public GetAllCategory() {
     }
 
     public List<Category> getAllCategory() {
-        con = ConnectDB.connect();
+        Connection con = ConnectDB.connect();
         List<Category> listCategory = new ArrayList<>();
         String sql = "SELECT * FROM categories";
         try {
-            pre = con.prepareStatement(sql);
-            rs = pre.executeQuery();
+            PreparedStatement pre = con.prepareStatement(sql);
+            ResultSet rs = pre.executeQuery();
 
             while (rs.next()) {
                 int id = rs.getInt("category_id");

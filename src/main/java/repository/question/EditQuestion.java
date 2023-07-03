@@ -2,7 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-
 package repository.question;
 
 import connection.ConnectDB;
@@ -16,13 +15,12 @@ import model.Question;
 
 public class EditQuestion {
 
-    private Connection con = ConnectDB.connect();
-
     public EditQuestion() {
 
     }
 
     public void editQuestion(Question question) {
+        Connection con = ConnectDB.connect();
         int questionId = question.getId();
         String name = question.getName();
         String questionText = question.getQuestionText();

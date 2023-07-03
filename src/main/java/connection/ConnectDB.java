@@ -97,6 +97,11 @@ public class ConnectDB {
                     + ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
             statement.execute(createQuizQuestionTableSQL);
 
+            String createTriggerSQL = "CREATE TRIGGER IF NOT EXISTS `update_category_count_question` AFTER INSERT ON `questions` FOR EACH ROW "
+                    + "UPDATE categories SET category_count_question = category_count_question + 1 "
+                    + "WHERE category_id = NEW.question_category";
+            statement.execute(createTriggerSQL);
+
             System.out.println("Database structure created successfully.");
         } catch (SQLException e) {
             System.out.println(e.getMessage());

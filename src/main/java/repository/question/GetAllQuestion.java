@@ -16,13 +16,13 @@ import model.Question;
 
 public class GetAllQuestion {
 
-    private Connection con = ConnectDB.connect();
-
     public GetAllQuestion() {
 
     }
 
     public List<Question> getAllQuestionByCategoryId(int categoryId) {
+
+        Connection con = ConnectDB.connect();
         List<Question> listQuestion = new ArrayList<>();
         String sql = "SELECT * FROM questions WHERE question_category = " + categoryId;
         try {
@@ -85,6 +85,8 @@ public class GetAllQuestion {
     }
 
     public List<Question> getAllQuestionByListCategoryId(List<Integer> listCategoryId) {
+        Connection con = ConnectDB.connect();
+
         List<Question> listQuestion = new ArrayList<>();
 
         StringBuilder categoryValues = new StringBuilder();

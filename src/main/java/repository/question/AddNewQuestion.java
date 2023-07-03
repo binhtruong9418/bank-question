@@ -14,16 +14,15 @@ import static java.sql.Types.NULL;
 import java.util.List;
 import model.Answer;
 import model.Question;
+import repository.category.EditCategory;
 
 public class AddNewQuestion {
 
-    private Connection con;
-
     public AddNewQuestion() {
-        con = ConnectDB.connect();
     }
 
     public int addANewQuestion(Question question) {
+        Connection con = ConnectDB.connect();
         int generatedQuestionId = -1; // Default value for failure
 
         String name = question.getName();
@@ -64,6 +63,7 @@ public class AddNewQuestion {
     }
 
     public int addListNewQuestion(List<Question> questions) {
+        Connection con = ConnectDB.connect();
         int numQuestionsAdded = 0;
 
         String sql = "INSERT INTO questions (question_name, question_category, question_text, question_mark, "

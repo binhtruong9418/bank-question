@@ -386,6 +386,8 @@ public class AddQuestionView extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "Add Question successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
                 questionBank.refreshQuestionData();
+                questionBank.refreshQuestionCategory();
+                initDropdownCategoryData();
                 nameInput.setText("");
                 questionTextInput.setText("");
                 markInput.setText("1");
@@ -471,6 +473,7 @@ public class AddQuestionView extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "Add Question successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
                 questionBank.refreshQuestionData();
+                questionBank.refreshQuestionCategory();
                 this.dispose();
             }
         } catch (HeadlessException | NumberFormatException e) {

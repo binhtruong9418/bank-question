@@ -249,9 +249,7 @@ public class Main extends javax.swing.JFrame {
         );
         categoryTabLayout.setVerticalGroup(
             categoryTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(categoryTabLayout.createSequentialGroup()
-                .addComponent(addCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 395, Short.MAX_VALUE))
+            .addComponent(addCategory, javax.swing.GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE)
         );
 
         menuContent.addTab(org.openide.util.NbBundle.getMessage(Main.class, "Main.categoryTab.TabConstraints.tabTitle"), categoryTab); // NOI18N
@@ -266,9 +264,7 @@ public class Main extends javax.swing.JFrame {
         );
         importTabLayout.setVerticalGroup(
             importTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(importTabLayout.createSequentialGroup()
-                .addComponent(importFile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 476, Short.MAX_VALUE))
+            .addComponent(importFile, javax.swing.GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE)
         );
 
         menuContent.addTab(org.openide.util.NbBundle.getMessage(Main.class, "Main.importTab.TabConstraints.tabTitle"), importTab); // NOI18N

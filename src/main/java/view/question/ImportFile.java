@@ -226,6 +226,7 @@ public class ImportFile extends javax.swing.JPanel {
             } else {
                 JOptionPane.showMessageDialog(null, "Success: " + listQuestionLength + " questions import to " + randomCategory.getName(), "Success", JOptionPane.INFORMATION_MESSAGE);
                 questionBank.refreshQuestionData();
+                questionBank.refreshQuestionCategory();
             }
         } catch (IOException e) {
             System.out.println(e.getMessage());

@@ -227,7 +227,11 @@ public class QuestionBank extends javax.swing.JPanel {
         // TODO add your handling code here:
         if (!firstSelect) {
             int index = selectCategoryDropdown.getSelectedIndex();
-            currentCategory = listCategory.get(index).getId();
+            if (index == -1) {
+                currentCategory = 0;
+            } else {
+                currentCategory = listCategory.get(index).getId();
+            }
             refreshQuestionData();
         }
     }//GEN-LAST:event_selectCategoryDropdownActionPerformed
