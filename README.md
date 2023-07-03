@@ -1,4 +1,4 @@
-# Bank Question Project
+# Bank Question - Java Swing Project
 
 The Bank Question project is a Java application that allows users to manage and organize questions for quizzes. Users can create, edit, and delete questions, as well as import questions from a text file. The application also provides a quiz feature for users to test their knowledge based on the available questions.
 
