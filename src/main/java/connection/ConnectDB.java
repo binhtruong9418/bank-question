@@ -101,6 +101,11 @@ public class ConnectDB {
                     + "UPDATE categories SET category_count_question = category_count_question + 1 "
                     + "WHERE category_id = NEW.question_category";
             statement.execute(createTriggerSQL);
+            
+            String deleteTriggerSQL = "CREATE TRIGGER IF NOT EXISTS `update_category_count_question_delete` AFTER DELETE ON `questions` FOR EACH ROW "
+                    + "UPDATE categories SET category_count_question = category_count_question - 1 "
+                    + "WHERE category_id = OLD.question_category";
+            statement.execute(deleteTriggerSQL);
 
             System.out.println("Database structure created successfully.");
         } catch (SQLException e) {

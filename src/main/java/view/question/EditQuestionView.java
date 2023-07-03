@@ -427,8 +427,8 @@ public class EditQuestionView extends javax.swing.JFrame {
             question.setCategory(category);
             question.setMark(mark);
             question.setAnswers(listAnswerInput);
-            EditQuestion editQuestion = new EditQuestion();
-            editQuestion.editQuestion(question);
+            EditQuestion editQuestionClass = new EditQuestion();
+            editQuestionClass.editQuestion(question);
             JOptionPane.showMessageDialog(null, "Edit Question successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
             questionBank.refreshQuestionData();
         } catch (HeadlessException | NumberFormatException e) {
@@ -452,6 +452,7 @@ public class EditQuestionView extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Question deleted successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
                 // Additional code after successful deletion
                 questionBank.refreshQuestionData();
+                questionBank.refreshQuestionCategory();
                 this.dispose();
             }
         } catch (Exception ex) {
