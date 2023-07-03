@@ -165,7 +165,9 @@ public class EditQuestionView extends javax.swing.JFrame {
 
         nameInput.setText(org.openide.util.NbBundle.getMessage(EditQuestionView.class, "EditQuestionView.nameInput.text")); // NOI18N
 
+        markInput.setEditable(false);
         markInput.setText(org.openide.util.NbBundle.getMessage(EditQuestionView.class, "EditQuestionView.markInput.text")); // NOI18N
+        markInput.setEnabled(false);
         markInput.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 markInputKeyPressed(evt);
@@ -394,17 +396,13 @@ public class EditQuestionView extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Please input question text.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            if (markInput.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Please input mark.", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
             List<Answer> listAnswerInput = new ArrayList<>();
             Float totalMark = (float) 0;
             String name = nameInput.getText();
             String questionText = questionTextInput.getText();
             int index = categoryDropdown.getSelectedIndex();
             int category = listCategory.get(index).getId();
-            float mark = Float.parseFloat(markInput.getText());
+            float mark = (float) 1;
             Component[] components = listAnswerView.getComponents();
             for (Component compo : components) {
                 if (compo instanceof AddAnswerView) {

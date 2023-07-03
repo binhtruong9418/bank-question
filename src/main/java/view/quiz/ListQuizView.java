@@ -4,14 +4,21 @@ import java.util.List;
 import javax.swing.DefaultListModel;
 import model.Quiz;
 import repository.quiz.GetAllQuiz;
+import view.quiz_interface.QuizSelectListener;
 
 public class ListQuizView extends javax.swing.JPanel {
+
+    private QuizSelectListener quizSelectListener;
 
     public ListQuizView() {
         initComponents();
         initQuizData();
     }
-    
+
+    public void setQuizSelectListener(QuizSelectListener listener) {
+        this.quizSelectListener = listener;
+    }
+
     public void refreshQuizData() {
         DefaultListModel listModel = (DefaultListModel) listQuizView.getModel();
         listModel.setSize(0);
@@ -62,10 +69,11 @@ public class ListQuizView extends javax.swing.JPanel {
 
     private void listQuizViewValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listQuizViewValueChanged
         // TODO add your handling code here:
-        if (!evt.getValueIsAdjusting()) {
+        if (!evt.getValueIsAdjusting() && quizSelectListener != null) {
             // Get the selected item
             Quiz selectedQuiz = listQuizView.getSelectedValue();
             System.out.println("Selected item: " + selectedQuiz.getId());
+            quizSelectListener.onQuizSelect(selectedQuiz);
         }
     }//GEN-LAST:event_listQuizViewValueChanged
 
