@@ -1,14 +1,9 @@
 package connection;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 public class ConnectDB {
@@ -19,24 +14,28 @@ public class ConnectDB {
         Connection conn = null;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            String url = "jdbc:mysql://localhost:3306/bank_question";
+            String url = "jdbc:mysql://localhost:3306/";
             conn = DriverManager.getConnection(url, "root", "");
             if (firstConnect) {
                 createDatabaseStructure(conn);
                 firstConnect = false;
             }
+            conn.setCatalog("bank_question");
         } catch (SQLException | ClassNotFoundException e) {
-            JOptionPane.showMessageDialog(null, "Please connect to database!", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Please connect to the database!", "Error", JOptionPane.ERROR_MESSAGE);
             System.out.println(e.getMessage());
         }
         return conn;
     }
 
     private static void createDatabaseStructure(Connection conn) {
-        System.out.println("create database structure");
+        System.out.println("Creating database structure...");
         try (Statement statement = conn.createStatement()) {
-            statement.execute("CREATE DATABASE IF NOT EXISTS bank_question;");
-            statement.execute("USE bank_question;");
+            // Create database if not exists
+            statement.execute("CREATE DATABASE IF NOT EXISTS bank_question");
+
+            // Use the bank_question database
+            statement.execute("USE bank_question");
 
             // Table: categories
             String createCategoriesTableSQL = "CREATE TABLE IF NOT EXISTS categories ("
@@ -97,12 +96,18 @@ public class ConnectDB {
                     + ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
             statement.execute(createQuizQuestionTableSQL);
 
-            String createTriggerSQL = "CREATE TRIGGER IF NOT EXISTS `update_category_count_question` AFTER INSERT ON `questions` FOR EACH ROW "
+            // Trigger: update_category_count_question
+            String createTriggerSQL = "CREATE TRIGGER IF NOT EXISTS `update_category_count_question` "
+                    + "AFTER INSERT ON `questions` "
+                    + "FOR EACH ROW "
                     + "UPDATE categories SET category_count_question = category_count_question + 1 "
                     + "WHERE category_id = NEW.question_category";
             statement.execute(createTriggerSQL);
             
-            String deleteTriggerSQL = "CREATE TRIGGER IF NOT EXISTS `update_category_count_question_delete` AFTER DELETE ON `questions` FOR EACH ROW "
+            // Trigger: update_category_count_question_delete
+            String deleteTriggerSQL = "CREATE TRIGGER IF NOT EXISTS `update_category_count_question_delete` "
+                    + "AFTER DELETE ON `questions` "
+                    + "FOR EACH ROW "
                     + "UPDATE categories SET category_count_question = category_count_question - 1 "
                     + "WHERE category_id = OLD.question_category";
             statement.execute(deleteTriggerSQL);
