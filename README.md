@@ -61,17 +61,12 @@ Follow these steps to set up and run the Bank Question project:
 
 To import questions from a text file, follow the format outlined below:
 
-What is the capital of France?
-
-A. Paris.
-
-B. London.
-
-C. Berlin.
-
-D. Rome.
-
-ANSWER: A.
+What is the capital of France?\n
+A. Paris\n
+B. London\n
+C. Berlin\n
+D. Rome\n
+ANSWER: A\n
 
 Each question and its answer choices should be on separate lines. Use the "Question:" prefix for the question text and "Answer X:" prefix for each answer choice. Mark the correct answer with the "(Correct)" suffix.
 
