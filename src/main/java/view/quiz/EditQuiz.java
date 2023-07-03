@@ -4,11 +4,16 @@
  */
 package view.quiz;
 
+import java.util.List;
+import model.Question;
+
 /**
  *
  * @author Duc Binh
  */
 public class EditQuiz extends javax.swing.JPanel {
+
+    public List<Question> listQuestion;
 
     public EditQuiz() {
         initComponents();
@@ -31,6 +36,11 @@ public class EditQuiz extends javax.swing.JPanel {
         addButtonDropdown = new javax.swing.JLabel();
 
         org.openide.awt.Mnemonics.setLocalizedText(fromBankQuestionItem, org.openide.util.NbBundle.getMessage(EditQuiz.class, "EditQuiz.fromBankQuestionItem.text")); // NOI18N
+        fromBankQuestionItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fromBankQuestionItemActionPerformed(evt);
+            }
+        });
         addMenu.add(fromBankQuestionItem);
 
         org.openide.awt.Mnemonics.setLocalizedText(randomQuestionItem, org.openide.util.NbBundle.getMessage(EditQuiz.class, "EditQuiz.randomQuestionItem.text")); // NOI18N
@@ -77,27 +87,27 @@ public class EditQuiz extends javax.swing.JPanel {
                 .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(quizNameLabel)
+                        .addContainerGap(694, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(selectMultipleButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(shuffleCheckbox, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel2)
                                 .addGap(18, 18, 18)
                                 .addComponent(saveButton))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(addButtonDropdown)
-                                .addGap(26, 26, 26)))
-                        .addGap(15, 15, 15))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(quizNameLabel)
-                        .addGap(0, 694, Short.MAX_VALUE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(selectMultipleButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(shuffleCheckbox, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(addButtonDropdown)
+                                        .addGap(26, 26, 26)))))
+                        .addGap(15, 15, 15))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -105,10 +115,11 @@ public class EditQuiz extends javax.swing.JPanel {
                 .addGap(14, 14, 14)
                 .addComponent(quizNameLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(saveButton))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(saveButton))
+                    .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(selectMultipleButton)
@@ -125,6 +136,12 @@ public class EditQuiz extends javax.swing.JPanel {
         // TODO add your handling code here:
         addMenu.show(addButtonDropdown, 0, addButtonDropdown.getHeight());
     }//GEN-LAST:event_addButtonDropdownMouseClicked
+
+    private void fromBankQuestionItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fromBankQuestionItemActionPerformed
+        // TODO add your handling code here:
+        AddQuestionToQuizFromBank addQuestionToQuizFromBank = new AddQuestionToQuizFromBank();
+        addQuestionToQuizFromBank.setVisible(true);
+    }//GEN-LAST:event_fromBankQuestionItemActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

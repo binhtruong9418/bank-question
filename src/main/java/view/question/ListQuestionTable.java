@@ -15,7 +15,9 @@ import model.Question;
  * @author Duc Binh
  */
 public class ListQuestionTable extends JTable {
+
     private QuestionBank questionBank;
+
     public ListQuestionTable() {
         setShowHorizontalLines(true);
         setShowVerticalLines(true);
@@ -33,7 +35,7 @@ public class ListQuestionTable extends JTable {
             @Override
             public Component getTableCellRendererComponent(JTable jtable, Object o, boolean selected, boolean focus, int i, int i1) {
                 Component com = super.getTableCellRendererComponent(jtable, o, selected, focus, i, i1);
-                
+
                 if (i1 == 1) {
                     com.setForeground(new Color(7, 116, 163));
                     setHorizontalAlignment(SwingConstants.CENTER);
@@ -49,7 +51,7 @@ public class ListQuestionTable extends JTable {
                 } else {
                     com.setBackground(new Color(242, 242, 242));
                 }
-                
+
                 if (o instanceof Question) {
                     Question question = (Question) o;
                     setValue(question.toString());
@@ -57,12 +59,13 @@ public class ListQuestionTable extends JTable {
                 return com;
             }
         });
-        
+
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 int row = rowAtPoint(e.getPoint());
                 int column = columnAtPoint(e.getPoint());
+                String columnName = getColumnName(column);
                 if (column == 1) {
                     Question question = (Question) getValueAt(row, 0);
                     EditQuestionView editQuestionView = new EditQuestionView(question);
@@ -72,14 +75,14 @@ public class ListQuestionTable extends JTable {
             }
         });
     }
-    
-    public void setQuestionBank (QuestionBank questionBank) {
+
+    public void setQuestionBank(QuestionBank questionBank) {
         this.questionBank = questionBank;
     }
-    
+
     public void addRow(Object[] row) {
         DefaultTableModel mod = (DefaultTableModel) getModel();
         mod.addRow(row); // Add the modified rowData to the table model;
     }
-    
+
 }
