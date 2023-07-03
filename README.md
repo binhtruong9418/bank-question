@@ -63,15 +63,15 @@ To import questions from a text file, follow the format outlined below:
 
 What is the capital of France?
 
-A. Paris (Correct)
+A. Paris.
 
-B. London
+B. London.
 
-C. Berlin
+C. Berlin.
 
-D. Rome
+D. Rome.
 
-ANSWER: A
+ANSWER: A.
 
 Each question and its answer choices should be on separate lines. Use the "Question:" prefix for the question text and "Answer X:" prefix for each answer choice. Mark the correct answer with the "(Correct)" suffix.
 
