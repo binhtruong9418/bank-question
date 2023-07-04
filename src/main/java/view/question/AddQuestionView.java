@@ -340,7 +340,6 @@ public class AddQuestionView extends javax.swing.JFrame {
     private void saveChangeAndEditButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveChangeAndEditButtonActionPerformed
         // TODO add your handling code here:
         try {
-
             if (nameInput.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Please input name.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;

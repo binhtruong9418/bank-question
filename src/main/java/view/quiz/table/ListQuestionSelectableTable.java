@@ -7,15 +7,12 @@ package view.quiz.table;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.DefaultCellEditor;
 import javax.swing.JCheckBox;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -112,30 +109,6 @@ public class ListQuestionSelectableTable extends JTable {
                 }
             }
         });
-    }
-
-    private static class CheckBoxRenderer extends DefaultTableCellRenderer {
-
-        private final JCheckBox checkBox;
-
-        public CheckBoxRenderer() {
-            checkBox = new JCheckBox();
-            checkBox.setHorizontalAlignment(SwingConstants.CENTER);
-            checkBox.addActionListener((ActionEvent e) -> {
-                JCheckBox source = (JCheckBox) e.getSource();
-                JTable table = (JTable) source.getParent();
-                int row = table.getEditingRow();
-                table.getCellEditor(row, 0).stopCellEditing(); // Stop editing the cell to apply the checkbox value
-            });
-        }
-
-        @Override
-        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-            if (value instanceof Boolean) {
-                checkBox.setSelected((boolean) value);
-            }
-            return checkBox;
-        }
     }
 
     public void addRow(Question question) {

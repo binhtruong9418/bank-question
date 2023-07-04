@@ -65,7 +65,6 @@ public class ListQuestionTable extends JTable {
             public void mouseClicked(MouseEvent e) {
                 int row = rowAtPoint(e.getPoint());
                 int column = columnAtPoint(e.getPoint());
-                String columnName = getColumnName(column);
                 if (column == 1) {
                     Question question = (Question) getValueAt(row, 0);
                     EditQuestionView editQuestionView = new EditQuestionView(question);

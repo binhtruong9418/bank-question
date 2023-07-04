@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
+
 package view.question;
 
 import java.sql.Connection;
@@ -244,8 +241,10 @@ public class QuestionBank extends javax.swing.JPanel {
 
     private void selectCategoryDropdownMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_selectCategoryDropdownMouseClicked
         // TODO add your handling code here:
-        if (firstSelect) {
+        if (firstSelect && !listCategory.isEmpty()) {
             selectCategoryDropdown.removeItemAt(0);
+            firstSelect = false;
+        } else {
             firstSelect = false;
         }
     }//GEN-LAST:event_selectCategoryDropdownMouseClicked

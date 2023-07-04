@@ -5,18 +5,35 @@
 package view.quiz;
 
 import java.util.List;
+import javax.swing.table.DefaultTableModel;
 import model.Question;
+import repository.question.GetAllQuestion;
+import view.quiz.table.ListQuestionEditTable.ListQuestionEditTableListener;
 
 /**
  *
  * @author Duc Binh
  */
-public class EditQuiz extends javax.swing.JPanel {
+public class EditQuiz extends javax.swing.JPanel implements ListQuestionEditTableListener {
 
+    private Boolean selectMultiple = false;
     public List<Question> listQuestion;
 
     public EditQuiz() {
         initComponents();
+        listQuestionEditTable.setShowCheckbox(false);
+        listQuestionEditTable.setListQuestionEditTableListener(this);
+        initListQuestionData();
+    }
+
+    private void initListQuestionData() {
+        DefaultTableModel tableModel = (DefaultTableModel) listQuestionEditTable.getModel();
+        tableModel.setRowCount(0);
+        listQuestion = new GetAllQuestion().getAllQuestionByCategoryId(1);
+
+        for (Question question : listQuestion) {
+            listQuestionEditTable.addRow(question, selectMultiple);
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -34,6 +51,8 @@ public class EditQuiz extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         shuffleCheckbox = new javax.swing.JCheckBox();
         addButtonDropdown = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        listQuestionEditTable = new view.quiz.table.ListQuestionEditTable();
 
         org.openide.awt.Mnemonics.setLocalizedText(fromBankQuestionItem, org.openide.util.NbBundle.getMessage(EditQuiz.class, "EditQuiz.fromBankQuestionItem.text")); // NOI18N
         fromBankQuestionItem.addActionListener(new java.awt.event.ActionListener() {
@@ -65,6 +84,11 @@ public class EditQuiz extends javax.swing.JPanel {
         selectMultipleButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         selectMultipleButton.setForeground(new java.awt.Color(255, 255, 255));
         org.openide.awt.Mnemonics.setLocalizedText(selectMultipleButton, org.openide.util.NbBundle.getMessage(EditQuiz.class, "EditQuiz.selectMultipleButton.text")); // NOI18N
+        selectMultipleButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selectMultipleButtonActionPerformed(evt);
+            }
+        });
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel3, org.openide.util.NbBundle.getMessage(EditQuiz.class, "EditQuiz.jLabel3.text")); // NOI18N
 
@@ -79,6 +103,8 @@ public class EditQuiz extends javax.swing.JPanel {
             }
         });
 
+        jScrollPane1.setViewportView(listQuestionEditTable);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -90,24 +116,23 @@ public class EditQuiz extends javax.swing.JPanel {
                         .addComponent(quizNameLabel)
                         .addContainerGap(694, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
-                                .addComponent(saveButton))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(selectMultipleButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(shuffleCheckbox, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(addButtonDropdown)
-                                        .addGap(26, 26, 26)))))
-                        .addGap(15, 15, 15))))
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(saveButton)
+                        .addGap(15, 15, 15))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(selectMultipleButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(shuffleCheckbox, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(addButtonDropdown)
+                                .addGap(26, 26, 26))))
+                    .addComponent(jScrollPane1)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -128,7 +153,8 @@ public class EditQuiz extends javax.swing.JPanel {
                 .addComponent(shuffleCheckbox)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(addButtonDropdown)
-                .addContainerGap(465, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -143,6 +169,13 @@ public class EditQuiz extends javax.swing.JPanel {
         addQuestionToQuizFromBank.setVisible(true);
     }//GEN-LAST:event_fromBankQuestionItemActionPerformed
 
+    private void selectMultipleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectMultipleButtonActionPerformed
+        // TODO add your handling code here:
+        selectMultiple = !selectMultiple;
+        listQuestionEditTable.setShowCheckbox(selectMultiple);
+        initListQuestionData();
+    }//GEN-LAST:event_selectMultipleButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel addButtonDropdown;
@@ -151,10 +184,28 @@ public class EditQuiz extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private view.quiz.table.ListQuestionEditTable listQuestionEditTable;
     private javax.swing.JLabel quizNameLabel;
     private javax.swing.JMenuItem randomQuestionItem;
     private javax.swing.JButton saveButton;
     private javax.swing.JButton selectMultipleButton;
     private javax.swing.JCheckBox shuffleCheckbox;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void onQuestionSelected(Question question) {
+        System.out.println("check");
+    }
+
+    @Override
+    public void onQuestionDeselected(Question question) {
+        System.out.println("uncheck");
+    }
+
+    @Override
+    public void onDeleteButtonClicked(Question question) {
+        System.out.println("delete");
+    }
+
 }
