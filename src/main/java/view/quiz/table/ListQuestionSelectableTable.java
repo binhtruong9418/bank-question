@@ -21,7 +21,7 @@ import view.question.ListQuestionTableHeader;
 
 public class ListQuestionSelectableTable extends JTable {
 
-    private List<Question> selectedQuestions;
+    private static List<Question> selectedQuestions;
 
     public ListQuestionSelectableTable() {
         selectedQuestions = new ArrayList<>();
@@ -114,6 +114,10 @@ public class ListQuestionSelectableTable extends JTable {
     public void addRow(Question question) {
         DefaultTableModel mod = (DefaultTableModel) getModel();
         mod.addRow(new Object[]{false, question});
+    }
+    
+    public void refreshSelectedQuestions() {
+        selectedQuestions.clear();
     }
 
     public List<Question> getSelectedQuestions() {

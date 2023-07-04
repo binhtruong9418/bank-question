@@ -443,7 +443,7 @@ public class EditQuestionView extends javax.swing.JFrame {
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         // TODO add your handling code here:
         try {
-            int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this question?", "Confirmation", JOptionPane.YES_NO_OPTION);
+            int confirm = JOptionPane.showConfirmDialog(null, "Are you want to delete this question?", "Confirmation", JOptionPane.YES_NO_OPTION);
             if (confirm == JOptionPane.YES_OPTION) {
                 DeleteQuestion deleteQuestion = new DeleteQuestion();
                 deleteQuestion.deleteQuestion(editQuestion.getId());

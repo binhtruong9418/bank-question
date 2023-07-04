@@ -1,13 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package view.quiz;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import model.Question;
-import repository.question.GetAllQuestion;
 import view.quiz.table.ListQuestionEditTable.ListQuestionEditTableListener;
 
 /**
@@ -17,23 +13,34 @@ import view.quiz.table.ListQuestionEditTable.ListQuestionEditTableListener;
 public class EditQuiz extends javax.swing.JPanel implements ListQuestionEditTableListener {
 
     private Boolean selectMultiple = false;
-    public List<Question> listQuestion;
+    public static List<Question> listQuestion;
 
     public EditQuiz() {
+        listQuestion = new ArrayList<>();
         initComponents();
         listQuestionEditTable.setShowCheckbox(false);
         listQuestionEditTable.setListQuestionEditTableListener(this);
         initListQuestionData();
     }
 
+    public void refreshTableData() {
+        initListQuestionData();
+    }
+
     private void initListQuestionData() {
         DefaultTableModel tableModel = (DefaultTableModel) listQuestionEditTable.getModel();
         tableModel.setRowCount(0);
-        listQuestion = new GetAllQuestion().getAllQuestionByCategoryId(1);
 
         for (Question question : listQuestion) {
             listQuestionEditTable.addRow(question, selectMultiple);
         }
+
+        System.out.println(listQuestion.size());
+
+    }
+
+    public void setQuizNameLabel(String quizName) {
+        quizNameLabel.setText("Editting quiz: " + quizName);
     }
 
     @SuppressWarnings("unchecked")
@@ -165,7 +172,7 @@ public class EditQuiz extends javax.swing.JPanel implements ListQuestionEditTabl
 
     private void fromBankQuestionItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fromBankQuestionItemActionPerformed
         // TODO add your handling code here:
-        AddQuestionToQuizFromBank addQuestionToQuizFromBank = new AddQuestionToQuizFromBank();
+        AddQuestionToQuizFromBank addQuestionToQuizFromBank = new AddQuestionToQuizFromBank(listQuestion, this);
         addQuestionToQuizFromBank.setVisible(true);
     }//GEN-LAST:event_fromBankQuestionItemActionPerformed
 

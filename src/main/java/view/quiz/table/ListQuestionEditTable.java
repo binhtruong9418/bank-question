@@ -30,9 +30,8 @@ public class ListQuestionEditTable extends JTable {
         this.listener = listener;
     }
 
-    private void updateTable(Boolean showCheckbox) {
+    public void updateTable(Boolean showCheckbox) {
         if (showCheckbox) {
-            System.out.println("update in func true");
             getTableHeader().setDefaultRenderer(new DefaultTableCellRenderer() {
                 @Override
                 public Component getTableCellRendererComponent(JTable jtable, Object o, boolean bln, boolean bln1, int i, int i1) {
@@ -133,7 +132,6 @@ public class ListQuestionEditTable extends JTable {
                 }
             });
         } else {
-            System.out.println("update in func false");
             getTableHeader().setDefaultRenderer(new DefaultTableCellRenderer() {
                 @Override
                 public Component getTableCellRendererComponent(JTable jtable, Object o, boolean bln, boolean bln1, int i, int i1) {
@@ -203,7 +201,6 @@ public class ListQuestionEditTable extends JTable {
     }
 
     public void setShowCheckbox(boolean status) {
-        System.out.println("update");
         updateTable(status);
     }
 

@@ -7,6 +7,7 @@ package view.quiz;
 import java.awt.event.ItemEvent;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Category;
 import model.Question;
@@ -23,11 +24,14 @@ public class AddQuestionToQuizFromBank extends javax.swing.JFrame {
     private Boolean showSubCategory = false;
     List<Category> listCategory = new ArrayList<>();
     public Integer currentCategory = 0;
+    private List<Question> listImportQuestion;
+    private final EditQuiz editQuiz;
 
-    public AddQuestionToQuizFromBank() {
+    public AddQuestionToQuizFromBank(List<Question> listQuestion, EditQuiz editQuiz) {
+        this.editQuiz = editQuiz;
+        this.listImportQuestion = listQuestion;
         initComponents();
         initDropdownCategoryData();
-
         setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -37,6 +41,7 @@ public class AddQuestionToQuizFromBank extends javax.swing.JFrame {
         DefaultTableModel tableModel = (DefaultTableModel) listQuestionSelectableTable.getModel();
         tableModel.setRowCount(0);
         initListQuestionsTableData();
+        listQuestionSelectableTable.refreshSelectedQuestions();
     }
 
     public void refreshQuestionCategory() {
@@ -201,9 +206,29 @@ public class AddQuestionToQuizFromBank extends javax.swing.JFrame {
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
         // TODO add your handling code here:
         List<Question> listData = listQuestionSelectableTable.getSelectedQuestions();
-        for (Question question : listData) {
-            System.out.println(question.getName());
+        if (listImportQuestion.isEmpty()) {
+            listImportQuestion.addAll(listData);
+        } else {
+            for (Question question : listData) {
+                for (Question questionInList : listImportQuestion) {
+                    if (question.getId() == questionInList.getId()) {
+                        int confirm = JOptionPane.showConfirmDialog(null,
+                                question.getName() + " has already in your quiz, do you want to replace it?",
+                                "Confirmation",
+                                JOptionPane.YES_NO_OPTION);
+                        if (confirm == JOptionPane.YES_OPTION) {
+                            // Replace the question in listImportQuestion
+
+                            int index = listImportQuestion.indexOf(questionInList);
+                            listImportQuestion.set(index, question);
+                        }
+
+                    }
+                }
+            }
         }
+        editQuiz.refreshTableData();
+        this.dispose();
     }//GEN-LAST:event_submitButtonActionPerformed
 
 
