@@ -22,7 +22,10 @@ public class QuizQuestionView extends javax.swing.JPanel {
         addData();
         
     }
-
+    void setLabel(String text){
+        question.setText(text);
+    }
+    
     private class CheckboxListCellRenderer extends JPanel implements ListCellRenderer<String> {
 
         private JCheckBox checkBox;
@@ -60,18 +63,18 @@ public class QuizQuestionView extends javax.swing.JPanel {
     void setchoicequestion(String text){
         title.setText(text);
     }
-    void setLabel(String text){
-        question.setText(text);
-    }
+    
     
     private void addData() {
         DefaultListModel<String> listModel = new DefaultListModel<>();
+        
         for (int i = 0; i < 6; i++) {
-            listModel.addElement("Answer" + (i + 1));
+            listModel.addElement("<html><body style='width: 800px; white-space: pre-wrap;'>"+"Cũng như bao mùa xuân trước, em rất thích ngắm mưa xuân. Những hạt mưa không vội vã, không ồn ào như mưa hạ. Nó dịu dàng, chầm chậm, mang đến cảm giác bình yên và thư thái trong tâm hồn. Những hạt mưa bắt đầu rơi, hạt mưa nhỏ, lất phất trong gió, vương những giọt long lanh trên cánh mai vàng mỏng manh, trên những chồi non cây lá, vạn vật được mưa tắm mát trở nên căng tràn sức sống. Mưa xuân diệu kỳ còn mang đến cho lòng người niềm vui khoan khoái, yêu biết bao nhiêu những cơn mưa xuân tuyệt vời như thế."+"</html>");
         }
         jList1.setModel(listModel);
         jList1.setCellRenderer(new CheckboxListCellRenderer());
-
+          int preferredHeight = jList1.getPreferredScrollableViewportSize().height;
+          scrollPane.setPreferredSize(new Dimension(scrollPane.getPreferredSize().width, preferredHeight));
         jList1.revalidate();
         jList1.repaint();
     }
@@ -85,7 +88,7 @@ public class QuizQuestionView extends javax.swing.JPanel {
         status = new javax.swing.JLabel();
         mark = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        scrollPane = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
         jPanel3 = new javax.swing.JPanel();
         question = new javax.swing.JLabel();
@@ -126,21 +129,35 @@ public class QuizQuestionView extends javax.swing.JPanel {
 
         jPanel2.setBackground(new java.awt.Color(204, 255, 255));
 
-        jScrollPane1.setBackground(new java.awt.Color(204, 255, 255));
-        jScrollPane1.setBorder(null);
+        scrollPane.setBackground(new java.awt.Color(204, 255, 255));
+        scrollPane.setBorder(null);
+        scrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
         jList1.setBackground(new java.awt.Color(204, 255, 255));
         jList1.setBorder(null);
         jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-        jScrollPane1.setViewportView(jList1);
+        scrollPane.setViewportView(jList1);
 
         jPanel3.setBackground(new java.awt.Color(204, 255, 255));
-        jPanel3.setLayout(new java.awt.GridLayout(1, 1, 0, 10));
 
-        question.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         org.openide.awt.Mnemonics.setLocalizedText(question, org.openide.util.NbBundle.getMessage(QuizQuestionView.class, "QuizQuestionView.question.text")); // NOI18N
-        question.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jPanel3.add(question);
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(question, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(question)
+                .addContainerGap(68, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -150,18 +167,15 @@ public class QuizQuestionView extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 81, Short.MAX_VALUE)))
-                .addContainerGap())
+                    .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 538, Short.MAX_VALUE)))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(scrollPane)
                 .addContainerGap())
         );
 
@@ -178,7 +192,7 @@ public class QuizQuestionView extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 139, Short.MAX_VALUE))
+                .addGap(0, 232, Short.MAX_VALUE))
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -189,9 +203,9 @@ public class QuizQuestionView extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel mark;
     private javax.swing.JLabel question;
+    private javax.swing.JScrollPane scrollPane;
     private javax.swing.JLabel status;
     private javax.swing.JLabel title;
     // End of variables declaration//GEN-END:variables
