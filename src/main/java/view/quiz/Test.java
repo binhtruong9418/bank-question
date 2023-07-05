@@ -43,14 +43,9 @@ public class Test extends javax.swing.JFrame {
         for (int i = 1; i < 45; i++) {
             QuizQuestionView quizQuestion = new QuizQuestionView();
             quizQuestion.setchoicequestion("Question"+i);
-            
-                String text="<html><body style='width: 600px; white-space: pre-wrap;'>Được. Khi ấy điểm của em sẽ thấp hơn so với điểm 20. Cụ thể: Bài 1: 0 điểm; bài 2: 0.5 điểm (nếu tạo được các category cha/con); bài 3: 1 điểm (nếu hoàn thành chức năng thêm từng câu hỏi mới bằng tay) - 0.5 điểm (nếu chỉnh được mức % cho từng đáp án) -  0.5 điểm (nếu import được file); bài 4: 1 điểm (kiểm tra định dạng file txt) - 1 điểm (kiểm tra định dạng file DOCX); bài 5: 0 điểm; bài 6: 0.5 điểm (nếu tạo N câu hỏi từ ngân hàng đề N câu) - 0.5 điểm (nếu tạo N câu hỏi từ ngân hàng đề M câu, M > N); bài 7: 0.5 điểm (đọc file bài làm) - 1 điểm (chấm điểm bài làm); bài 8: 1 điểm (nếu xuất ra PDF không có hình ảnh) - 1 điểm (nếu xuất PDF có hình ảnh); bài 9: 1 điểm (nếu gắn được mật khẩu cho file). Vậy nếu không làm GUI thì điểm của SV có thể được 10/20 điểm.\n" +
-"10) trong bài tập lớn lập trình hướng đối tượng thì mọi câu hỏi đều được mặc định số điểm là 1.00 và không sửa được đúng không?\n" +
-"Đúng vậy. Để đơn giản thì mọi câu hỏi đều không cho sửa điểm. Nhưng nội dung câu hỏi và các đáp án (cũng như đáp án đúng) đều sửa được.\n" +
-"11) một số chức năng có hiện ở ảnh thầy để nhưng thầy không đề cập thì có cần làm không, chẳng hạn như:Từ giao diện (3.1), chuyển sang được (3.2) bằng cách nhấn Create new question. Danh sách các mức điểm của câu này đi từ 100% cho đến -83.33% (sau 10% sẽ là 5% và -5%). Danh sách này chỉ hiện ra nếu nhấn vào Grade, mặc định của Grade là None.\n" +
-"Ở giao diện (3.2): nhấn vào Blanks for 3 more choices sẽ hiện ra bổ sung thêm 3 Choice nữa. Trong các choice vẫn có thể chèn các bức ảnh được (1 điểm)\n" +
-"Nhấn vào Save changes and continue editing sẽ vẫn ở màn hình hiện tại. Nhấn vào Save changes (hoặc Cancel) sẽ chuyển sang giao diện 3.1\n" +
-"Các ô có dấu chấm than đỏ sẽ là các ô bắt buộc nhập nội dung\n</html>";
+                String question="Cũng như bao mùa xuân trước, em rất thích ngắm mưa xuân. Những hạt mưa không vội vã, không ồn ào như mưa hạ. Nó dịu dàng, chầm chậm, mang đến cảm giác bình yên và thư thái trong tâm hồn. Những hạt mưa bắt đầu rơi, hạt mưa nhỏ, lất phất trong gió, vương những giọt long lanh trên cánh mai vàng mỏng manh, trên những chồi non cây lá, vạn vật được mưa tắm mát trở nên căng tràn sức sống. Mưa xuân diệu kỳ còn mang đến cho lòng người niềm vui khoan khoái, yêu biết bao nhiêu những cơn mưa xuân tuyệt vời như thế";
+
+                String text="<html><body style='width: 800px; white-space: pre-wrap;'>"+question+"</html>";
             quizQuestion.setLabel(text);
             
             
