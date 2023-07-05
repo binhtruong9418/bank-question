@@ -140,7 +140,7 @@ public class QuestionBank extends javax.swing.JPanel {
             }
         });
 
-        createNewQuestionButton.setBackground(new java.awt.Color(7, 116, 163));
+        createNewQuestionButton.setBackground(new java.awt.Color(0, 159, 229));
         createNewQuestionButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         createNewQuestionButton.setForeground(new java.awt.Color(255, 255, 255));
         org.openide.awt.Mnemonics.setLocalizedText(createNewQuestionButton, org.openide.util.NbBundle.getMessage(QuestionBank.class, "QuestionBank.createNewQuestionButton.text")); // NOI18N

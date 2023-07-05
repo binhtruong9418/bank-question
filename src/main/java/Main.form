@@ -137,7 +137,7 @@
         <Container class="javax.swing.JPanel" name="topbar">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="a3" green="74" red="7" type="rgb"/>
+              <Color blue="a5" green="73" red="0" type="rgb"/>
             </Property>
           </Properties>
 
@@ -365,15 +365,27 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="1930" max="32767" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
+                          <Component id="listQuizView" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="1014" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="958" max="32767" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+                          <Component id="listQuizView" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="440" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
                 </DimensionLayout>
               </Layout>
+              <SubComponents>
+                <Component class="view.quiz.ListQuizView" name="listQuizView">
+                </Component>
+              </SubComponents>
             </Container>
             <Container class="javax.swing.JPanel" name="mainContent">
               <Properties>
@@ -422,6 +434,26 @@
                           </JTabbedPaneConstraints>
                         </Constraint>
                       </Constraints>
+
+                      <Layout>
+                        <DimensionLayout dim="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="questionBank" alignment="0" pref="1930" max="32767" attributes="0"/>
+                          </Group>
+                        </DimensionLayout>
+                        <DimensionLayout dim="1">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="questionBank" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="0" pref="318" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                      </Layout>
+                      <SubComponents>
+                        <Component class="view.question.QuestionBank" name="questionBank">
+                        </Component>
+                      </SubComponents>
                     </Container>
                     <Container class="javax.swing.JPanel" name="categoryTab">
                       <Properties>
@@ -442,15 +474,25 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="1930" max="32767" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="addCategory" min="-2" pref="811" max="-2" attributes="0"/>
+                                  <EmptySpace min="0" pref="1119" max="32767" attributes="0"/>
+                              </Group>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="927" max="32767" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="addCategory" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="0" pref="395" max="32767" attributes="0"/>
+                              </Group>
                           </Group>
                         </DimensionLayout>
                       </Layout>
+                      <SubComponents>
+                        <Component class="view.category.AddCategory" name="addCategory">
+                        </Component>
+                      </SubComponents>
                     </Container>
                     <Container class="javax.swing.JPanel" name="importTab">
                       <Properties>

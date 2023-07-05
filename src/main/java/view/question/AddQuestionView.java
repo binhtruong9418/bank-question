@@ -167,7 +167,7 @@ public class AddQuestionView extends javax.swing.JFrame {
             }
         });
 
-        saveChangeButton.setBackground(new java.awt.Color(7, 116, 163));
+        saveChangeButton.setBackground(new java.awt.Color(0, 159, 229));
         saveChangeButton.setForeground(new java.awt.Color(255, 255, 255));
         org.openide.awt.Mnemonics.setLocalizedText(saveChangeButton, org.openide.util.NbBundle.getMessage(AddQuestionView.class, "AddQuestionView.saveChangeButton.text")); // NOI18N
         saveChangeButton.addActionListener(new java.awt.event.ActionListener() {
@@ -176,7 +176,7 @@ public class AddQuestionView extends javax.swing.JFrame {
             }
         });
 
-        getMoreChoiceButton.setBackground(new java.awt.Color(7, 116, 163));
+        getMoreChoiceButton.setBackground(new java.awt.Color(0, 159, 229));
         getMoreChoiceButton.setForeground(new java.awt.Color(255, 255, 255));
         org.openide.awt.Mnemonics.setLocalizedText(getMoreChoiceButton, org.openide.util.NbBundle.getMessage(AddQuestionView.class, "AddQuestionView.getMoreChoiceButton.text")); // NOI18N
         getMoreChoiceButton.addActionListener(new java.awt.event.ActionListener() {
@@ -185,7 +185,7 @@ public class AddQuestionView extends javax.swing.JFrame {
             }
         });
 
-        saveChangeAndEditButton.setBackground(new java.awt.Color(7, 116, 163));
+        saveChangeAndEditButton.setBackground(new java.awt.Color(0, 159, 229));
         saveChangeAndEditButton.setForeground(new java.awt.Color(255, 255, 255));
         org.openide.awt.Mnemonics.setLocalizedText(saveChangeAndEditButton, org.openide.util.NbBundle.getMessage(AddQuestionView.class, "AddQuestionView.saveChangeAndEditButton.text")); // NOI18N
         saveChangeAndEditButton.addActionListener(new java.awt.event.ActionListener() {

@@ -94,7 +94,7 @@ public class PreviewQuiz extends javax.swing.JPanel {
         quizNameLabel.setForeground(new java.awt.Color(192, 36, 36));
         org.openide.awt.Mnemonics.setLocalizedText(quizNameLabel, org.openide.util.NbBundle.getMessage(PreviewQuiz.class, "PreviewQuiz.quizNameLabel.text")); // NOI18N
 
-        jPanel1.setBackground(new java.awt.Color(7, 116, 163));
+        jPanel1.setBackground(new java.awt.Color(0, 159, 229));
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -155,7 +155,7 @@ public class PreviewQuiz extends javax.swing.JPanel {
                 .addGap(31, 31, 31))
         );
 
-        previewQuizButton.setBackground(new java.awt.Color(7, 116, 163));
+        previewQuizButton.setBackground(new java.awt.Color(0, 159, 229));
         previewQuizButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         previewQuizButton.setForeground(new java.awt.Color(255, 255, 255));
         org.openide.awt.Mnemonics.setLocalizedText(previewQuizButton, org.openide.util.NbBundle.getMessage(PreviewQuiz.class, "PreviewQuiz.previewQuizButton.text")); // NOI18N

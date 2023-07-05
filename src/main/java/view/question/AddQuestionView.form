@@ -362,7 +362,7 @@
                     <Component class="javax.swing.JButton" name="saveChangeButton">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="a3" green="74" red="7" type="rgb"/>
+                          <Color blue="e5" green="9f" red="0" type="rgb"/>
                         </Property>
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -378,7 +378,7 @@
                     <Component class="javax.swing.JButton" name="getMoreChoiceButton">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="a3" green="74" red="7" type="rgb"/>
+                          <Color blue="e5" green="9f" red="0" type="rgb"/>
                         </Property>
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -394,7 +394,7 @@
                     <Component class="javax.swing.JButton" name="saveChangeAndEditButton">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="a3" green="74" red="7" type="rgb"/>
+                          <Color blue="e5" green="9f" red="0" type="rgb"/>
                         </Property>
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>

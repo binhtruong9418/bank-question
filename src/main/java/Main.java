@@ -67,10 +67,13 @@ public class Main extends javax.swing.JFrame implements PreviewQuizButtonListene
         settingButton = DropDownButtonFactory.createDropDownButton(settingMenuButtonIcon, settingMenu);
         content = new javax.swing.JPanel();
         listQuiz = new javax.swing.JPanel();
+        listQuizView = new view.quiz.ListQuizView();
         mainContent = new javax.swing.JPanel();
         menuContent = new javax.swing.JTabbedPane();
         questionTab = new javax.swing.JPanel();
+        questionBank = new view.question.QuestionBank();
         categoryTab = new javax.swing.JPanel();
+        addCategory = new view.category.AddCategory();
         importTab = new javax.swing.JPanel();
         importFile = new view.question.ImportFile();
         exportTab = new javax.swing.JPanel();
@@ -122,7 +125,7 @@ public class Main extends javax.swing.JFrame implements PreviewQuizButtonListene
 
         bg.setBackground(new java.awt.Color(255, 255, 255));
 
-        topbar.setBackground(new java.awt.Color(7, 116, 163));
+        topbar.setBackground(new java.awt.Color(0, 115, 165));
 
         homeButton.setBackground(new java.awt.Color(7, 116, 163));
         homeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/home.png"))); // NOI18N
@@ -237,11 +240,17 @@ public class Main extends javax.swing.JFrame implements PreviewQuizButtonListene
         listQuiz.setLayout(listQuizLayout);
         listQuizLayout.setHorizontalGroup(
             listQuizLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1930, Short.MAX_VALUE)
+            .addGroup(listQuizLayout.createSequentialGroup()
+                .addGap(90, 90, 90)
+                .addComponent(listQuizView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(1014, Short.MAX_VALUE))
         );
         listQuizLayout.setVerticalGroup(
             listQuizLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 958, Short.MAX_VALUE)
+            .addGroup(listQuizLayout.createSequentialGroup()
+                .addGap(51, 51, 51)
+                .addComponent(listQuizView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(440, Short.MAX_VALUE))
         );
 
         content.add(listQuiz, "listQuizCard");
@@ -249,6 +258,20 @@ public class Main extends javax.swing.JFrame implements PreviewQuizButtonListene
         mainContent.setBackground(new java.awt.Color(255, 255, 255));
 
         questionTab.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout questionTabLayout = new javax.swing.GroupLayout(questionTab);
+        questionTab.setLayout(questionTabLayout);
+        questionTabLayout.setHorizontalGroup(
+            questionTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(questionBank, javax.swing.GroupLayout.DEFAULT_SIZE, 1930, Short.MAX_VALUE)
+        );
+        questionTabLayout.setVerticalGroup(
+            questionTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(questionTabLayout.createSequentialGroup()
+                .addComponent(questionBank, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 318, Short.MAX_VALUE))
+        );
+
         menuContent.addTab(org.openide.util.NbBundle.getMessage(Main.class, "Main.questionTab.TabConstraints.tabTitle"), questionTab); // NOI18N
 
         categoryTab.setBackground(new java.awt.Color(255, 255, 255));
@@ -257,11 +280,15 @@ public class Main extends javax.swing.JFrame implements PreviewQuizButtonListene
         categoryTab.setLayout(categoryTabLayout);
         categoryTabLayout.setHorizontalGroup(
             categoryTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1930, Short.MAX_VALUE)
+            .addGroup(categoryTabLayout.createSequentialGroup()
+                .addComponent(addCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 811, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 1119, Short.MAX_VALUE))
         );
         categoryTabLayout.setVerticalGroup(
             categoryTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 927, Short.MAX_VALUE)
+            .addGroup(categoryTabLayout.createSequentialGroup()
+                .addComponent(addCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 395, Short.MAX_VALUE))
         );
 
         menuContent.addTab(org.openide.util.NbBundle.getMessage(Main.class, "Main.categoryTab.TabConstraints.tabTitle"), categoryTab); // NOI18N
@@ -481,6 +508,7 @@ public class Main extends javax.swing.JFrame implements PreviewQuizButtonListene
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private view.category.AddCategory addCategory;
     private javax.swing.JPanel bg;
     private javax.swing.JMenuItem categoryMenuItem;
     private javax.swing.JPanel categoryTab;
@@ -496,16 +524,14 @@ public class Main extends javax.swing.JFrame implements PreviewQuizButtonListene
     private javax.swing.JLabel itLabel;
     private javax.swing.JButton jButton2;
     private javax.swing.JPanel listQuiz;
+    private view.quiz.ListQuizView listQuizView;
     private javax.swing.JPanel mainContent;
     private javax.swing.JTabbedPane menuContent;
     private javax.swing.JPanel page;
     private javax.swing.JLabel pageLink;
-<<<<<<< HEAD
-=======
     private javax.swing.JPanel previewQuiz;
     private view.quiz.PreviewQuiz previewQuizContent;
     private view.question.QuestionBank questionBank;
->>>>>>> e48be1885819f112a95efef8e8446678d967fc76
     private javax.swing.JMenuItem questionMenuItem;
     private javax.swing.JPanel questionTab;
     private javax.swing.JButton settingButton;

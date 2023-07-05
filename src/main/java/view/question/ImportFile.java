@@ -268,7 +268,7 @@ public class ImportFile extends javax.swing.JPanel {
         importQuestionLabel.setForeground(new java.awt.Color(192, 36, 36));
         org.openide.awt.Mnemonics.setLocalizedText(importQuestionLabel, org.openide.util.NbBundle.getMessage(ImportFile.class, "ImportFile.importQuestionLabel.text")); // NOI18N
 
-        selectUploadFileButton.setBackground(new java.awt.Color(7, 116, 163));
+        selectUploadFileButton.setBackground(new java.awt.Color(0, 159, 229));
         selectUploadFileButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         selectUploadFileButton.setForeground(new java.awt.Color(255, 255, 255));
         org.openide.awt.Mnemonics.setLocalizedText(selectUploadFileButton, org.openide.util.NbBundle.getMessage(ImportFile.class, "ImportFile.selectUploadFileButton.text")); // NOI18N

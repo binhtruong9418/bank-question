@@ -162,7 +162,7 @@
     <Container class="javax.swing.JPanel" name="jPanel1">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="a3" green="74" red="7" type="rgb"/>
+          <Color blue="e5" green="9f" red="0" type="rgb"/>
         </Property>
       </Properties>
 
@@ -275,7 +275,7 @@
     <Component class="javax.swing.JButton" name="previewQuizButton">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="a3" green="74" red="7" type="rgb"/>
+          <Color blue="e5" green="9f" red="0" type="rgb"/>
         </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="14" style="0"/>
