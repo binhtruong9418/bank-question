@@ -1,6 +1,7 @@
 package view.quiz;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import model.Question;
@@ -28,14 +29,13 @@ public class EditQuiz extends javax.swing.JPanel implements ListQuestionEditTabl
     }
 
     private void initListQuestionData() {
+        System.out.println(listQuestion.size());
         DefaultTableModel tableModel = (DefaultTableModel) listQuestionEditTable.getModel();
         tableModel.setRowCount(0);
 
         for (Question question : listQuestion) {
             listQuestionEditTable.addRow(question, selectMultiple);
         }
-
-        System.out.println(listQuestion.size());
 
     }
 
@@ -211,8 +211,9 @@ public class EditQuiz extends javax.swing.JPanel implements ListQuestionEditTabl
     }
 
     @Override
-    public void onDeleteButtonClicked(Question question) {
-        System.out.println("delete");
+    public void onDeleteButtonClicked(Question deleteQuestion) {
+        listQuestion.remove(deleteQuestion);
+        initListQuestionData();
     }
 
 }

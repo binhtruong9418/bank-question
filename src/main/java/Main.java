@@ -38,6 +38,7 @@ public class Main extends javax.swing.JFrame implements PreviewQuizButtonListene
         pageLink.setText("Home / My courses / THI CUỐI KỲ / General / " + quiz.getName() + " / Edit quiz");
         CardLayout contentLayout = (CardLayout) content.getLayout();
         contentLayout.show(content, "editQuizCard");
+        editQuizContent.setQuizNameLabel(quiz.getName());
         System.out.println("Button setting clicked!");
     }
 

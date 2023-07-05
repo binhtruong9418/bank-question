@@ -220,6 +220,7 @@ public class PreviewQuiz extends javax.swing.JPanel {
 
     private void settingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settingButtonActionPerformed
         // TODO add your handling code here:
+        
         listener.onSettingButtonClick(currentQuiz);
     }//GEN-LAST:event_settingButtonActionPerformed
 
