@@ -227,6 +227,10 @@ public class AddCategory extends javax.swing.JPanel {
     private void addCategoryButtonSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCategoryButtonSubmitActionPerformed
         // TODO add your handling code here:
         try {
+            if (nameCategoryInput.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Please fill your name of category!", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
             int index = parentCategoryInput.getSelectedIndex();
             int parentCategory = 0;
             if (index != 0) {

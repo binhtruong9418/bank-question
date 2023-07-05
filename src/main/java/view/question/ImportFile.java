@@ -1,6 +1,5 @@
 package view.question;
 
-import view.question.QuestionBank;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.dnd.DnDConstants;

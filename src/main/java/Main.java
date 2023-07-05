@@ -2,23 +2,48 @@
 import view.quiz.AddingANewQuizView;
 import java.awt.CardLayout;
 import javax.swing.*;
-//quang test thử
+import model.Quiz;
 import org.openide.awt.DropDownButtonFactory;
+import view.quiz_interface.PreviewQuizButtonListener;
+import view.quiz_interface.QuizSelectListener;
 
-public class Main extends javax.swing.JFrame {
+public class Main extends javax.swing.JFrame implements PreviewQuizButtonListener, QuizSelectListener {
 
-    /**
-     * Creates new form Main
-     */
     public Main() {
         initComponents();
         setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
         importQuestionBankToOtherTab();
+        listQuizView.setQuizSelectListener(this);
+        previewQuizContent.setButtonClickListener(this);
+
     }
 
     private void importQuestionBankToOtherTab() {
         addCategory.getQuestionBank(questionBank);
         importFile.getQuestionBank(questionBank);
+    }
+
+    @Override
+    public void onQuizSelect(Quiz quiz) {
+        previewQuizContent.setQuiz(quiz);
+        CardLayout contentLayout = (CardLayout) content.getLayout();
+        contentLayout.show(content, "previewQuizCard");
+        pageLink.setText("Home / My courses / THI CUỐI KỲ / General / " + quiz.getName());
+        settingButton.setVisible(false);
+        turnEditingButton.setVisible(false);
+    }
+
+    @Override
+    public void onSettingButtonClick(Quiz quiz) {
+        pageLink.setText("Home / My courses / THI CUỐI KỲ / General / " + quiz.getName() + " / Edit quiz");
+        CardLayout contentLayout = (CardLayout) content.getLayout();
+        contentLayout.show(content, "editQuizCard");
+        System.out.println("Button setting clicked!");
+    }
+
+    @Override
+    public void onPreviewButtonClick(Quiz quiz) {
+        System.out.println("Button preview clicked!");
     }
 
     @SuppressWarnings("unchecked")
@@ -48,6 +73,10 @@ public class Main extends javax.swing.JFrame {
         importTab = new javax.swing.JPanel();
         importFile = new view.question.ImportFile();
         exportTab = new javax.swing.JPanel();
+        previewQuiz = new javax.swing.JPanel();
+        previewQuizContent = new view.quiz.PreviewQuiz();
+        editQuiz = new javax.swing.JPanel();
+        editQuizContent = new view.quiz.EditQuiz();
 
         settingMenu.setBackground(new java.awt.Color(7, 116, 163));
         settingMenu.setForeground(new java.awt.Color(7, 116, 163));
@@ -113,6 +142,11 @@ public class Main extends javax.swing.JFrame {
         jButton2.setContentAreaFilled(false);
         jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         jButton2.setIconTextGap(10);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout topbarLayout = new javax.swing.GroupLayout(topbar);
         topbar.setLayout(topbarLayout);
@@ -276,6 +310,36 @@ public class Main extends javax.swing.JFrame {
 
         content.add(mainContent, "mainContentCard");
 
+        javax.swing.GroupLayout previewQuizLayout = new javax.swing.GroupLayout(previewQuiz);
+        previewQuiz.setLayout(previewQuizLayout);
+        previewQuizLayout.setHorizontalGroup(
+            previewQuizLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(previewQuizContent, javax.swing.GroupLayout.DEFAULT_SIZE, 1930, Short.MAX_VALUE)
+        );
+        previewQuizLayout.setVerticalGroup(
+            previewQuizLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(previewQuizContent, javax.swing.GroupLayout.DEFAULT_SIZE, 958, Short.MAX_VALUE)
+        );
+
+        content.add(previewQuiz, "previewQuizCard");
+
+        editQuiz.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout editQuizLayout = new javax.swing.GroupLayout(editQuiz);
+        editQuiz.setLayout(editQuizLayout);
+        editQuizLayout.setHorizontalGroup(
+            editQuizLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(editQuizContent, javax.swing.GroupLayout.DEFAULT_SIZE, 1930, Short.MAX_VALUE)
+        );
+        editQuizLayout.setVerticalGroup(
+            editQuizLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(editQuizLayout.createSequentialGroup()
+                .addComponent(editQuizContent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 327, Short.MAX_VALUE))
+        );
+
+        content.add(editQuiz, "editQuizCard");
+
         javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
         bg.setLayout(bgLayout);
         bgLayout.setHorizontalGroup(
@@ -313,6 +377,7 @@ public class Main extends javax.swing.JFrame {
 
     private void questionMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_questionMenuItemActionPerformed
         // TODO add your handling code here:
+        pageLink.setText("Home / My courses / THI CUỐI KỲ");
         Object source = evt.getSource();
         if (source instanceof JMenuItem) {
             JMenuItem clickedMenuItem = (JMenuItem) source;
@@ -327,6 +392,7 @@ public class Main extends javax.swing.JFrame {
 
     private void categoryMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoryMenuItemActionPerformed
         // TODO add your handling code here:
+        pageLink.setText("Home / My courses / THI CUỐI KỲ");
         Object source = evt.getSource();
         if (source instanceof JMenuItem) {
             JMenuItem clickedMenuItem = (JMenuItem) source;
@@ -341,6 +407,7 @@ public class Main extends javax.swing.JFrame {
 
     private void importMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importMenuItemActionPerformed
         // TODO add your handling code here:
+        pageLink.setText("Home / My courses / THI CUỐI KỲ");
         Object source = evt.getSource();
         if (source instanceof JMenuItem) {
             JMenuItem clickedMenuItem = (JMenuItem) source;
@@ -355,6 +422,7 @@ public class Main extends javax.swing.JFrame {
 
     private void exportMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportMenuItemActionPerformed
         // TODO add your handling code here:
+        pageLink.setText("Home / My courses / THI CUỐI KỲ");
         Object source = evt.getSource();
         if (source instanceof JMenuItem) {
             JMenuItem clickedMenuItem = (JMenuItem) source;
@@ -372,13 +440,20 @@ public class Main extends javax.swing.JFrame {
         AddingANewQuizView addingANewQuizView = new AddingANewQuizView();
         addingANewQuizView.setListQuizView(listQuizView);
         addingANewQuizView.setVisible(true);
+        turnEditingButton.setVisible(true);
     }//GEN-LAST:event_turnEditingButtonActionPerformed
 
     private void homeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeButtonActionPerformed
         // TODO add your handling code here:
         CardLayout contentLayout = (CardLayout) content.getLayout();
         contentLayout.show(content, "listQuizCard");
+        pageLink.setText("Home / My courses / THI CUỐI KỲ");
+        settingButton.setVisible(true);
     }//GEN-LAST:event_homeButtonActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     public static void main(String args[]) {
         try {
@@ -409,6 +484,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenuItem categoryMenuItem;
     private javax.swing.JPanel categoryTab;
     private javax.swing.JPanel content;
+    private javax.swing.JPanel editQuiz;
+    private view.quiz.EditQuiz editQuizContent;
     private javax.swing.JMenuItem exportMenuItem;
     private javax.swing.JPanel exportTab;
     private javax.swing.JButton homeButton;
@@ -422,6 +499,12 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTabbedPane menuContent;
     private javax.swing.JPanel page;
     private javax.swing.JLabel pageLink;
+<<<<<<< HEAD
+=======
+    private javax.swing.JPanel previewQuiz;
+    private view.quiz.PreviewQuiz previewQuizContent;
+    private view.question.QuestionBank questionBank;
+>>>>>>> e48be1885819f112a95efef8e8446678d967fc76
     private javax.swing.JMenuItem questionMenuItem;
     private javax.swing.JPanel questionTab;
     private javax.swing.JButton settingButton;

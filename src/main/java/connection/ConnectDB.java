@@ -39,34 +39,32 @@ public class ConnectDB {
 
             // Table: categories
             String createCategoriesTableSQL = "CREATE TABLE IF NOT EXISTS categories ("
-                    + "category_id int(11) NOT NULL,"
-                    + "category_name varchar(200) NOT NULL,"
-                    + "category_parent int(11) DEFAULT NULL,"
-                    + "category_info varchar(200) DEFAULT NULL,"
-                    + "category_id_number int(11) DEFAULT NULL,"
-                    + "category_count_question int(11) NOT NULL DEFAULT 0,"
-                    + "PRIMARY KEY (category_id)"
+                    + "category_id INT AUTO_INCREMENT PRIMARY KEY,"
+                    + "category_name VARCHAR(200) NOT NULL,"
+                    + "category_parent INT DEFAULT NULL,"
+                    + "category_info VARCHAR(200) DEFAULT NULL,"
+                    + "category_id_number INT DEFAULT NULL,"
+                    + "category_count_question INT NOT NULL DEFAULT 0"
                     + ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
             statement.execute(createCategoriesTableSQL);
 
             // Table: questions
             String createQuestionsTableSQL = "CREATE TABLE IF NOT EXISTS questions ("
-                    + "question_id int(11) NOT NULL,"
-                    + "question_name varchar(200) NOT NULL,"
-                    + "question_category int(11) NOT NULL DEFAULT 0,"
-                    + "question_text varchar(1000) NOT NULL,"
-                    + "question_mark float NOT NULL DEFAULT 1,"
-                    + "answer1_text varchar(300) DEFAULT NULL,"
-                    + "answer1_grade float NOT NULL DEFAULT 0,"
-                    + "answer2_text varchar(300) DEFAULT NULL,"
-                    + "answer2_grade float NOT NULL DEFAULT 0,"
-                    + "answer3_text varchar(300) DEFAULT NULL,"
-                    + "answer3_grade float NOT NULL DEFAULT 0,"
-                    + "answer4_text varchar(300) DEFAULT NULL,"
-                    + "answer4_grade float NOT NULL DEFAULT 0,"
-                    + "answer5_text varchar(300) DEFAULT NULL,"
-                    + "answer5_grade float NOT NULL DEFAULT 0,"
-                    + "PRIMARY KEY (question_id),"
+                    + "question_id INT AUTO_INCREMENT PRIMARY KEY,"
+                    + "question_name VARCHAR(200) NOT NULL,"
+                    + "question_category INT NOT NULL DEFAULT 0,"
+                    + "question_text VARCHAR(1000) NOT NULL,"
+                    + "question_mark FLOAT NOT NULL DEFAULT 1,"
+                    + "answer1_text VARCHAR(300) DEFAULT NULL,"
+                    + "answer1_grade FLOAT NOT NULL DEFAULT 0,"
+                    + "answer2_text VARCHAR(300) DEFAULT NULL,"
+                    + "answer2_grade FLOAT NOT NULL DEFAULT 0,"
+                    + "answer3_text VARCHAR(300) DEFAULT NULL,"
+                    + "answer3_grade FLOAT NOT NULL DEFAULT 0,"
+                    + "answer4_text VARCHAR(300) DEFAULT NULL,"
+                    + "answer4_grade FLOAT NOT NULL DEFAULT 0,"
+                    + "answer5_text VARCHAR(300) DEFAULT NULL,"
+                    + "answer5_grade FLOAT NOT NULL DEFAULT 0,"
                     + "KEY FK_CategoryQuestion (question_category),"
                     + "FOREIGN KEY (question_category) REFERENCES categories (category_id)"
                     + ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
@@ -74,13 +72,12 @@ public class ConnectDB {
 
             // Table: quizzes
             String createQuizzesTableSQL = "CREATE TABLE IF NOT EXISTS quizzes ("
-                    + "quiz_id int(11) NOT NULL,"
-                    + "quiz_name varchar(255) NOT NULL,"
-                    + "quiz_description varchar(1000) DEFAULT NULL,"
-                    + "time_limit int(11) DEFAULT NULL,"
-                    + "time_start bigint(20) NOT NULL,"
-                    + "time_end bigint(20) NOT NULL,"
-                    + "PRIMARY KEY (quiz_id)"
+                    + "quiz_id INT AUTO_INCREMENT PRIMARY KEY,"
+                    + "quiz_name VARCHAR(255) NOT NULL,"
+                    + "quiz_description VARCHAR(1000) DEFAULT NULL,"
+                    + "time_limit INT DEFAULT NULL,"
+                    + "time_start BIGINT NOT NULL,"
+                    + "time_end BIGINT NOT NULL"
                     + ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
             statement.execute(createQuizzesTableSQL);
 
@@ -103,7 +100,7 @@ public class ConnectDB {
                     + "UPDATE categories SET category_count_question = category_count_question + 1 "
                     + "WHERE category_id = NEW.question_category";
             statement.execute(createTriggerSQL);
-            
+
             // Trigger: update_category_count_question_delete
             String deleteTriggerSQL = "CREATE TRIGGER IF NOT EXISTS `update_category_count_question_delete` "
                     + "AFTER DELETE ON `questions` "

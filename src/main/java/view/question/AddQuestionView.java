@@ -131,7 +131,9 @@ public class AddQuestionView extends javax.swing.JFrame {
 
         nameInput.setText(org.openide.util.NbBundle.getMessage(AddQuestionView.class, "AddQuestionView.nameInput.text")); // NOI18N
 
+        markInput.setEditable(false);
         markInput.setText(org.openide.util.NbBundle.getMessage(AddQuestionView.class, "AddQuestionView.markInput.text")); // NOI18N
+        markInput.setEnabled(false);
         markInput.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 markInputKeyPressed(evt);
@@ -338,7 +340,6 @@ public class AddQuestionView extends javax.swing.JFrame {
     private void saveChangeAndEditButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveChangeAndEditButtonActionPerformed
         // TODO add your handling code here:
         try {
-
             if (nameInput.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Please input name.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
@@ -347,17 +348,13 @@ public class AddQuestionView extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Please input question text.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            if (markInput.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Please input mark.", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
             List<Answer> listAnswerInput = new ArrayList<>();
             Float totalMark = (float) 0;
             String name = nameInput.getText();
             String questionText = questionTextInput.getText();
             int index = categoryDropdown.getSelectedIndex();
             int category = listCategory.get(index).getId();
-            float mark = Float.parseFloat(markInput.getText());
+            float mark = (float) 1;
             Component[] components = listAnswer.getComponents();
             for (Component compo : components) {
                 if (compo instanceof AddAnswerView) {
