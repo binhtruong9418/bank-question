@@ -8,8 +8,13 @@ import java.awt.event.ItemEvent;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import model.Category;
+import model.Question;
 import repository.category.GetAllCategory;
+import repository.question.GetAllQuestion;
 import service.ArrangeCategory;
 
 /**
@@ -21,8 +26,14 @@ public class AddRandomQuestion extends javax.swing.JFrame {
     private Integer currentCategory = 0;
     private List<Category> listCategory = new ArrayList<>();
     private Boolean showSubCategory = false;
+    private List<Question> listImportQuestion;
+    private List<Question> listQuestion;
+    private final EditQuiz editQuiz;
 
-    public AddRandomQuestion() {
+    public AddRandomQuestion(List<Question> listQuestionQuiz, EditQuiz editQuiz) {
+        listQuestion = new ArrayList<>();
+        this.editQuiz = editQuiz;
+        this.listImportQuestion = listQuestionQuiz;
         initComponents();
         initDropdownCategoryData();
         setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
@@ -34,6 +45,12 @@ public class AddRandomQuestion extends javax.swing.JFrame {
         categoryDropdown.removeAllItems();
         listCategory.clear();
         initDropdownCategoryData();
+    }
+
+    public void refreshQuestionData() {
+        DefaultTableModel tableModel = (DefaultTableModel) listQuestionRandomTable.getModel();
+        tableModel.setRowCount(0);
+        initListQuestionsTableData();
     }
 
     private void initDropdownCategoryData() {
@@ -66,6 +83,21 @@ public class AddRandomQuestion extends javax.swing.JFrame {
         }
     }
 
+    private void initListQuestionsTableData() {
+        GetAllQuestion getAllQuestion = new GetAllQuestion();
+        listQuestion.clear();
+        if (!showSubCategory) {
+            listQuestion.addAll(getAllQuestion.getAllQuestionByCategoryId(currentCategory));
+        } else {
+            List<Integer> listSubCategory = ArrangeCategory.getListCategoryChildren(currentCategory, listCategory);
+            listSubCategory.add(currentCategory);
+            listQuestion.addAll(getAllQuestion.getAllQuestionByListCategoryId(listSubCategory));
+        }
+        for (Question question : listQuestion) {
+            listQuestionRandomTable.addRow(question);
+        }
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -78,7 +110,9 @@ public class AddRandomQuestion extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         numberRandomQuestionInput = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        paginationPane2 = new view.quiz.pagination.PaginationPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        listQuestionRandomTable = new view.quiz.table.ListQuestionRandomTable();
+        submitButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -119,6 +153,18 @@ public class AddRandomQuestion extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         org.openide.awt.Mnemonics.setLocalizedText(jLabel4, org.openide.util.NbBundle.getMessage(AddRandomQuestion.class, "AddRandomQuestion.jLabel4.text")); // NOI18N
 
+        jScrollPane1.setViewportView(listQuestionRandomTable);
+
+        submitButton.setBackground(new java.awt.Color(0, 159, 229));
+        submitButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        submitButton.setForeground(new java.awt.Color(255, 255, 255));
+        org.openide.awt.Mnemonics.setLocalizedText(submitButton, org.openide.util.NbBundle.getMessage(AddRandomQuestion.class, "AddRandomQuestion.submitButton.text")); // NOI18N
+        submitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                submitButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
         bg.setLayout(bgLayout);
         bgLayout.setHorizontalGroup(
@@ -126,20 +172,25 @@ public class AddRandomQuestion extends javax.swing.JFrame {
             .addGroup(bgLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(paginationPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel4)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1019, Short.MAX_VALUE)
+                    .addGroup(bgLayout.createSequentialGroup()
+                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel4)
+                            .addGroup(bgLayout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(44, 44, 44)
+                                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(showSubcategoryCheckbox)
+                                    .addComponent(categoryDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 637, Short.MAX_VALUE))
                     .addGroup(bgLayout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
-                        .addComponent(numberRandomQuestionInput, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(bgLayout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(44, 44, 44)
-                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(showSubcategoryCheckbox)
-                            .addComponent(categoryDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(609, Short.MAX_VALUE))
+                        .addComponent(numberRandomQuestionInput, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(submitButton)))
+                .addContainerGap())
         );
         bgLayout.setVerticalGroup(
             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -155,12 +206,12 @@ public class AddRandomQuestion extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(numberRandomQuestionInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(numberRandomQuestionInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(submitButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(paginationPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(387, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -185,11 +236,13 @@ public class AddRandomQuestion extends javax.swing.JFrame {
         } else {
             currentCategory = listCategory.get(index).getId();
         }
+        refreshQuestionData();
     }//GEN-LAST:event_categoryDropdownActionPerformed
 
     private void showSubcategoryCheckboxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_showSubcategoryCheckboxItemStateChanged
         // TODO add your handling code here:
         showSubCategory = evt.getStateChange() == ItemEvent.SELECTED;
+        refreshQuestionData();
     }//GEN-LAST:event_showSubcategoryCheckboxItemStateChanged
 
     private void numberRandomQuestionInputKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_numberRandomQuestionInputKeyPressed
@@ -204,6 +257,33 @@ public class AddRandomQuestion extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_numberRandomQuestionInputKeyPressed
 
+    private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
+        // TODO add your handling code here:
+        List<Question> randomQuestions = new ArrayList<>();
+        int totalRandomQuestion = Integer.parseInt(numberRandomQuestionInput.getText());
+        int totalQuestions = listQuestion.size();
+        // Create a random number generator
+        Random random = new Random();
+
+        // Generate unique random indices
+        List<Integer> randomIndices = new ArrayList<>();
+        while (randomIndices.size() < totalRandomQuestion) {
+            int randomIndex = random.nextInt(totalQuestions);
+            if (!randomIndices.contains(randomIndex)) {
+                randomIndices.add(randomIndex);
+            }
+        }
+
+        // Select questions based on random indices
+        for (int index : randomIndices) {
+            randomQuestions.add(listQuestion.get(index));
+        }
+        
+        listImportQuestion.addAll(randomQuestions);
+        editQuiz.refreshTableData();
+        this.dispose();
+    }//GEN-LAST:event_submitButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
@@ -212,8 +292,11 @@ public class AddRandomQuestion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private view.quiz.table.ListQuestionRandomTable listQuestionRandomTable;
     private javax.swing.JTextField numberRandomQuestionInput;
-    private view.quiz.pagination.PaginationPane paginationPane2;
     private javax.swing.JCheckBox showSubcategoryCheckbox;
+    private javax.swing.JButton submitButton;
     // End of variables declaration//GEN-END:variables
+
 }

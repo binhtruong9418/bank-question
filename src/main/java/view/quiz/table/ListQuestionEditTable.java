@@ -15,6 +15,7 @@ import view.question.ListQuestionTableHeader;
 
 public class ListQuestionEditTable extends JTable {
 
+    private static int time = 0;
     private ListQuestionEditTableListener listener;
 
     public ListQuestionEditTable() {
@@ -23,7 +24,6 @@ public class ListQuestionEditTable extends JTable {
         setGridColor(new Color(230, 230, 230));
         setRowHeight(35);
         getTableHeader().setReorderingAllowed(false);
-        updateTable(false);
     }
 
     public void setListQuestionEditTableListener(ListQuestionEditTableListener listener) {
@@ -132,6 +132,7 @@ public class ListQuestionEditTable extends JTable {
                 }
             });
         } else {
+            System.out.println("reload" + ++time);
             getTableHeader().setDefaultRenderer(new DefaultTableCellRenderer() {
                 @Override
                 public Component getTableCellRendererComponent(JTable jtable, Object o, boolean bln, boolean bln1, int i, int i1) {
@@ -174,18 +175,7 @@ public class ListQuestionEditTable extends JTable {
 
             DefaultTableModel model = new DefaultTableModel();
             setModel(model);
-            addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    int row = rowAtPoint(e.getPoint());
-                    int column = columnAtPoint(e.getPoint());
-                    String columnName = getColumnName(column);
-                    if (columnName == "Action") {
-                        Question question = (Question) getValueAt(row, 0);
-                        listener.onDeleteButtonClicked(question);
-                    }
-                }
-            });
+
             model.addColumn("Question");
             model.addColumn("Action");
 
@@ -196,6 +186,20 @@ public class ListQuestionEditTable extends JTable {
             TableColumn actionColumn = getColumnModel().getColumn(1);
             actionColumn.setPreferredWidth(70);
             actionColumn.setResizable(false);
+            addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    int row = rowAtPoint(e.getPoint());
+                    int column = columnAtPoint(e.getPoint());
+                    System.out.println("row" + row);
+                    System.out.println("col" + column);
+                    String columnName = getColumnName(column);
+                    if (columnName == "Action") {
+                        Question question = (Question) getValueAt(row, 0);
+                        listener.onDeleteButtonClicked(question);
+                    }
+                }
+            });
         }
         repaint();
     }

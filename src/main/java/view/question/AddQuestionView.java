@@ -366,6 +366,10 @@ public class AddQuestionView extends javax.swing.JFrame {
                     totalMark += answer.getGrade();
                 }
             }
+            if (listAnswerInput.size() < 2) {
+                JOptionPane.showMessageDialog(null, "You must enter at least 2 answers", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
             if (totalMark != (float) 100) {
                 JOptionPane.showMessageDialog(null, "Total mark is not equal 100%", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
@@ -452,6 +456,10 @@ public class AddQuestionView extends javax.swing.JFrame {
                     }
                     totalMark += answer.getGrade();
                 }
+            }
+            if (listAnswerInput.size() < 2) {
+                JOptionPane.showMessageDialog(null, "You must enter at least 2 answers", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
             }
             if (totalMark != (float) 100) {
                 JOptionPane.showMessageDialog(null, "Total mark is not equal 100%", "Error", JOptionPane.ERROR_MESSAGE);

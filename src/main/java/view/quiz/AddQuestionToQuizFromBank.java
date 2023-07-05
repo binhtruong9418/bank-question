@@ -40,7 +40,7 @@ public class AddQuestionToQuizFromBank extends javax.swing.JFrame {
     public void refreshQuestionData() {
         DefaultTableModel tableModel = (DefaultTableModel) listQuestionSelectableTable.getModel();
         tableModel.setRowCount(0);
-        initListQuestionsTableData();
+        initListQuestionsTableData(false);
         listQuestionSelectableTable.refreshSelectedQuestions();
     }
 
@@ -80,7 +80,7 @@ public class AddQuestionToQuizFromBank extends javax.swing.JFrame {
         }
     }
 
-    private void initListQuestionsTableData() {
+    private void initListQuestionsTableData(Boolean questionSelected) {
         GetAllQuestion getAllQuestion = new GetAllQuestion();
         List<Question> listQuestion = new ArrayList<>();
         if (!showSubCategory) {
@@ -91,7 +91,7 @@ public class AddQuestionToQuizFromBank extends javax.swing.JFrame {
             listQuestion.addAll(getAllQuestion.getAllQuestionByListCategoryId(listSubCategory));
         }
         for (Question question : listQuestion) {
-            listQuestionSelectableTable.addRow(question);
+            listQuestionSelectableTable.addRow(question, questionSelected);
         }
     }
 
@@ -107,6 +107,7 @@ public class AddQuestionToQuizFromBank extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         listQuestionSelectableTable = new view.quiz.table.ListQuestionSelectableTable();
         submitButton = new javax.swing.JButton();
+        selectAllButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -147,6 +148,15 @@ public class AddQuestionToQuizFromBank extends javax.swing.JFrame {
             }
         });
 
+        selectAllButton.setBackground(new java.awt.Color(0, 159, 229));
+        selectAllButton.setForeground(new java.awt.Color(255, 255, 255));
+        org.openide.awt.Mnemonics.setLocalizedText(selectAllButton, org.openide.util.NbBundle.getMessage(AddQuestionToQuizFromBank.class, "AddQuestionToQuizFromBank.selectAllButton.text")); // NOI18N
+        selectAllButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selectAllButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -156,20 +166,24 @@ public class AddQuestionToQuizFromBank extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(15, 15, 15)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(jScrollPane1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(18, 18, 18)
-                                .addComponent(categoryDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(showSubcategoryCheckbox)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 427, Short.MAX_VALUE)
-                                .addComponent(submitButton))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addComponent(jScrollPane1)))
+                                .addComponent(submitButton))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(selectAllButton)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(categoryDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -185,7 +199,9 @@ public class AddQuestionToQuizFromBank extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(showSubcategoryCheckbox)
-                        .addGap(43, 43, 43)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(selectAllButton)
+                        .addGap(14, 14, 14)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 524, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(submitButton)
@@ -226,6 +242,7 @@ public class AddQuestionToQuizFromBank extends javax.swing.JFrame {
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
         // TODO add your handling code here:
         List<Question> listData = listQuestionSelectableTable.getSelectedQuestions();
+        System.out.println(listData.size());
         if (listImportQuestion.isEmpty()) {
             listImportQuestion.addAll(listData);
         } else {
@@ -251,6 +268,14 @@ public class AddQuestionToQuizFromBank extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_submitButtonActionPerformed
 
+    private void selectAllButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectAllButtonActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel tableModel = (DefaultTableModel) listQuestionSelectableTable.getModel();
+        tableModel.setRowCount(0);
+        listQuestionSelectableTable.refreshSelectedQuestions();
+        initListQuestionsTableData(true);
+    }//GEN-LAST:event_selectAllButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> categoryDropdown;
@@ -259,6 +284,7 @@ public class AddQuestionToQuizFromBank extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private view.quiz.table.ListQuestionSelectableTable listQuestionSelectableTable;
+    private javax.swing.JButton selectAllButton;
     private javax.swing.JCheckBox showSubcategoryCheckbox;
     private javax.swing.JButton submitButton;
     // End of variables declaration//GEN-END:variables
