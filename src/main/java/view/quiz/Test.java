@@ -44,6 +44,16 @@ public class Test extends javax.swing.JFrame {
             QuizQuestionView quizQuestion = new QuizQuestionView();
             quizQuestion.setchoicequestion("Question"+i);
             
+                String text="<html><body style='width: 600px; white-space: pre-wrap;'>Được. Khi ấy điểm của em sẽ thấp hơn so với điểm 20. Cụ thể: Bài 1: 0 điểm; bài 2: 0.5 điểm (nếu tạo được các category cha/con); bài 3: 1 điểm (nếu hoàn thành chức năng thêm từng câu hỏi mới bằng tay) - 0.5 điểm (nếu chỉnh được mức % cho từng đáp án) -  0.5 điểm (nếu import được file); bài 4: 1 điểm (kiểm tra định dạng file txt) - 1 điểm (kiểm tra định dạng file DOCX); bài 5: 0 điểm; bài 6: 0.5 điểm (nếu tạo N câu hỏi từ ngân hàng đề N câu) - 0.5 điểm (nếu tạo N câu hỏi từ ngân hàng đề M câu, M > N); bài 7: 0.5 điểm (đọc file bài làm) - 1 điểm (chấm điểm bài làm); bài 8: 1 điểm (nếu xuất ra PDF không có hình ảnh) - 1 điểm (nếu xuất PDF có hình ảnh); bài 9: 1 điểm (nếu gắn được mật khẩu cho file). Vậy nếu không làm GUI thì điểm của SV có thể được 10/20 điểm.\n" +
+"10) trong bài tập lớn lập trình hướng đối tượng thì mọi câu hỏi đều được mặc định số điểm là 1.00 và không sửa được đúng không?\n" +
+"Đúng vậy. Để đơn giản thì mọi câu hỏi đều không cho sửa điểm. Nhưng nội dung câu hỏi và các đáp án (cũng như đáp án đúng) đều sửa được.\n" +
+"11) một số chức năng có hiện ở ảnh thầy để nhưng thầy không đề cập thì có cần làm không, chẳng hạn như:Từ giao diện (3.1), chuyển sang được (3.2) bằng cách nhấn Create new question. Danh sách các mức điểm của câu này đi từ 100% cho đến -83.33% (sau 10% sẽ là 5% và -5%). Danh sách này chỉ hiện ra nếu nhấn vào Grade, mặc định của Grade là None.\n" +
+"Ở giao diện (3.2): nhấn vào Blanks for 3 more choices sẽ hiện ra bổ sung thêm 3 Choice nữa. Trong các choice vẫn có thể chèn các bức ảnh được (1 điểm)\n" +
+"Nhấn vào Save changes and continue editing sẽ vẫn ở màn hình hiện tại. Nhấn vào Save changes (hoặc Cancel) sẽ chuyển sang giao diện 3.1\n" +
+"Các ô có dấu chấm than đỏ sẽ là các ô bắt buộc nhập nội dung\n</html>";
+            quizQuestion.setLabel(text);
+            
+            
             listAnswer.add(quizQuestion);
         }
 
@@ -85,7 +95,7 @@ public class Test extends javax.swing.JFrame {
 
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-        listAnswer.setLayout(new javax.swing.BoxLayout(listAnswer, javax.swing.BoxLayout.Y_AXIS));
+        listAnswer.setLayout(new java.awt.GridLayout(0, 1, 0, 10));
         jScrollPane1.setViewportView(listAnswer);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -94,9 +104,9 @@ public class Test extends javax.swing.JFrame {
         jSeparator1.setForeground(new java.awt.Color(51, 51, 51));
 
         jTextField1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jTextField1.setForeground(new java.awt.Color(255, 0, 51));
         jTextField1.setText(org.openide.util.NbBundle.getMessage(Test.class, "Test.jTextField1.text")); // NOI18N
         jTextField1.setBorder(null);
-        jTextField1.setForeground(new java.awt.Color(255, 0, 51));
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
@@ -104,7 +114,7 @@ public class Test extends javax.swing.JFrame {
         });
 
         Numberquestion.setBackground(new java.awt.Color(255, 255, 255));
-        Numberquestion.setLayout(new java.awt.GridLayout(7, 8, 4, 3));
+        Numberquestion.setLayout(new java.awt.GridLayout(8, 7));
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel1, org.openide.util.NbBundle.getMessage(Test.class, "Test.jLabel1.text")); // NOI18N
 
@@ -113,14 +123,14 @@ public class Test extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jSeparator1)
-            .addComponent(Numberquestion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(Numberquestion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -139,23 +149,23 @@ public class Test extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(255, 0, 51), null));
 
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel2, org.openide.util.NbBundle.getMessage(Test.class, "Test.jLabel2.text")); // NOI18N
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel2, org.openide.util.NbBundle.getMessage(Test.class, "Test.jLabel2.text")); // NOI18N
 
-        org.openide.awt.Mnemonics.setLocalizedText(Gio, org.openide.util.NbBundle.getMessage(Test.class, "Test.Gio.text")); // NOI18N
         Gio.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(Gio, org.openide.util.NbBundle.getMessage(Test.class, "Test.Gio.text")); // NOI18N
 
-        org.openide.awt.Mnemonics.setLocalizedText(Phut, org.openide.util.NbBundle.getMessage(Test.class, "Test.Phut.text")); // NOI18N
         Phut.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(Phut, org.openide.util.NbBundle.getMessage(Test.class, "Test.Phut.text")); // NOI18N
 
-        org.openide.awt.Mnemonics.setLocalizedText(Giay, org.openide.util.NbBundle.getMessage(Test.class, "Test.Giay.text")); // NOI18N
         Giay.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(Giay, org.openide.util.NbBundle.getMessage(Test.class, "Test.Giay.text")); // NOI18N
 
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel6, org.openide.util.NbBundle.getMessage(Test.class, "Test.jLabel6.text")); // NOI18N
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel6, org.openide.util.NbBundle.getMessage(Test.class, "Test.jLabel6.text")); // NOI18N
 
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel7, org.openide.util.NbBundle.getMessage(Test.class, "Test.jLabel7.text")); // NOI18N
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel7, org.openide.util.NbBundle.getMessage(Test.class, "Test.jLabel7.text")); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -196,11 +206,11 @@ public class Test extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 694, Short.MAX_VALUE)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(

@@ -67,13 +67,10 @@ public class Main extends javax.swing.JFrame implements PreviewQuizButtonListene
         settingButton = DropDownButtonFactory.createDropDownButton(settingMenuButtonIcon, settingMenu);
         content = new javax.swing.JPanel();
         listQuiz = new javax.swing.JPanel();
-        listQuizView = new view.quiz.ListQuizView();
         mainContent = new javax.swing.JPanel();
         menuContent = new javax.swing.JTabbedPane();
         questionTab = new javax.swing.JPanel();
-        questionBank = new view.question.QuestionBank();
         categoryTab = new javax.swing.JPanel();
-        addCategory = new view.category.AddCategory();
         importTab = new javax.swing.JPanel();
         importFile = new view.question.ImportFile();
         exportTab = new javax.swing.JPanel();
@@ -240,17 +237,11 @@ public class Main extends javax.swing.JFrame implements PreviewQuizButtonListene
         listQuiz.setLayout(listQuizLayout);
         listQuizLayout.setHorizontalGroup(
             listQuizLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(listQuizLayout.createSequentialGroup()
-                .addGap(94, 94, 94)
-                .addComponent(listQuizView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1010, Short.MAX_VALUE))
+            .addGap(0, 1930, Short.MAX_VALUE)
         );
         listQuizLayout.setVerticalGroup(
             listQuizLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(listQuizLayout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(listQuizView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(457, Short.MAX_VALUE))
+            .addGap(0, 958, Short.MAX_VALUE)
         );
 
         content.add(listQuiz, "listQuizCard");
@@ -258,20 +249,6 @@ public class Main extends javax.swing.JFrame implements PreviewQuizButtonListene
         mainContent.setBackground(new java.awt.Color(255, 255, 255));
 
         questionTab.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout questionTabLayout = new javax.swing.GroupLayout(questionTab);
-        questionTab.setLayout(questionTabLayout);
-        questionTabLayout.setHorizontalGroup(
-            questionTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(questionBank, javax.swing.GroupLayout.DEFAULT_SIZE, 1930, Short.MAX_VALUE)
-        );
-        questionTabLayout.setVerticalGroup(
-            questionTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(questionTabLayout.createSequentialGroup()
-                .addComponent(questionBank, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 318, Short.MAX_VALUE))
-        );
-
         menuContent.addTab(org.openide.util.NbBundle.getMessage(Main.class, "Main.questionTab.TabConstraints.tabTitle"), questionTab); // NOI18N
 
         categoryTab.setBackground(new java.awt.Color(255, 255, 255));
@@ -280,11 +257,11 @@ public class Main extends javax.swing.JFrame implements PreviewQuizButtonListene
         categoryTab.setLayout(categoryTabLayout);
         categoryTabLayout.setHorizontalGroup(
             categoryTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(addCategory, javax.swing.GroupLayout.DEFAULT_SIZE, 1930, Short.MAX_VALUE)
+            .addGap(0, 1930, Short.MAX_VALUE)
         );
         categoryTabLayout.setVerticalGroup(
             categoryTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(addCategory, javax.swing.GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE)
+            .addGap(0, 927, Short.MAX_VALUE)
         );
 
         menuContent.addTab(org.openide.util.NbBundle.getMessage(Main.class, "Main.categoryTab.TabConstraints.tabTitle"), categoryTab); // NOI18N
@@ -504,7 +481,6 @@ public class Main extends javax.swing.JFrame implements PreviewQuizButtonListene
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private view.category.AddCategory addCategory;
     private javax.swing.JPanel bg;
     private javax.swing.JMenuItem categoryMenuItem;
     private javax.swing.JPanel categoryTab;
@@ -520,14 +496,16 @@ public class Main extends javax.swing.JFrame implements PreviewQuizButtonListene
     private javax.swing.JLabel itLabel;
     private javax.swing.JButton jButton2;
     private javax.swing.JPanel listQuiz;
-    private view.quiz.ListQuizView listQuizView;
     private javax.swing.JPanel mainContent;
     private javax.swing.JTabbedPane menuContent;
     private javax.swing.JPanel page;
     private javax.swing.JLabel pageLink;
+<<<<<<< HEAD
+=======
     private javax.swing.JPanel previewQuiz;
     private view.quiz.PreviewQuiz previewQuizContent;
     private view.question.QuestionBank questionBank;
+>>>>>>> e48be1885819f112a95efef8e8446678d967fc76
     private javax.swing.JMenuItem questionMenuItem;
     private javax.swing.JPanel questionTab;
     private javax.swing.JButton settingButton;
