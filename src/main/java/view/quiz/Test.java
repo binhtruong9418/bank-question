@@ -43,7 +43,7 @@ public class Test extends javax.swing.JFrame {
         for (int i = 1; i < 45; i++) {
             QuizQuestionView quizQuestion = new QuizQuestionView();
             quizQuestion.setchoicequestion("Question"+i);
-                String question="Cũng như bao mùa xuân trước, em rất thích ngắm mưa xuân. Những hạt mưa không vội vã, không ồn ào như mưa hạ. Nó dịu dàng, chầm chậm, mang đến cảm giác bình yên và thư thái trong tâm hồn. Những hạt mưa bắt đầu rơi, hạt mưa nhỏ, lất phất trong gió, vương những giọt long lanh trên cánh mai vàng mỏng manh, trên những chồi non cây lá, vạn vật được mưa tắm mát trở nên căng tràn sức sống. Mưa xuân diệu kỳ còn mang đến cho lòng người niềm vui khoan khoái, yêu biết bao nhiêu những cơn mưa xuân tuyệt vời như thế";
+                String question="Cách hiểu thứ nhất (đoạn ý): Đoạn văn được dùng với ý nghĩa để chỉ sự phân đoạn nội dung, phân đoạn ý của văn bản. Một văn bản bao gồm nhiều đoạn văn: Đoạn mở đầu văn bản, những đoạn khai triển văn bản, đoạn kết thúc văn bản. Mỗi đoạn phải có sự hoàn chỉnh nhất định nào đó về mặt ý, về mặt nội dung. Nhưng thế nào là một nội dung, một ý hoàn chỉnh thì không có tiêu chí để xác định rõ ràng. Một văn bản, tuỳ theo người đọc cảm nhận mà phân chia ra thành các đoạn, sự phân chia có thể không thống nhất giữa những người đọc: có người chia theo ý lớn, có người chia theo ý nhỏ. Ý lớn là đoạn bài có hai hoặc ba ý nhỏ được khai triển từ ý lớn, bao gồm hai hoặc ba đoạn văn ngắn, mỗi đoạn ngắn đó là một ý nhỏ, các đoạn này hợp ý với nhau thành một ý lớn; ý nhỏ là ý được khai triển từ ý lớn, về mặt nội dung chỉ triển khai theo một phương diện, một hướng cụ thể, mỗi ý nhỏ là một đoạn.";
 
                 String text="<html><body style='width: 800px; white-space: pre-wrap;'>"+question+"</html>";
             quizQuestion.setLabel(text);
@@ -56,7 +56,7 @@ public class Test extends javax.swing.JFrame {
         listAnswer.repaint();
     }
      private void addNumber() {
-        for (int i = 1; i < 45; i++) {
+        for (int i = 1; i < 10; i++) {
             Number number1 = new Number();
             number1.setnumber(Integer.toString(i));
             
