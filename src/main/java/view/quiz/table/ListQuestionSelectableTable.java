@@ -111,9 +111,12 @@ public class ListQuestionSelectableTable extends JTable {
         });
     }
 
-    public void addRow(Question question) {
+    public void addRow(Question question, Boolean status) {
         DefaultTableModel mod = (DefaultTableModel) getModel();
-        mod.addRow(new Object[]{false, question});
+        if(status) {
+            selectedQuestions.add(question);
+        }
+        mod.addRow(new Object[]{status, question});
     }
     
     public void refreshSelectedQuestions() {

@@ -7,7 +7,6 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 
 public class ConnectDB {
-
     private static Boolean firstConnect = true;
 
     public static Connection connect() {

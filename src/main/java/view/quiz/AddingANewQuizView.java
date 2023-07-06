@@ -296,7 +296,15 @@ public class AddingANewQuizView extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Please input time limit.", "Error", JOptionPane.ERROR_MESSAGE);
             } else {
                 int timeLimit = Integer.parseInt(timeLimitInput.getText().trim().replaceAll("[^0-9]", ""));
-                quiz.setTimeLimit(timeLimit);
+                String timeType = (String) timeLimitDropdown.getSelectedItem();
+                System.out.println(timeType);
+                if (timeType == "minutes") {
+                    quiz.setTimeLimit(timeLimit * 60);
+                } else if (timeType == "hours") {
+                    quiz.setTimeLimit(timeLimit * 3600);
+                } else if (timeType == "seconds") {
+                    quiz.setTimeLimit(timeLimit);
+                }
             }
         } else {
             quiz.setTimeLimit(0);

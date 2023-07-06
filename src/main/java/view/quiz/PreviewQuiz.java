@@ -15,7 +15,7 @@ public class PreviewQuiz extends javax.swing.JPanel {
     public void setButtonClickListener(PreviewQuizButtonListener listener) {
         this.listener = listener;
     }
-    
+
     public void setQuiz(Quiz quiz) {
         currentQuiz = quiz;
         setQuizNameLabel(quiz.getName());
@@ -35,17 +35,26 @@ public class PreviewQuiz extends javax.swing.JPanel {
         }
     }
 
-    private static String convertToHourTime(int minutes) {
+    private static String convertToHourTime(int seconds) {
+        int minutes = seconds / 60;
         int hours = minutes / 60;
         int remainingMinutes = minutes % 60;
+        int remainingSeconds = seconds % 60;
 
-        if (remainingMinutes == 0) {
-            return hours + "h";
+        if (remainingSeconds == 0) {
+            if (remainingMinutes == 0) {
+                return hours + "h";
+            } else if (hours > 0) {
+                return remainingMinutes + "m";
+            }
+        } else if (remainingMinutes > 0) {
+            if (hours > 0) {
+                return hours + "h " + remainingMinutes + "m " + remainingSeconds + "s";
+            } else {
+                return remainingMinutes + "m " + remainingSeconds + "s";
+            }
         }
-        if(hours == 0) {
-            return remainingMinutes + "m";
-        }
-        return hours + "h " + remainingMinutes + "m";
+        return remainingSeconds + "s";
     }
 
     @SuppressWarnings("unchecked")
@@ -220,13 +229,13 @@ public class PreviewQuiz extends javax.swing.JPanel {
 
     private void settingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settingButtonActionPerformed
         // TODO add your handling code here:
-        
+
         listener.onSettingButtonClick(currentQuiz);
     }//GEN-LAST:event_settingButtonActionPerformed
 
     private void previewQuizButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_previewQuizButtonActionPerformed
         // TODO add your handling code here:
-        listener.onPreviewButtonClick(currentQuiz);    
+        listener.onPreviewButtonClick(currentQuiz);
     }//GEN-LAST:event_previewQuizButtonActionPerformed
 
 
