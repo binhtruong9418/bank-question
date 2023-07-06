@@ -14,15 +14,17 @@ import static java.sql.Types.NULL;
 import java.util.List;
 import model.Answer;
 import model.Question;
+import model.Quiz;
 import repository.category.EditCategory;
 
 public class AddNewQuestion {
+
+    private Connection con = ConnectDB.connect();
 
     public AddNewQuestion() {
     }
 
     public int addANewQuestion(Question question) {
-        Connection con = ConnectDB.connect();
         int generatedQuestionId = -1; // Default value for failure
 
         String name = question.getName();
@@ -63,7 +65,6 @@ public class AddNewQuestion {
     }
 
     public int addListNewQuestion(List<Question> questions) {
-        Connection con = ConnectDB.connect();
         int numQuestionsAdded = 0;
 
         String sql = "INSERT INTO questions (question_name, question_category, question_text, question_mark, "
@@ -99,6 +100,34 @@ public class AddNewQuestion {
             System.out.println("Questions added successfully!");
         } catch (SQLException ex) {
             System.out.println("Error adding questions to the database: " + ex.getMessage());
+        }
+
+        return numQuestionsAdded;
+    }
+
+    public int addListQuestionToQuiz(List<Question> listQuestion, Quiz quiz) {
+        int numQuestionsAdded = 0; // Default value for failure
+
+        try (PreparedStatement deleteStatement = con.prepareStatement(
+                "DELETE FROM quiz_question WHERE quiz_id = ?"
+        ); PreparedStatement insertStatement = con.prepareStatement(
+                "INSERT INTO quiz_question (quiz_id, question_id) VALUES (?, ?)"
+        )) {
+
+            // Delete existing quiz questions
+            deleteStatement.setInt(1, quiz.getId());
+            deleteStatement.executeUpdate();
+
+            for (Question question : listQuestion) {
+                System.out.println(quiz.getId() + "quiz");
+                System.out.println(question.getId() + "question");
+                insertStatement.setInt(1, quiz.getId());
+                insertStatement.setInt(2, question.getId());
+                insertStatement.executeUpdate();
+                numQuestionsAdded++;
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error adding question to the database: " + ex.getMessage());
         }
 
         return numQuestionsAdded;

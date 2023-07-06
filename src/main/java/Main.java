@@ -5,9 +5,10 @@ import javax.swing.*;
 import model.Quiz;
 import org.openide.awt.DropDownButtonFactory;
 import view.quiz_interface.PreviewQuizButtonListener;
+import view.quiz_interface.QuizEditListener;
 import view.quiz_interface.QuizSelectListener;
 
-public class Main extends javax.swing.JFrame implements PreviewQuizButtonListener, QuizSelectListener {
+public class Main extends javax.swing.JFrame implements PreviewQuizButtonListener, QuizSelectListener, QuizEditListener {
 
     public Main() {
         initComponents();
@@ -15,7 +16,7 @@ public class Main extends javax.swing.JFrame implements PreviewQuizButtonListene
         importQuestionBankToOtherTab();
         listQuizView.setQuizSelectListener(this);
         previewQuizContent.setButtonClickListener(this);
-
+        editQuizContent.setQuizEditListener(this);
     }
 
     private void importQuestionBankToOtherTab() {
@@ -38,7 +39,7 @@ public class Main extends javax.swing.JFrame implements PreviewQuizButtonListene
         pageLink.setText("Home / My courses / THI CUỐI KỲ / General / " + quiz.getName() + " / Edit quiz");
         CardLayout contentLayout = (CardLayout) content.getLayout();
         contentLayout.show(content, "editQuizCard");
-        editQuizContent.setQuizNameLabel(quiz.getName());
+        editQuizContent.setQuiz(quiz);
         System.out.println("Button setting clicked!");
     }
 
@@ -477,6 +478,7 @@ public class Main extends javax.swing.JFrame implements PreviewQuizButtonListene
         contentLayout.show(content, "listQuizCard");
         pageLink.setText("Home / My courses / THI CUỐI KỲ");
         settingButton.setVisible(true);
+        turnEditingButton.setVisible(true);
     }//GEN-LAST:event_homeButtonActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -539,5 +541,11 @@ public class Main extends javax.swing.JFrame implements PreviewQuizButtonListene
     private javax.swing.JPanel topbar;
     private javax.swing.JButton turnEditingButton;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void onSaveEditQuiz() {
+        CardLayout contentLayout = (CardLayout) content.getLayout();
+        contentLayout.show(content, "previewQuizCard");
+    }
 
 }

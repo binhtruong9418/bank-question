@@ -4,9 +4,14 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Question;
+import model.Quiz;
+import repository.question.AddNewQuestion;
+import repository.question.GetAllQuestion;
 import view.quiz.table.ListQuestionEditTable.ListQuestionEditTableListener;
+import view.quiz_interface.QuizEditListener;
 
 /**
  *
@@ -15,25 +20,31 @@ import view.quiz.table.ListQuestionEditTable.ListQuestionEditTableListener;
 public class EditQuiz extends javax.swing.JPanel implements ListQuestionEditTableListener {
 
     private Boolean selectMultiple = false;
+    private Quiz currentQuiz;
     public static List<Question> listQuestion;
     private List<Question> listQuestionSelected = new ArrayList<>();
+    private QuizEditListener quizEditListener;
 
     public EditQuiz() {
-        listQuestion = new ArrayList<>();
         initComponents();
         deleteAllButton.setVisible(false);
         listQuestionEditTable.setShowCheckbox(false);
         listQuestionEditTable.setListQuestionEditTableListener(this);
-        initListQuestionData();
     }
 
     public void refreshTableData() {
         initListQuestionData();
     }
 
+    public void setQuizEditListener(QuizEditListener quizEditListener) {
+        this.quizEditListener = quizEditListener;
+    }
+
     private void initListQuestionData() {
         DefaultTableModel tableModel = (DefaultTableModel) listQuestionEditTable.getModel();
         tableModel.setRowCount(0);
+
+        System.out.println(listQuestion.size());
 
         totalQuestionLabel.setText("Questions: " + listQuestion.size() + " | This quiz is open");
         String formatNumber = new DecimalFormat("0.00").format(listQuestion.size());
@@ -44,8 +55,15 @@ public class EditQuiz extends javax.swing.JPanel implements ListQuestionEditTabl
 
     }
 
-    public void setQuizNameLabel(String quizName) {
+    private void setQuizNameLabel(String quizName) {
         quizNameLabel.setText("Editting quiz: " + quizName);
+    }
+
+    public void setQuiz(Quiz quiz) {
+        this.currentQuiz = quiz;
+        setQuizNameLabel(quiz.getName());
+        listQuestion = new GetAllQuestion().getAllQuestionByQuizId(quiz.getId());
+        initListQuestionData();
     }
 
     @SuppressWarnings("unchecked")
@@ -235,6 +253,22 @@ public class EditQuiz extends javax.swing.JPanel implements ListQuestionEditTabl
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         // TODO add your handling code here:
+        try {
+            int confirm = JOptionPane.showConfirmDialog(null, "Do you want to save all changes ?", "Confirmation", JOptionPane.YES_NO_OPTION);
+            if (confirm == JOptionPane.YES_OPTION) {
+                int count = new AddNewQuestion().addListQuestionToQuiz(listQuestion, currentQuiz);
+                System.out.println(count);
+                if (count != listQuestion.size()) {
+                    JOptionPane.showMessageDialog(null, "Edit quiz failed!", "Error", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Edit quiz successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                    quizEditListener.onSaveEditQuiz();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(null, "Edit quiz failed!", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_saveButtonActionPerformed
 
 

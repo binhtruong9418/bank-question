@@ -247,21 +247,7 @@ public class AddQuestionToQuizFromBank extends javax.swing.JFrame {
             listImportQuestion.addAll(listData);
         } else {
             for (Question question : listData) {
-                for (Question questionInList : listImportQuestion) {
-                    if (question.getId() == questionInList.getId()) {
-                        int confirm = JOptionPane.showConfirmDialog(null,
-                                question.getName() + " has already in your quiz, do you want to replace it?",
-                                "Confirmation",
-                                JOptionPane.YES_NO_OPTION);
-                        if (confirm == JOptionPane.YES_OPTION) {
-                            // Replace the question in listImportQuestion
-
-                            int index = listImportQuestion.indexOf(questionInList);
-                            listImportQuestion.set(index, question);
-                        }
-
-                    }
-                }
+                listImportQuestion.add(question);
             }
         }
         editQuiz.refreshTableData();
