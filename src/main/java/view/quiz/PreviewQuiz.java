@@ -37,27 +37,32 @@ public class PreviewQuiz extends javax.swing.JPanel {
         }
     }
 
-    private static String convertToHourTime(int seconds) {
-        int minutes = seconds / 60;
-        int hours = minutes / 60;
-        int remainingMinutes = minutes % 60;
-        int remainingSeconds = seconds % 60;
+    private static String convertToHourTime(int totalSeconds) {
+        int hours = totalSeconds / 3600;
+        int minutes = (totalSeconds % 3600) / 60;
+        int seconds = totalSeconds % 60;
 
-        String durationString = "";
+        StringBuilder durationString = new StringBuilder();
 
         if (hours > 0) {
-            String hoursString = (hours == 1) ? "hr" : "hrs";
-            durationString = durationString + " " + (hours) + (" ") + (hoursString);
+            durationString.append(hours).append(hours == 1 ? " hr" : " hrs");
         }
 
         if (minutes > 0) {
-            String minutesString = (remainingMinutes == 1) ? "min" : "mins";
-            durationString = durationString + " " + (hours) + (" ") + (minutesString);
+            if (durationString.length() > 0) {
+                durationString.append(" ");
+            }
+            durationString.append(minutes).append(minutes == 1 ? " min" : " mins");
         }
 
-        String secondsString = (remainingSeconds == 1) ? "sec" : "secs";
-        durationString = durationString + " " + (hours) + (" ") + (secondsString);
-        return durationString;
+        if (seconds > 0) {
+            if (durationString.length() > 0) {
+                durationString.append(" ");
+            }
+            durationString.append(seconds).append(seconds == 1 ? " sec" : " secs");
+        }
+
+        return durationString.toString();
     }
 
     @SuppressWarnings("unchecked")
@@ -202,12 +207,10 @@ public class PreviewQuiz extends javax.swing.JPanel {
                         .addComponent(previewQuizButton))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(506, 506, 506)
-                        .addComponent(jLabel3)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(timeLimitLabel)
+                            .addComponent(jLabel3))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(541, 541, 541)
-                .addComponent(timeLimitLabel)
-                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

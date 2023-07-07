@@ -1,4 +1,3 @@
-
 package view.question;
 
 import java.sql.Connection;
@@ -21,7 +20,6 @@ import repository.question.GetAllQuestion;
 public class QuestionBank extends javax.swing.JPanel {
 
     Connection con = null;
-    private Boolean firstSelect = true;
     public Integer currentCategory = 0;
     List<Category> listCategory = new ArrayList<>();
 
@@ -74,6 +72,7 @@ public class QuestionBank extends javax.swing.JPanel {
                 toString += " (" + category.getCount() + ")";
             }
             selectCategoryDropdown.addItem(toString); // Add the category to the dropdown
+            selectCategoryDropdown.setSelectedIndex(0);
         }
     }
 
@@ -88,7 +87,6 @@ public class QuestionBank extends javax.swing.JPanel {
             listQuestion.addAll(getAllQuestion.getAllQuestionByListCategoryId(listSubCategory));
         }
         for (Question question : listQuestion) {
-            System.out.println(question.getId());
             listQuestionTable.addRow(question.toRowTable());
         }
     }
@@ -115,13 +113,7 @@ public class QuestionBank extends javax.swing.JPanel {
         selectCategoryLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         org.openide.awt.Mnemonics.setLocalizedText(selectCategoryLabel, org.openide.util.NbBundle.getMessage(QuestionBank.class, "QuestionBank.selectCategoryLabel.text")); // NOI18N
 
-        selectCategoryDropdown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Default" }));
         selectCategoryDropdown.setToolTipText(org.openide.util.NbBundle.getMessage(QuestionBank.class, "QuestionBank.selectCategoryDropdown.toolTipText")); // NOI18N
-        selectCategoryDropdown.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                selectCategoryDropdownMouseClicked(evt);
-            }
-        });
         selectCategoryDropdown.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 selectCategoryDropdownActionPerformed(evt);
@@ -222,15 +214,13 @@ public class QuestionBank extends javax.swing.JPanel {
 
     private void selectCategoryDropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectCategoryDropdownActionPerformed
         // TODO add your handling code here:
-        if (!firstSelect) {
-            int index = selectCategoryDropdown.getSelectedIndex();
-            if (index == -1) {
-                currentCategory = 0;
-            } else {
-                currentCategory = listCategory.get(index).getId();
-            }
-            refreshQuestionData();
+        int index = selectCategoryDropdown.getSelectedIndex();
+        if (index == -1) {
+            currentCategory = 0;
+        } else {
+            currentCategory = listCategory.get(index).getId();
         }
+        refreshQuestionData();
     }//GEN-LAST:event_selectCategoryDropdownActionPerformed
 
     private void showSubcategoryCheckboxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_showSubcategoryCheckboxItemStateChanged
@@ -238,16 +228,6 @@ public class QuestionBank extends javax.swing.JPanel {
         showSubCategory = evt.getStateChange() == ItemEvent.SELECTED;
         refreshQuestionData();
     }//GEN-LAST:event_showSubcategoryCheckboxItemStateChanged
-
-    private void selectCategoryDropdownMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_selectCategoryDropdownMouseClicked
-        // TODO add your handling code here:
-        if (firstSelect && !listCategory.isEmpty()) {
-            selectCategoryDropdown.removeItemAt(0);
-            firstSelect = false;
-        } else {
-            firstSelect = false;
-        }
-    }//GEN-LAST:event_selectCategoryDropdownMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
