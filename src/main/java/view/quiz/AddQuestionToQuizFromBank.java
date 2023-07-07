@@ -243,11 +243,14 @@ public class AddQuestionToQuizFromBank extends javax.swing.JFrame {
         // TODO add your handling code here:
         List<Question> listData = listQuestionSelectableTable.getSelectedQuestions();
         System.out.println(listData.size());
+
         if (listImportQuestion.isEmpty()) {
             listImportQuestion.addAll(listData);
         } else {
             for (Question question : listData) {
-                listImportQuestion.add(question);
+                if (!listImportQuestion.contains(question)) {
+                    listImportQuestion.add(question);
+                }
             }
         }
         editQuiz.refreshTableData();

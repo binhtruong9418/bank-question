@@ -22,15 +22,15 @@ import model.Quiz;
 import repository.question.GetAllQuestion;
 
 public class Test extends javax.swing.JFrame {
-
+    
     private final Quiz currentQuiz;
     private Boolean isFinish;
     private List<Question> listQuestion;
     private LocalDateTime startQuiz;
     private LocalDateTime endQuiz;
-
+    
     Timer timer;
-
+    
     private void runtime() {
         timer = new Timer(1000, new ActionListener() {
             int totalTime = currentQuiz.getTimeLimit(); // Total time in seconds (example: 4000 seconds = 1 hour, 6 minutes, 40 seconds)
@@ -39,13 +39,13 @@ public class Test extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 if (totalTime > 0) {
                     totalTime--;
-
+                    
                     int hours = totalTime / 3600;
                     int minutes = (totalTime % 3600) / 60;
                     int seconds = (totalTime % 3600) % 60;
-
+                    
                     String formattedTime = String.format("%02d:%02d:%02d", hours, minutes, seconds);
-
+                    
                     timeLeft.setText("Time left: " + formattedTime);
                 } else {
                     timer.stop();
@@ -53,10 +53,10 @@ public class Test extends javax.swing.JFrame {
                 }
             }
         });
-
+        
         timer.start();
     }
-
+    
     public Test(Quiz quiz) {
         this.isFinish = false;
         this.currentQuiz = quiz;
@@ -66,7 +66,7 @@ public class Test extends javax.swing.JFrame {
         setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-
+        
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -83,11 +83,11 @@ public class Test extends javax.swing.JFrame {
         addNumber();
         runtime();
     }
-
+    
     private void closeQuiz() {
         this.dispose();
     }
-
+    
     private void addData() {
         listQuestion = new GetAllQuestion().getAllQuestionByQuizId(currentQuiz.getId());
         if (currentQuiz.getIsShuffle()) {
@@ -98,11 +98,11 @@ public class Test extends javax.swing.JFrame {
             quizQuestion.setchoicequestion("Question " + (i + 1));
             listQuestionPanel.add(quizQuestion);
         }
-
+        
         listQuestionPanel.revalidate();
         listQuestionPanel.repaint();
     }
-
+    
     private void addNumber() {
         int number = listQuestion.size();
         JPanel numberQuestion = new JPanel(new GridLayout());
@@ -111,23 +111,22 @@ public class Test extends javax.swing.JFrame {
             number1.setnumber(Integer.toString(i));
             numberQuestion.add(number1);
         }
-        int column = 5;
-        int row = number / 5;
-        if (number % 5 != 0) {
+        int column = 7;
+        int row = number / 7;
+        if (number % 7 != 0) {
             row++;
         }
-        numberQuestion.setSize(50 * 5, row * 50);
         pageNavigation.add(numberQuestion, BorderLayout.CENTER);
         GridLayout layout = (GridLayout) numberQuestion.getLayout();
 
         // Set the row and column indices for the component
         layout.setColumns(column);
-        layout.setRows(1);
-
+        layout.setRows(row);
+        
         pageNavigation.revalidate();
-
+        
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -307,7 +306,7 @@ public class Test extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addComponent(resultDisplayPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 132, Short.MAX_VALUE)
                 .addComponent(timeDisplayPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -326,10 +325,10 @@ public class Test extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 956, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pageNavigation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pageNavigation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -349,31 +348,30 @@ public class Test extends javax.swing.JFrame {
         // TODO add your handling code here:
         endQuiz = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE, d MMMM yyyy, h:mm a");
-
+        
         String startQuizTimeFormatted = startQuiz.format(formatter);
         String endQuizTimeFormatted = endQuiz.format(formatter);
-
+        
         Duration duration = Duration.between(startQuiz, endQuiz);
         long hours = duration.toHours();
         long minutes = (duration.toMinutes() % 60);
         long seconds = (duration.getSeconds() % 60);
         StringBuilder durationString = new StringBuilder("Duration:");
-
+        
         if (hours > 0) {
             String hoursString = (hours == 1) ? "hr" : "hrs";
             durationString.append(" ").append(hours).append(" ").append(hoursString);
         }
-
+        
         if (minutes > 0) {
             String minutesString = (minutes == 1) ? "min" : "mins";
             durationString.append(" ").append(minutes).append(" ").append(minutesString);
         }
-
+        
         String secondsString = (seconds == 1) ? "sec" : "secs";
         durationString.append(" ").append(seconds).append(" ").append(secondsString);
-
+        resultDisplayPanel.setVisible(true);
         System.out.println(durationString.toString().trim());
-
         System.out.println(startQuizTimeFormatted);
         System.out.println(endQuizTimeFormatted);
     }//GEN-LAST:event_jLabel1MouseClicked

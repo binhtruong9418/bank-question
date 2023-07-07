@@ -7,12 +7,15 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.ListCellRenderer;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import model.Answer;
 import model.Question;
 import view.quiz.checkbox.CircleCheckBox;
@@ -58,6 +61,10 @@ public class QuizQuestionView extends javax.swing.JPanel {
             Font newFont = currentFont.deriveFont(14f);
             label.setFont(newFont);
             label.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 0));
+
+            checkBox.addActionListener(e -> {
+                checkBox.setSelected(false); // Deselect the checkbox
+            });
 
             westPanel.add(checkBox, BorderLayout.NORTH);
             add(westPanel, BorderLayout.WEST);
@@ -114,7 +121,6 @@ public class QuizQuestionView extends javax.swing.JPanel {
             westPanel.add(checkBox, BorderLayout.NORTH);
             add(westPanel, BorderLayout.WEST);
             add(label, BorderLayout.CENTER);
-
         }
 
         @Override
@@ -123,14 +129,14 @@ public class QuizQuestionView extends javax.swing.JPanel {
 
             String labelAlphaBet = String.valueOf((char) ('A' + index));
             String wrapperText = "<html><body style='width: 800px; white-space: pre-wrap;'>" + labelAlphaBet + ". " + answer.getText() + "</html>";
-
             label.setText(wrapperText);
             checkBox.setSelected(isSelected);
+            checkBox.setIndeterminate(list.isSelectedIndex(index));
 
             setBackground(list.getBackground());
             setForeground(list.getForeground());
 
-            if (isSelected) {
+            if (isSelected && cellHasFocus) {
                 if (listSelectedAnswer.contains(answer)) {
                     listSelectedAnswer.remove(answer);
                 } else {
@@ -157,12 +163,13 @@ public class QuizQuestionView extends javax.swing.JPanel {
         listAnswerList.setModel(listModel);
         for (Answer answer : currentQuestion.getAnswers()) {
             if (answer.getGrade().intValue() == 100) {
-                listAnswerList.setCellRenderer(new CircleCheckboxListCellRenderer());
                 listAnswerList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+                listAnswerList.setCellRenderer(new CircleCheckboxListCellRenderer());
                 break;
             } else if (answer.getGrade().intValue() != 100 && answer.getGrade().intValue() != 0) {
-                listAnswerList.setCellRenderer(new SquareCheckboxListCellRenderer());
                 listAnswerList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+                SquareCheckboxListCellRenderer cellRenderer = new SquareCheckboxListCellRenderer();
+                listAnswerList.setCellRenderer(new SquareCheckboxListCellRenderer());
                 break;
             }
         }
@@ -235,7 +242,6 @@ public class QuizQuestionView extends javax.swing.JPanel {
 
         listAnswerList.setBackground(new java.awt.Color(231, 243, 245));
         listAnswerList.setBorder(null);
-        listAnswerList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         listAnswerList.setVisibleRowCount(5);
         jScrollPane1.setViewportView(listAnswerList);
 

@@ -13,20 +13,28 @@ import javax.swing.JCheckBox;
 public class SquareCheckBox extends JCheckBox {
 
     private boolean selected;
+    private boolean indeterminate;
 
     public SquareCheckBox() {
         this.selected = false;
+        this.indeterminate = false;
+
         setPreferredSize(new Dimension(17, 17));
     }
 
     @Override
     public boolean isSelected() {
-        return selected;
+        return selected || indeterminate;
     }
 
     @Override
     public void setSelected(boolean selected) {
         this.selected = selected;
+        repaint();
+    }
+
+    public void setIndeterminate(boolean indeterminate) {
+        this.indeterminate = indeterminate;
         repaint();
     }
 
@@ -48,7 +56,7 @@ public class SquareCheckBox extends JCheckBox {
         g2d.drawRect(0, 0, size, size);
 
         // Fill the checkbox if selected
-        if (selected) {
+        if (selected || indeterminate) {
             int margin = size / 4;
             g2d.fillRect(margin, margin, size - margin * 2, size - margin * 2);
         }
