@@ -1,5 +1,7 @@
 package view.quiz;
 
+import java.time.Duration;
+import javax.swing.JOptionPane;
 import model.Quiz;
 import view.quiz_interface.PreviewQuizButtonListener;
 
@@ -28,7 +30,7 @@ public class PreviewQuiz extends javax.swing.JPanel {
 
     private void setTimeLimit(int timeLimit) {
         if (timeLimit == 0) {
-            timeLimitLabel.setText("Time limit: Unlimited");
+            timeLimitLabel.setText("Time limit: 0");
         } else {
             String time = convertToHourTime(timeLimit);
             timeLimitLabel.setText("Time limit: " + time);
@@ -41,20 +43,21 @@ public class PreviewQuiz extends javax.swing.JPanel {
         int remainingMinutes = minutes % 60;
         int remainingSeconds = seconds % 60;
 
-        if (remainingSeconds == 0) {
-            if (remainingMinutes == 0) {
-                return hours + "h";
-            } else if (hours > 0) {
-                return remainingMinutes + "m";
-            }
-        } else if (remainingMinutes > 0) {
-            if (hours > 0) {
-                return hours + "h " + remainingMinutes + "m " + remainingSeconds + "s";
-            } else {
-                return remainingMinutes + "m " + remainingSeconds + "s";
-            }
+        String durationString = "";
+
+        if (hours > 0) {
+            String hoursString = (hours == 1) ? "hr" : "hrs";
+            durationString = durationString + " " + (hours) + (" ") + (hoursString);
         }
-        return remainingSeconds + "s";
+
+        if (minutes > 0) {
+            String minutesString = (remainingMinutes == 1) ? "min" : "mins";
+            durationString = durationString + " " + (hours) + (" ") + (minutesString);
+        }
+
+        String secondsString = (remainingSeconds == 1) ? "sec" : "secs";
+        durationString = durationString + " " + (hours) + (" ") + (secondsString);
+        return durationString;
     }
 
     @SuppressWarnings("unchecked")
@@ -229,14 +232,22 @@ public class PreviewQuiz extends javax.swing.JPanel {
 
     private void settingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settingButtonActionPerformed
         // TODO add your handling code here:
-
         listener.onSettingButtonClick(currentQuiz);
     }//GEN-LAST:event_settingButtonActionPerformed
 
     private void previewQuizButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_previewQuizButtonActionPerformed
         // TODO add your handling code here:
-        Test newTest = new Test(currentQuiz);
-        newTest.setVisible(true);
+        int confirm = JOptionPane.showConfirmDialog(null, "Time Limit \n\n\n\n"
+                + "Your attempt will have a time limit of "
+                + timeLimitLabel.getText()
+                + ".\nWhen you start, the timer will begin to count down and cannot to be paused.\n"
+                + "You must finish your attempt before it expires.\n"
+                + "Are you sure you wish to start now ?", "Start attempt", JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+            Test newTest = new Test(currentQuiz);
+            newTest.setSubmitQuizListener(listener);
+            newTest.setVisible(true);
+        }
     }//GEN-LAST:event_previewQuizButtonActionPerformed
 
 

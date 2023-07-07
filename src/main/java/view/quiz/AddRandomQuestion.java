@@ -262,6 +262,10 @@ public class AddRandomQuestion extends javax.swing.JFrame {
         List<Question> randomQuestions = new ArrayList<>();
         int totalRandomQuestion = Integer.parseInt(numberRandomQuestionInput.getText());
         int totalQuestions = listQuestion.size();
+        if (totalRandomQuestion > totalQuestions) {
+            JOptionPane.showMessageDialog(null, "Please enter amount of random questions less than total questions", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         // Create a random number generator
         Random random = new Random();
 
@@ -278,8 +282,16 @@ public class AddRandomQuestion extends javax.swing.JFrame {
         for (int index : randomIndices) {
             randomQuestions.add(listQuestion.get(index));
         }
-        
-        listImportQuestion.addAll(randomQuestions);
+
+        if (listImportQuestion.isEmpty()) {
+            listImportQuestion.addAll(randomQuestions);
+        } else {
+            for (Question question : randomQuestions) {
+                if (!listImportQuestion.contains(question)) {
+                    listImportQuestion.add(question);
+                }
+            }
+        }
         editQuiz.refreshTableData();
         this.dispose();
     }//GEN-LAST:event_submitButtonActionPerformed

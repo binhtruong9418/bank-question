@@ -548,4 +548,10 @@ public class Main extends javax.swing.JFrame implements PreviewQuizButtonListene
         contentLayout.show(content, "previewQuizCard");
     }
 
+    @Override
+    public void onSubmitQuiz() {
+        CardLayout contentLayout = (CardLayout) content.getLayout();
+        contentLayout.show(content, "listQuizCard");
+    }
+
 }

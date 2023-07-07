@@ -19,48 +19,48 @@ import view.quiz_interface.QuizEditListener;
  * @author Duc Binh
  */
 public class EditQuizView extends javax.swing.JPanel implements ListQuestionEditTableListener {
-    
+
     private Boolean selectMultiple = false;
     private Quiz currentQuiz;
-    public static List<Question> listQuestion;
+    public List<Question> listQuestion;
     private List<Question> listQuestionSelected = new ArrayList<>();
     private QuizEditListener quizEditListener;
     private Boolean isShuffle;
-    
+
     public EditQuizView() {
         initComponents();
         deleteAllButton.setVisible(false);
         listQuestionEditTable.setShowCheckbox(false);
         listQuestionEditTable.setListQuestionEditTableListener(this);
     }
-    
+
     public void refreshTableData() {
         initListQuestionData();
     }
-    
+
     public void setQuizEditListener(QuizEditListener quizEditListener) {
         this.quizEditListener = quizEditListener;
     }
-    
+
     private void initListQuestionData() {
         DefaultTableModel tableModel = (DefaultTableModel) listQuestionEditTable.getModel();
         tableModel.setRowCount(0);
-        
+
         System.out.println(listQuestion.size());
-        
+
         totalQuestionLabel.setText("Questions: " + listQuestion.size() + " | This quiz is open");
         String formatNumber = new DecimalFormat("0.00").format(listQuestion.size());
         totalMarkLabel.setText("Total of marks: " + formatNumber);
         for (Question question : listQuestion) {
             listQuestionEditTable.addRow(question, selectMultiple);
         }
-        
+
     }
-    
+
     private void setQuizNameLabel(String quizName) {
         quizNameLabel.setText("Editting quiz: " + quizName);
     }
-    
+
     public void setQuiz(Quiz quiz) {
         this.currentQuiz = quiz;
         setQuizNameLabel(quiz.getName());
@@ -69,7 +69,7 @@ public class EditQuizView extends javax.swing.JPanel implements ListQuestionEdit
         isShuffle = quiz.getIsShuffle();
         initListQuestionData();
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -314,17 +314,17 @@ public class EditQuizView extends javax.swing.JPanel implements ListQuestionEdit
         System.out.println("check");
         listQuestionSelected.add(question);
     }
-    
+
     @Override
     public void onQuestionDeselected(Question question) {
         System.out.println("uncheck");
         listQuestionSelected.remove(question);
     }
-    
+
     @Override
     public void onDeleteButtonClicked(Question deleteQuestion) {
         listQuestion.remove(deleteQuestion);
         initListQuestionData();
     }
-    
+
 }

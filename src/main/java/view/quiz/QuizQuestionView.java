@@ -24,12 +24,12 @@ import view.quiz.checkbox.SquareCheckBox;
 public class QuizQuestionView extends javax.swing.JPanel {
 
     private Question currentQuestion;
-    private List<Answer> listSelectedAnswer;
+    private Answer selectedAnswer;
 
     public QuizQuestionView(Question question) {
         this.currentQuestion = question;
-        this.listSelectedAnswer = new ArrayList<>();
         initComponents();
+        status.setVisible(false);
         rightAnswerPanel.setVisible(false);
         setLabel(question.getName() + ": " + question.getQuestionText());
         addData();
@@ -62,10 +62,6 @@ public class QuizQuestionView extends javax.swing.JPanel {
             label.setFont(newFont);
             label.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 0));
 
-            checkBox.addActionListener(e -> {
-                checkBox.setSelected(false); // Deselect the checkbox
-            });
-
             westPanel.add(checkBox, BorderLayout.NORTH);
             add(westPanel, BorderLayout.WEST);
             add(label, BorderLayout.CENTER);
@@ -87,10 +83,10 @@ public class QuizQuestionView extends javax.swing.JPanel {
 
             if (isSelected && cellHasFocus) {
                 int answerIndex = list.getSelectedIndex();
-                Answer selectedAnswer = list.getModel().getElementAt(answerIndex);
+                Answer answerFromCheck = list.getModel().getElementAt(answerIndex);
+                status.setVisible(true);
 
-                listSelectedAnswer.clear();
-                listSelectedAnswer.add(selectedAnswer);
+                selectedAnswer = answerFromCheck;
                 // Handle the selected answer here
             }
 
@@ -137,18 +133,17 @@ public class QuizQuestionView extends javax.swing.JPanel {
             setForeground(list.getForeground());
 
             if (isSelected && cellHasFocus) {
-                if (listSelectedAnswer.contains(answer)) {
-                    listSelectedAnswer.remove(answer);
-                } else {
-                    listSelectedAnswer.add(answer);
-                }
+
+                int answerIndex = list.getSelectedIndex();
+                Answer answerFromCheck = list.getModel().getElementAt(answerIndex);
+                selectedAnswer = answerFromCheck;
             }
 
             return this;
         }
     }
 
-    void setchoicequestion(String text) {
+    public void setchoicequestion(String text) {
         title.setText(text);
     }
 
@@ -179,9 +174,27 @@ public class QuizQuestionView extends javax.swing.JPanel {
         listAnswerList.repaint();
     }
 
-//    public List<Integer> getSelectedAnswer() {
-//        
-//    }
+    public Answer getSelectedAnswer() {
+        return selectedAnswer;
+    }
+
+    public void onFinishQuiz() {
+        if (selectedAnswer.getGrade() != (float) 100) {
+            for (int i = 0; i < currentQuestion.getAnswers().size(); i++) {
+                Answer answer = currentQuestion.getAnswers().get(i);
+                if (answer.getGrade() == (float) 100) {
+                    correctAnswerLabel.setText("The correct answer is: " + answer.getText());
+                    rightAnswerPanel.setVisible(true);
+                    rightPanel.revalidate();
+                    rightPanel.repaint();
+                    listAnswerList.revalidate();
+                    listAnswerList.repaint();
+                    break;
+                }
+            }
+        }
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -196,7 +209,7 @@ public class QuizQuestionView extends javax.swing.JPanel {
         questionTextPanel = new javax.swing.JPanel();
         question = new javax.swing.JLabel();
         rightAnswerPanel = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        correctAnswerLabel = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -285,7 +298,7 @@ public class QuizQuestionView extends javax.swing.JPanel {
 
         rightAnswerPanel.setBackground(new java.awt.Color(252, 239, 220));
 
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel1, org.openide.util.NbBundle.getMessage(QuizQuestionView.class, "QuizQuestionView.jLabel1.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(correctAnswerLabel, org.openide.util.NbBundle.getMessage(QuizQuestionView.class, "QuizQuestionView.correctAnswerLabel.text")); // NOI18N
 
         javax.swing.GroupLayout rightAnswerPanelLayout = new javax.swing.GroupLayout(rightAnswerPanel);
         rightAnswerPanel.setLayout(rightAnswerPanelLayout);
@@ -293,14 +306,14 @@ public class QuizQuestionView extends javax.swing.JPanel {
             rightAnswerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(rightAnswerPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(correctAnswerLabel)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         rightAnswerPanelLayout.setVerticalGroup(
             rightAnswerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(rightAnswerPanelLayout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addComponent(jLabel1)
+                .addComponent(correctAnswerLabel)
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
@@ -331,7 +344,7 @@ public class QuizQuestionView extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel correctAnswerLabel;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel leftPanel;
     private javax.swing.JList<Answer> listAnswerList;
