@@ -35,13 +35,7 @@ Follow these steps to set up and run the Bank Question project:
 
 2. Import the project into your preferred Java IDE.
 
-3. Create a MySQL database named `bank_question` or adjust the database name in the project's configuration if desired.
-
-4. Execute the `createDatabaseStructure` method in the `Main` class to create the required database tables and structure.
-
-5. Update the MySQL connection settings in the `Main` class to match your MySQL server configuration.
-
-6. Run the `Main` class to start the application.
+3. Run the `Main` class to start the application.
 
 ## Usage
 
@@ -69,12 +63,6 @@ D. Rome<br>
 ANSWER: A<br>
 
 Each question and its answer choices should be on separate lines. Use the "Question:" prefix for the question text and "Answer X:" prefix for each answer choice.
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
-
-Feel free to customize and modify the project as per your requirements.
 
 ## Acknowledgements
 
