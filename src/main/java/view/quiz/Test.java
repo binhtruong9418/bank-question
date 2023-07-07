@@ -36,7 +36,7 @@ public class Test extends javax.swing.JFrame {
 
     private void runtime() {
         timer = new Timer(1000, new ActionListener() {
-            int totalTime = 22; // Total time in seconds (example: 4000 seconds = 1 hour, 6 minutes, 40 seconds)
+            int totalTime = currentQuiz.getTimeLimit(); // Total time in seconds (example: 4000 seconds = 1 hour, 6 minutes, 40 seconds)
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -167,9 +167,10 @@ public class Test extends javax.swing.JFrame {
         int index = 0;
         for (Component compo : components) {
             if (compo instanceof QuizQuestionView) {
-                QuizQuestionView QuizQuestionView = (QuizQuestionView) compo;
-                Answer answer = QuizQuestionView.getSelectedAnswer();
-                if (answer != null) {
+                QuizQuestionView quizQuestionView = (QuizQuestionView) compo;
+                quizQuestionView.onFinishQuiz();
+                List<Answer> listAnswer = quizQuestionView.getSelectedAnswer();
+                for (Answer answer : listAnswer) {
                     float mark = answer.getGrade() / 100;
                     totalMark += mark;
                 }

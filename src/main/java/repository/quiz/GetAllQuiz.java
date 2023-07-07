@@ -41,9 +41,6 @@ public class GetAllQuiz {
                 quiz.setDescription(description);
                 quiz.setTimeStart(timeStart);
                 quiz.setTimeEnd(timeEnd);
-                if (timeLimit == null) {
-                    timeLimit = 0;
-                }
                 quiz.setTimeLimit(timeLimit);
                 quiz.setIsShuffle(isShuffle == 1);
                 listQuiz.add(quiz);

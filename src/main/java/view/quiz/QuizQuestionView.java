@@ -24,10 +24,11 @@ import view.quiz.checkbox.SquareCheckBox;
 public class QuizQuestionView extends javax.swing.JPanel {
 
     private Question currentQuestion;
-    private Answer selectedAnswer;
+    private List<Answer> listSelectedAnswer;
 
     public QuizQuestionView(Question question) {
         this.currentQuestion = question;
+        listSelectedAnswer = new ArrayList<>();
         initComponents();
         status.setVisible(false);
         rightAnswerPanel.setVisible(false);
@@ -86,7 +87,8 @@ public class QuizQuestionView extends javax.swing.JPanel {
                 Answer answerFromCheck = list.getModel().getElementAt(answerIndex);
                 status.setVisible(true);
 
-                selectedAnswer = answerFromCheck;
+                listSelectedAnswer.clear();
+                listSelectedAnswer.add(answer);
                 // Handle the selected answer here
             }
 
@@ -132,11 +134,12 @@ public class QuizQuestionView extends javax.swing.JPanel {
             setBackground(list.getBackground());
             setForeground(list.getForeground());
 
-            if (isSelected && cellHasFocus) {
-
-                int answerIndex = list.getSelectedIndex();
-                Answer answerFromCheck = list.getModel().getElementAt(answerIndex);
-                selectedAnswer = answerFromCheck;
+            if (isSelected) {
+                if (!listSelectedAnswer.contains(answer)) {
+                    listSelectedAnswer.add(answer);
+                }
+            } else {
+                listSelectedAnswer.remove(answer);
             }
 
             return this;
@@ -174,25 +177,24 @@ public class QuizQuestionView extends javax.swing.JPanel {
         listAnswerList.repaint();
     }
 
-    public Answer getSelectedAnswer() {
-        return selectedAnswer;
+    public List<Answer> getSelectedAnswer() {
+        return listSelectedAnswer;
     }
 
     public void onFinishQuiz() {
-        if (selectedAnswer.getGrade() != (float) 100) {
-            for (int i = 0; i < currentQuestion.getAnswers().size(); i++) {
-                Answer answer = currentQuestion.getAnswers().get(i);
-                if (answer.getGrade() == (float) 100) {
-                    correctAnswerLabel.setText("The correct answer is: " + answer.getText());
-                    rightAnswerPanel.setVisible(true);
-                    rightPanel.revalidate();
-                    rightPanel.repaint();
-                    listAnswerList.revalidate();
-                    listAnswerList.repaint();
-                    break;
-                }
+        String text = "The correct answer is: ";
+        for (int i = 0; i < currentQuestion.getAnswers().size(); i++) {
+            Answer answer = currentQuestion.getAnswers().get(i);
+            if (answer.getGrade() != (float) 0) {
+                String labelAlphaBet = String.valueOf((char) ('A' + i));
+                text += labelAlphaBet;
+            }
+            if (i < currentQuestion.getAnswers().size() - 2) {
+                text += ", ";
             }
         }
+        correctAnswerLabel.setText(text);
+        rightAnswerPanel.setVisible(true);
     }
 
     @SuppressWarnings("unchecked")

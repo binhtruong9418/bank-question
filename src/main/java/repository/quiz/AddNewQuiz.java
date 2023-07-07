@@ -31,11 +31,7 @@ public class AddNewQuiz {
             pre.setString(2, quiz.getDescription());
             pre.setLong(3, quiz.getTimeStart());
             pre.setLong(4, quiz.getTimeEnd());
-            if (quiz.getTimeLimit() == 0) {
-                pre.setObject(5, NULL);
-            } else {
-                pre.setInt(5, quiz.getTimeLimit());
-            }
+            pre.setInt(5, quiz.getTimeLimit());
             int affectedRows = pre.executeUpdate();
             if (affectedRows > 0) {
                 ResultSet generatedKeys = pre.getGeneratedKeys();

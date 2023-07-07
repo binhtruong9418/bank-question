@@ -75,7 +75,7 @@ public class ConnectDB {
                     + "quiz_id INT AUTO_INCREMENT PRIMARY KEY,"
                     + "quiz_name VARCHAR(255) NOT NULL,"
                     + "quiz_description VARCHAR(1000) DEFAULT NULL,"
-                    + "time_limit INT DEFAULT NULL,"
+                    + "time_limit INT NOT NULL DEFAULT 0,"
                     + "time_start BIGINT NOT NULL,"
                     + "time_end BIGINT NOT NULL,"
                     + "is_shuffle INT NOT NULL DEFAULT 0"
