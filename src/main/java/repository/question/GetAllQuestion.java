@@ -16,7 +16,7 @@ import model.Question;
 
 public class GetAllQuestion {
 
-    private Connection con = ConnectDB.connect();
+    private final Connection con = ConnectDB.connect();
 
     public GetAllQuestion() {
 

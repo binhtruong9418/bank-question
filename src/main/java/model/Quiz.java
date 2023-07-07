@@ -4,9 +4,9 @@ import java.util.Date;
 import java.util.List;
 
 public class Quiz {
-    
+
     private int id;
-    
+
     private String name;
 
     private String description;
@@ -21,18 +21,21 @@ public class Quiz {
 
     private Float mark;
 
+    private Boolean isShuffle;
+
     public Quiz(int id, String name, String description, long timeStart, long timeEnd, int timeLimit) {
         this.name = name;
         this.description = description;
         this.timeStart = timeStart;
         this.timeEnd = timeEnd;
         this.timeLimit = timeLimit;
+        this.isShuffle = false;
     }
 
     public Quiz() {
 
     }
-    
+
     public Integer getId() {
         return id;
     }
@@ -64,7 +67,11 @@ public class Quiz {
     public Float getMark() {
         return mark;
     }
-    
+
+    public Boolean getIsShuffle() {
+        return isShuffle;
+    }
+
     public void setId(int id) {
         this.id = id;
     }
@@ -99,5 +106,9 @@ public class Quiz {
 
     public void setMark(Float mark) {
         this.mark = mark;
+    }
+
+    public void setIsShuffle(Boolean isShuffle) {
+        this.isShuffle = isShuffle;
     }
 }

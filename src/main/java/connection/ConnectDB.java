@@ -7,6 +7,7 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 
 public class ConnectDB {
+
     private static Boolean firstConnect = true;
 
     public static Connection connect() {
@@ -76,7 +77,8 @@ public class ConnectDB {
                     + "quiz_description VARCHAR(1000) DEFAULT NULL,"
                     + "time_limit INT DEFAULT NULL,"
                     + "time_start BIGINT NOT NULL,"
-                    + "time_end BIGINT NOT NULL"
+                    + "time_end BIGINT NOT NULL,"
+                    + "is_shuffle INT NOT NULL DEFAULT 0"
                     + ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
             statement.execute(createQuizzesTableSQL);
 

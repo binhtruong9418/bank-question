@@ -15,11 +15,12 @@ import org.openide.util.Exceptions;
 
 public class GetAllCategory {
 
+    private final Connection con = ConnectDB.connect();
+
     public GetAllCategory() {
     }
 
     public List<Category> getAllCategory() {
-        Connection con = ConnectDB.connect();
         List<Category> listCategory = new ArrayList<>();
         String sql = "SELECT * FROM categories";
         try {

@@ -8,12 +8,13 @@ import java.sql.SQLException;
 
 public class EditCategory {
 
+    private final Connection con = ConnectDB.connect();
+
     public EditCategory() {
 
     }
 
     public void updateCategoryQuestionCount(int categoryId, int questionCount) {
-        Connection con = ConnectDB.connect();
         String sql = "UPDATE categories SET category_count_question = ? WHERE category_id = ?";
 
         int categoryPrevCount = getUpdatedQuestionCount(con, categoryId);

@@ -81,7 +81,7 @@ public class Main extends javax.swing.JFrame implements PreviewQuizButtonListene
         previewQuiz = new javax.swing.JPanel();
         previewQuizContent = new view.quiz.PreviewQuiz();
         editQuiz = new javax.swing.JPanel();
-        editQuizContent = new view.quiz.EditQuiz();
+        editQuizContent = new view.quiz.EditQuizView();
 
         settingMenu.setBackground(new java.awt.Color(7, 116, 163));
         settingMenu.setForeground(new java.awt.Color(7, 116, 163));
@@ -516,7 +516,7 @@ public class Main extends javax.swing.JFrame implements PreviewQuizButtonListene
     private javax.swing.JPanel categoryTab;
     private javax.swing.JPanel content;
     private javax.swing.JPanel editQuiz;
-    private view.quiz.EditQuiz editQuizContent;
+    private view.quiz.EditQuizView editQuizContent;
     private javax.swing.JMenuItem exportMenuItem;
     private javax.swing.JPanel exportTab;
     private javax.swing.JButton homeButton;

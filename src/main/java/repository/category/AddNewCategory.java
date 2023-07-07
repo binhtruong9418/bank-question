@@ -10,12 +10,12 @@ import static java.sql.Types.NULL;
 
 public class AddNewCategory {
 
+    private final Connection con = ConnectDB.connect();
     public AddNewCategory() {
 
     }
 
     public int addNewCategory(String name, String info, int parentCategory, String idNumberInput) {
-        Connection con = ConnectDB.connect();
         int generatedCategoryId = -1; // Default value for failure
         String sql = "INSERT INTO categories (category_name,category_parent,category_info,category_id_number,category_count_question) VALUES (?,?,?,?,0)";
 

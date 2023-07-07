@@ -15,7 +15,7 @@ import model.Quiz;
 
 public class AddNewQuiz {
 
-    private Connection con = ConnectDB.connect();
+    private final Connection con = ConnectDB.connect();
 
     public AddNewQuiz() {
 
@@ -24,7 +24,7 @@ public class AddNewQuiz {
     public int addNewQuiz(Quiz quiz) {
         int generatedQuizId = -1; // Default value for failure
 
-        String sql = "INSERT INTO quizzes (quiz_name, quiz_description, time_start, time_end, time_limit) VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO quizzes (quiz_name, quiz_description, time_start, time_end, time_limit, is_shuffle) VALUES (?,?,?,?,?,0)";
 
         try (PreparedStatement pre = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             pre.setString(1, quiz.getName());

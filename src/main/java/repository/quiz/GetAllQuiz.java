@@ -12,20 +12,17 @@ import org.openide.util.Exceptions;
 
 public class GetAllQuiz {
 
-    private Connection con = null;
-    private PreparedStatement pre = null;
-    private ResultSet rs = null;
+    private final Connection con = ConnectDB.connect();
 
     public GetAllQuiz() {
     }
 
     public List<Quiz> getAllQuiz() {
-        con = ConnectDB.connect();
         List<Quiz> listQuiz = new ArrayList<>();
         String sql = "SELECT * FROM quizzes";
         try {
-            pre = con.prepareStatement(sql);
-            rs = pre.executeQuery();
+            PreparedStatement pre = con.prepareStatement(sql);
+            ResultSet rs = pre.executeQuery();
 
             while (rs.next()) {
                 int id = rs.getInt("quiz_id");
@@ -34,6 +31,7 @@ public class GetAllQuiz {
                 long timeStart = rs.getLong("time_start");
                 long timeEnd = rs.getLong("time_end");
                 Integer timeLimit = (Integer) rs.getObject("time_limit");
+                int isShuffle = rs.getInt("is_shuffle");
                 Quiz quiz = new Quiz();
                 quiz.setId(id);
                 quiz.setName(name);
@@ -47,6 +45,7 @@ public class GetAllQuiz {
                     timeLimit = 0;
                 }
                 quiz.setTimeLimit(timeLimit);
+                quiz.setIsShuffle(isShuffle == 1);
                 listQuiz.add(quiz);
             }
 

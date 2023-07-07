@@ -28,9 +28,9 @@ public class AddRandomQuestion extends javax.swing.JFrame {
     private Boolean showSubCategory = false;
     private List<Question> listImportQuestion;
     private List<Question> listQuestion;
-    private final EditQuiz editQuiz;
+    private final EditQuizView editQuiz;
 
-    public AddRandomQuestion(List<Question> listQuestionQuiz, EditQuiz editQuiz) {
+    public AddRandomQuestion(List<Question> listQuestionQuiz, EditQuizView editQuiz) {
         listQuestion = new ArrayList<>();
         this.editQuiz = editQuiz;
         this.listImportQuestion = listQuestionQuiz;

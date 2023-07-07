@@ -19,7 +19,7 @@ import repository.category.EditCategory;
 
 public class AddNewQuestion {
 
-    private Connection con = ConnectDB.connect();
+    private final Connection con = ConnectDB.connect();
 
     public AddNewQuestion() {
     }

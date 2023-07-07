@@ -11,11 +11,12 @@ import java.sql.SQLException;
 
 public class DeleteQuestion {
 
+    private final Connection con = ConnectDB.connect();
+
     public DeleteQuestion() {
     }
 
     public void deleteQuestion(int questionId) {
-        Connection con = ConnectDB.connect();
         String sql = "DELETE FROM questions WHERE question_id = ?";
         try (PreparedStatement pre = con.prepareStatement(sql)) {
             pre.setInt(1, questionId);

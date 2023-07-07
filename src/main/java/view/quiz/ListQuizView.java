@@ -72,7 +72,6 @@ public class ListQuizView extends javax.swing.JPanel {
         if (!evt.getValueIsAdjusting() && quizSelectListener != null) {
             // Get the selected item
             Quiz selectedQuiz = listQuizView.getSelectedValue();
-            System.out.println("Selected item: " + selectedQuiz.getId());
             quizSelectListener.onQuizSelect(selectedQuiz);
         }
     }//GEN-LAST:event_listQuizViewValueChanged

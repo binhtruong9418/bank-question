@@ -612,7 +612,7 @@
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="view.quiz.EditQuiz" name="editQuizContent">
+                <Component class="view.quiz.EditQuizView" name="editQuizContent">
                 </Component>
               </SubComponents>
             </Container>

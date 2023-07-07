@@ -15,12 +15,13 @@ import model.Question;
 
 public class EditQuestion {
 
+    private final Connection con = ConnectDB.connect();
+
     public EditQuestion() {
 
     }
 
     public void editQuestion(Question question) {
-        Connection con = ConnectDB.connect();
         int questionId = question.getId();
         String name = question.getName();
         String questionText = question.getQuestionText();

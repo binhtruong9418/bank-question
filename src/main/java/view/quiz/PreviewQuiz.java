@@ -235,7 +235,8 @@ public class PreviewQuiz extends javax.swing.JPanel {
 
     private void previewQuizButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_previewQuizButtonActionPerformed
         // TODO add your handling code here:
-        listener.onPreviewButtonClick(currentQuiz);
+        Test newTest = new Test(currentQuiz);
+        newTest.setVisible(true);
     }//GEN-LAST:event_previewQuizButtonActionPerformed
 
 

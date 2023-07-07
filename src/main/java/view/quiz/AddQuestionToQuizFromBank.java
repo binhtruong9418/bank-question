@@ -25,9 +25,9 @@ public class AddQuestionToQuizFromBank extends javax.swing.JFrame {
     List<Category> listCategory = new ArrayList<>();
     public Integer currentCategory = 0;
     private List<Question> listImportQuestion;
-    private final EditQuiz editQuiz;
+    private final EditQuizView editQuiz;
 
-    public AddQuestionToQuizFromBank(List<Question> listQuestion, EditQuiz editQuiz) {
+    public AddQuestionToQuizFromBank(List<Question> listQuestion, EditQuizView editQuiz) {
         this.editQuiz = editQuiz;
         this.listImportQuestion = listQuestion;
         initComponents();
