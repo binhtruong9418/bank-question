@@ -188,10 +188,9 @@ public class QuizQuestionView extends javax.swing.JPanel {
             if (answer.getGrade() != (float) 0) {
                 String labelAlphaBet = String.valueOf((char) ('A' + i));
                 text += labelAlphaBet;
+                text += "\t";
             }
-            if (i < currentQuestion.getAnswers().size() - 2) {
-                text += ", ";
-            }
+
         }
         correctAnswerLabel.setText(text);
         rightAnswerPanel.setVisible(true);
