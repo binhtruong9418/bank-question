@@ -3,6 +3,7 @@ package view.quiz;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.GridLayout;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -15,6 +16,7 @@ import java.util.Collections;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import javax.swing.WindowConstants;
 import model.Answer;
@@ -115,6 +117,7 @@ public class Test extends javax.swing.JFrame {
         for (int i = 1; i <= number; i++) {
             Number number1 = new Number();
             number1.setnumber(Integer.toString(i));
+            number1.getButton().addActionListener(new PaginationActionListener(i));
             numberQuestion.add(number1);
         }
         int column = 7;
@@ -192,6 +195,25 @@ public class Test extends javax.swing.JFrame {
 
     public void setSubmitQuizListener(PreviewQuizButtonListener listener) {
         this.listener = listener;
+    }
+
+    public class PaginationActionListener implements ActionListener {
+
+        private int targetItemIndex;
+
+        public PaginationActionListener(int targetItemIndex) {
+            this.targetItemIndex = targetItemIndex;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            // Scroll to the desired item
+            Component targetComponent = listQuestionPanel.getComponent(targetItemIndex - 1);
+            Rectangle targetBounds = targetComponent.getBounds();
+            targetBounds.y = Math.max(0, targetBounds.y);
+            SwingUtilities.convertRectangle(listQuestionPanel, targetBounds, jScrollPane1.getViewport());
+            jScrollPane1.getViewport().setViewPosition(targetBounds.getLocation());
+        }
     }
 
     @SuppressWarnings("unchecked")
