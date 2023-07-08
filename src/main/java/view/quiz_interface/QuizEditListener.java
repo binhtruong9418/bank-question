@@ -4,10 +4,13 @@
  */
 package view.quiz_interface;
 
+import model.Quiz;
+
 /**
  *
  * @author Duc Binh
  */
 public interface QuizEditListener {
-    void onSaveEditQuiz();
+    void onSaveEditQuiz(Quiz quiz);
+    void onDeleteQuiz();
 }

@@ -10,6 +10,7 @@ import model.Question;
 import model.Quiz;
 import repository.question.AddNewQuestion;
 import repository.question.GetAllQuestion;
+import repository.quiz.DeleteQuiz;
 import repository.quiz.EditQuiz;
 import view.quiz.table.ListQuestionEditTable.ListQuestionEditTableListener;
 import view.quiz_interface.QuizEditListener;
@@ -19,48 +20,48 @@ import view.quiz_interface.QuizEditListener;
  * @author Duc Binh
  */
 public class EditQuizView extends javax.swing.JPanel implements ListQuestionEditTableListener {
-
+    
     private Boolean selectMultiple = false;
     private Quiz currentQuiz;
     public List<Question> listQuestion;
     private List<Question> listQuestionSelected = new ArrayList<>();
     private QuizEditListener quizEditListener;
     private Boolean isShuffle;
-
+    
     public EditQuizView() {
         initComponents();
         deleteAllButton.setVisible(false);
         listQuestionEditTable.setShowCheckbox(false);
         listQuestionEditTable.setListQuestionEditTableListener(this);
     }
-
+    
     public void refreshTableData() {
         initListQuestionData();
     }
-
+    
     public void setQuizEditListener(QuizEditListener quizEditListener) {
         this.quizEditListener = quizEditListener;
     }
-
+    
     private void initListQuestionData() {
         DefaultTableModel tableModel = (DefaultTableModel) listQuestionEditTable.getModel();
         tableModel.setRowCount(0);
-
+        
         System.out.println(listQuestion.size());
-
+        
         totalQuestionLabel.setText("Questions: " + listQuestion.size() + " | This quiz is open");
         String formatNumber = new DecimalFormat("0.00").format(listQuestion.size());
         totalMarkLabel.setText("Total of marks: " + formatNumber);
         for (Question question : listQuestion) {
             listQuestionEditTable.addRow(question, selectMultiple);
         }
-
+        
     }
-
+    
     private void setQuizNameLabel(String quizName) {
         quizNameLabel.setText("Editting quiz: " + quizName);
     }
-
+    
     public void setQuiz(Quiz quiz) {
         this.currentQuiz = quiz;
         setQuizNameLabel(quiz.getName());
@@ -69,7 +70,7 @@ public class EditQuizView extends javax.swing.JPanel implements ListQuestionEdit
         isShuffle = quiz.getIsShuffle();
         initListQuestionData();
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -88,6 +89,7 @@ public class EditQuizView extends javax.swing.JPanel implements ListQuestionEdit
         jScrollPane1 = new javax.swing.JScrollPane();
         listQuestionEditTable = new view.quiz.table.ListQuestionEditTable();
         deleteAllButton = new javax.swing.JButton();
+        deleteQuizButton = new javax.swing.JButton();
 
         org.openide.awt.Mnemonics.setLocalizedText(fromBankQuestionItem, org.openide.util.NbBundle.getMessage(EditQuizView.class, "EditQuizView.fromBankQuestionItem.text")); // NOI18N
         fromBankQuestionItem.addActionListener(new java.awt.event.ActionListener() {
@@ -165,6 +167,16 @@ public class EditQuizView extends javax.swing.JPanel implements ListQuestionEdit
             }
         });
 
+        deleteQuizButton.setBackground(new java.awt.Color(192, 36, 36));
+        deleteQuizButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        deleteQuizButton.setForeground(new java.awt.Color(255, 255, 255));
+        org.openide.awt.Mnemonics.setLocalizedText(deleteQuizButton, org.openide.util.NbBundle.getMessage(EditQuizView.class, "EditQuizView.deleteQuizButton.text")); // NOI18N
+        deleteQuizButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteQuizButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -184,9 +196,12 @@ public class EditQuizView extends javax.swing.JPanel implements ListQuestionEdit
                         .addGap(15, 15, 15))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(selectMultipleButton)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(selectMultipleButton)
+                                .addGap(39, 39, 39)
+                                .addComponent(deleteQuizButton))
                             .addComponent(deleteAllButton))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 703, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(totalMarkLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -210,7 +225,8 @@ public class EditQuizView extends javax.swing.JPanel implements ListQuestionEdit
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(selectMultipleButton)
-                    .addComponent(totalMarkLabel))
+                    .addComponent(totalMarkLabel)
+                    .addComponent(deleteQuizButton))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -271,7 +287,7 @@ public class EditQuizView extends javax.swing.JPanel implements ListQuestionEdit
                     JOptionPane.showMessageDialog(null, "Edit quiz failed!", "Error", JOptionPane.ERROR_MESSAGE);
                 } else {
                     JOptionPane.showMessageDialog(null, "Edit quiz successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
-                    quizEditListener.onSaveEditQuiz();
+                    quizEditListener.onSaveEditQuiz(currentQuiz);
                 }
             }
         } catch (Exception e) {
@@ -291,11 +307,32 @@ public class EditQuizView extends javax.swing.JPanel implements ListQuestionEdit
         }
     }//GEN-LAST:event_shuffleCheckboxItemStateChanged
 
+    private void deleteQuizButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteQuizButtonActionPerformed
+        // TODO add your handling code here:
+        List<Question> blankList = new ArrayList<>();
+        try {
+            int confirm = JOptionPane.showConfirmDialog(null, "Do you want to delete this quiz ?", "Confirmation", JOptionPane.YES_NO_OPTION);
+            if (confirm == JOptionPane.YES_OPTION) {
+                int count = new AddNewQuestion().addListQuestionToQuiz(blankList, currentQuiz);
+                new DeleteQuiz().deleteQuiz(currentQuiz.getId());
+                if (count != 0) {
+                    JOptionPane.showMessageDialog(null, "Delete quiz failed!", "Error", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Delete quiz successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                    quizEditListener.onDeleteQuiz();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }//GEN-LAST:event_deleteQuizButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel addButtonDropdown;
     private javax.swing.JPopupMenu addMenu;
     private javax.swing.JButton deleteAllButton;
+    private javax.swing.JButton deleteQuizButton;
     private javax.swing.JMenuItem fromBankQuestionItem;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -314,17 +351,17 @@ public class EditQuizView extends javax.swing.JPanel implements ListQuestionEdit
         System.out.println("check");
         listQuestionSelected.add(question);
     }
-
+    
     @Override
     public void onQuestionDeselected(Question question) {
         System.out.println("uncheck");
         listQuestionSelected.remove(question);
     }
-
+    
     @Override
     public void onDeleteButtonClicked(Question deleteQuestion) {
         listQuestion.remove(deleteQuestion);
         initListQuestionData();
     }
-
+    
 }

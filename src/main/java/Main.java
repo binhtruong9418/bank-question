@@ -543,17 +543,30 @@ public class Main extends javax.swing.JFrame implements PreviewQuizButtonListene
     // End of variables declaration//GEN-END:variables
 
     @Override
-    public void onSaveEditQuiz() {
+    public void onSaveEditQuiz(Quiz quiz) {
         CardLayout contentLayout = (CardLayout) content.getLayout();
         contentLayout.show(content, "previewQuizCard");
+        pageLink.setText("Home / My courses / THI CUỐI KỲ / General / " + quiz.getName());
+
     }
 
     @Override
     public void onSubmitQuiz() {
-        CardLayout contentLayout = (CardLayout) content.getLayout();
-        contentLayout.show(content, "listQuizCard");
+        pageLink.setText("Home / My courses / THI CUỐI KỲ");
         settingButton.setVisible(true);
         turnEditingButton.setVisible(true);
+        CardLayout contentLayout = (CardLayout) content.getLayout();
+        contentLayout.show(content, "listQuizCard");
+    }
+
+    @Override
+    public void onDeleteQuiz() {
+        pageLink.setText("Home / My courses / THI CUỐI KỲ");
+        settingButton.setVisible(true);
+        turnEditingButton.setVisible(true);
+        CardLayout contentLayout = (CardLayout) content.getLayout();
+        contentLayout.show(content, "listQuizCard");
+        listQuizView.refreshQuizData();
     }
 
 }
