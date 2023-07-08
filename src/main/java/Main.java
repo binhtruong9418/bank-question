@@ -552,6 +552,8 @@ public class Main extends javax.swing.JFrame implements PreviewQuizButtonListene
     public void onSubmitQuiz() {
         CardLayout contentLayout = (CardLayout) content.getLayout();
         contentLayout.show(content, "listQuizCard");
+        settingButton.setVisible(true);
+        turnEditingButton.setVisible(true);
     }
 
 }
