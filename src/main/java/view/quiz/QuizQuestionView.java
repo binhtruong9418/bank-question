@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
+import javax.swing.DefaultListSelectionModel;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -163,11 +164,48 @@ public class QuizQuestionView extends javax.swing.JPanel {
             if (answer.getGrade().intValue() == 100) {
                 listAnswerList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
                 listAnswerList.setCellRenderer(new CircleCheckboxListCellRenderer());
+
+                listAnswerList.setSelectionModel(new DefaultListSelectionModel() {
+                    private boolean isAdjusting = false;
+
+                    @Override
+                    public void setSelectionInterval(int index0, int index1) {
+                        if (!isAdjusting) {
+                            isAdjusting = true;
+
+                            if (isSelectedIndex(index0)) {
+                                removeSelectionInterval(index0, index1);
+                            } else {
+                                super.setSelectionInterval(index0, index1);
+                            }
+
+                            isAdjusting = false;
+                        }
+                    }
+                });
                 break;
             } else if (answer.getGrade().intValue() != 100 && answer.getGrade().intValue() != 0) {
                 listAnswerList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
                 SquareCheckboxListCellRenderer cellRenderer = new SquareCheckboxListCellRenderer();
                 listAnswerList.setCellRenderer(new SquareCheckboxListCellRenderer());
+                listAnswerList.setSelectionModel(new DefaultListSelectionModel() {
+                    private boolean isAdjusting = false;
+
+                    @Override
+                    public void setSelectionInterval(int index0, int index1) {
+                        if (!isAdjusting) {
+                            isAdjusting = true;
+
+                            if (isSelectedIndex(index0)) {
+                                removeSelectionInterval(index0, index1);
+                            } else {
+                                addSelectionInterval(index0, index1);
+                            }
+
+                            isAdjusting = false;
+                        }
+                    }
+                });
                 break;
             }
         }

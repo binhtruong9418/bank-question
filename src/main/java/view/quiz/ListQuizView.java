@@ -2,6 +2,7 @@ package view.quiz;
 
 import java.util.List;
 import javax.swing.DefaultListModel;
+import javax.swing.DefaultListSelectionModel;
 import model.Quiz;
 import repository.quiz.GetAllQuiz;
 import view.quiz_interface.QuizSelectListener;
@@ -29,6 +30,24 @@ public class ListQuizView extends javax.swing.JPanel {
         DefaultListModel<Quiz> quizListModel = new DefaultListModel<>();
         listQuizView.setModel(quizListModel);
         listQuizView.setCellRenderer(new QuizItem());
+        listQuizView.setSelectionModel(new DefaultListSelectionModel() {
+            private boolean isAdjusting = false;
+
+            @Override
+            public void setSelectionInterval(int index0, int index1) {
+                if (!isAdjusting) {
+                    isAdjusting = true;
+
+                    if (isSelectedIndex(index0)) {
+                        removeSelectionInterval(index0, index1);
+                    } else {
+                        super.setSelectionInterval(index0, index1);
+                    }
+
+                    isAdjusting = false;
+                }
+            }
+        });
 
         List<Quiz> listQuiz = new GetAllQuiz().getAllQuiz();
         for (Quiz quiz : listQuiz) {
